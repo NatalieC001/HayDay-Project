@@ -1,0 +1,273 @@
+fileFormatVersion: 2
+guid: 6445d55ada4377449a13d62f0fe441bb
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Kid_mesh
+    100004: L_Kid_clavicle_jnt
+    100006: L_Kid_elbow_jnt
+    100008: L_Kid_eyebrowA_ctrl
+    100010: L_Kid_eyebrowA_jnt
+    100012: L_Kid_eyebrowB_ctrl
+    100014: L_Kid_eyebrowB_jnt
+    100016: L_Kid_finger_jnt
+    100018: L_Kid_foot_ctrl
+    100020: L_Kid_foot_jnt
+    100022: L_Kid_hand_ctrl
+    100024: L_Kid_hand_jnt
+    100026: L_Kid_hip_jnt
+    100028: L_Kid_knee_jnt
+    100030: L_Kid_shoulder_ctrl
+    100032: L_Kid_shoulder_jnt
+    100034: L_Kid_toe_jnt
+    100036: M_Kid_head_ctrl
+    100038: M_Kid_head_jnt
+    100040: M_Kid_hip_ctrl
+    100042: M_Kid_Hip_jnt
+    100044: M_Kid_main_ctrl
+    100046: M_Kid_neck_jnt
+    100048: M_Kid_root_jnt
+    100050: M_Kid_spine1_ctrl
+    100052: M_Kid_spine2_ctrl
+    100054: M_Kid_spineA_jnt
+    100056: M_Kid_spineB_jnt
+    100058: R_Kid_clavicle_jnt
+    100060: R_Kid_elbow_jnt
+    100062: R_Kid_eyebrowA_ctrl
+    100064: R_Kid_eyebrowA_jnt
+    100066: R_Kid_eyebrowB_ctrl
+    100068: R_Kid_eyebrowB_jnt
+    100070: R_Kid_finger_jnt
+    100072: R_Kid_foot_ctrl
+    100074: R_Kid_foot_jnt
+    100076: R_Kid_hand_ctrl
+    100078: R_Kid_hand_jnt
+    100080: R_Kid_hip_jnt
+    100082: R_Kid_knee_jnt
+    100084: R_Kid_shoulder_ctrl
+    100086: R_Kid_shoulder_jnt
+    100088: R_Kid_toe_jnt
+    400000: //RootNode
+    400002: Kid_mesh
+    400004: L_Kid_clavicle_jnt
+    400006: L_Kid_elbow_jnt
+    400008: L_Kid_eyebrowA_ctrl
+    400010: L_Kid_eyebrowA_jnt
+    400012: L_Kid_eyebrowB_ctrl
+    400014: L_Kid_eyebrowB_jnt
+    400016: L_Kid_finger_jnt
+    400018: L_Kid_foot_ctrl
+    400020: L_Kid_foot_jnt
+    400022: L_Kid_hand_ctrl
+    400024: L_Kid_hand_jnt
+    400026: L_Kid_hip_jnt
+    400028: L_Kid_knee_jnt
+    400030: L_Kid_shoulder_ctrl
+    400032: L_Kid_shoulder_jnt
+    400034: L_Kid_toe_jnt
+    400036: M_Kid_head_ctrl
+    400038: M_Kid_head_jnt
+    400040: M_Kid_hip_ctrl
+    400042: M_Kid_Hip_jnt
+    400044: M_Kid_main_ctrl
+    400046: M_Kid_neck_jnt
+    400048: M_Kid_root_jnt
+    400050: M_Kid_spine1_ctrl
+    400052: M_Kid_spine2_ctrl
+    400054: M_Kid_spineA_jnt
+    400056: M_Kid_spineB_jnt
+    400058: R_Kid_clavicle_jnt
+    400060: R_Kid_elbow_jnt
+    400062: R_Kid_eyebrowA_ctrl
+    400064: R_Kid_eyebrowA_jnt
+    400066: R_Kid_eyebrowB_ctrl
+    400068: R_Kid_eyebrowB_jnt
+    400070: R_Kid_finger_jnt
+    400072: R_Kid_foot_ctrl
+    400074: R_Kid_foot_jnt
+    400076: R_Kid_hand_ctrl
+    400078: R_Kid_hand_jnt
+    400080: R_Kid_hip_jnt
+    400082: R_Kid_knee_jnt
+    400084: R_Kid_shoulder_ctrl
+    400086: R_Kid_shoulder_jnt
+    400088: R_Kid_toe_jnt
+    4300000: Kid_mesh
+    7400000: Freefall
+    9500000: //RootNode
+    13700000: Kid_mesh
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Freefall
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Kid_mesh
+        weight: 1
+      - path: M_Kid_main_ctrl
+        weight: 1
+      - path: M_Kid_main_ctrl/L_Kid_foot_ctrl
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_Hip_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_Hip_jnt/L_Kid_hip_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_Hip_jnt/L_Kid_hip_jnt/L_Kid_knee_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_Hip_jnt/L_Kid_hip_jnt/L_Kid_knee_jnt/L_Kid_foot_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_Hip_jnt/L_Kid_hip_jnt/L_Kid_knee_jnt/L_Kid_foot_jnt/L_Kid_toe_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_Hip_jnt/R_Kid_hip_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_Hip_jnt/R_Kid_hip_jnt/R_Kid_knee_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_Hip_jnt/R_Kid_hip_jnt/R_Kid_knee_jnt/R_Kid_foot_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_Hip_jnt/R_Kid_hip_jnt/R_Kid_knee_jnt/R_Kid_foot_jnt/R_Kid_toe_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/L_Kid_clavicle_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/L_Kid_clavicle_jnt/L_Kid_shoulder_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/L_Kid_clavicle_jnt/L_Kid_shoulder_jnt/L_Kid_elbow_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/L_Kid_clavicle_jnt/L_Kid_shoulder_jnt/L_Kid_elbow_jnt/L_Kid_hand_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/L_Kid_clavicle_jnt/L_Kid_shoulder_jnt/L_Kid_elbow_jnt/L_Kid_hand_jnt/L_Kid_finger_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/M_Kid_neck_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/M_Kid_neck_jnt/L_Kid_eyebrowA_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/M_Kid_neck_jnt/L_Kid_eyebrowA_jnt/L_Kid_eyebrowB_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/M_Kid_neck_jnt/M_Kid_head_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/M_Kid_neck_jnt/R_Kid_eyebrowA_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/M_Kid_neck_jnt/R_Kid_eyebrowA_jnt/R_Kid_eyebrowB_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/R_Kid_clavicle_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/R_Kid_clavicle_jnt/R_Kid_shoulder_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/R_Kid_clavicle_jnt/R_Kid_shoulder_jnt/R_Kid_elbow_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/R_Kid_clavicle_jnt/R_Kid_shoulder_jnt/R_Kid_elbow_jnt/R_Kid_hand_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_root_jnt/M_Kid_spineA_jnt/M_Kid_spineB_jnt/R_Kid_clavicle_jnt/R_Kid_shoulder_jnt/R_Kid_elbow_jnt/R_Kid_hand_jnt/R_Kid_finger_jnt
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_spine1_ctrl
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_spine1_ctrl/M_Kid_spine2_ctrl
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_spine1_ctrl/M_Kid_spine2_ctrl/L_Kid_shoulder_ctrl
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_spine1_ctrl/M_Kid_spine2_ctrl/L_Kid_shoulder_ctrl/L_Kid_hand_ctrl
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_spine1_ctrl/M_Kid_spine2_ctrl/M_Kid_head_ctrl
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_spine1_ctrl/M_Kid_spine2_ctrl/M_Kid_head_ctrl/L_Kid_eyebrowB_ctrl
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_spine1_ctrl/M_Kid_spine2_ctrl/M_Kid_head_ctrl/L_Kid_eyebrowB_ctrl/L_Kid_eyebrowA_ctrl
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_spine1_ctrl/M_Kid_spine2_ctrl/M_Kid_head_ctrl/R_Kid_eyebrowB_ctrl
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_spine1_ctrl/M_Kid_spine2_ctrl/M_Kid_head_ctrl/R_Kid_eyebrowB_ctrl/R_Kid_eyebrowA_ctrl
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_spine1_ctrl/M_Kid_spine2_ctrl/R_Kid_shoulder_ctrl
+        weight: 1
+      - path: M_Kid_main_ctrl/M_Kid_hip_ctrl/M_Kid_spine1_ctrl/M_Kid_spine2_ctrl/R_Kid_shoulder_ctrl/R_Kid_hand_ctrl
+        weight: 1
+      - path: M_Kid_main_ctrl/R_Kid_foot_ctrl
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
