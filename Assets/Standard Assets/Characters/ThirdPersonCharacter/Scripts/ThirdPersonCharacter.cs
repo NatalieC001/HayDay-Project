@@ -56,6 +56,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_TurnAmount = Mathf.Atan2(move.x, move.z);
 			m_ForwardAmount = move.z;
 
+			Debug.Log ("move.z = " + m_ForwardAmount);
+
 			ApplyExtraTurnRotation();
 
 			// control and velocity handling is different when grounded and airborne:
@@ -121,13 +123,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 			// Problem below with these set floats, they don't exist in character controller yet, thus lagging the game
 
-			//m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
-			//m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
-			//m_Animator.SetBool("Crouch", m_Crouching);
-			//m_Animator.SetBool("OnGround", m_IsGrounded);
+			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
+			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
+			m_Animator.SetBool("Crouch", m_Crouching);
+			m_Animator.SetBool("OnGround", m_IsGrounded);
 			if (!m_IsGrounded)
 			{
-				//m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
+				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
 			}
 
 			// calculate which leg is behind, so as to leave that leg trailing in the jump animation
@@ -139,7 +141,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			float jumpLeg = (runCycle < k_Half ? 1 : -1) * m_ForwardAmount;
 			if (m_IsGrounded)
 			{
-				//m_Animator.SetFloat("JumpLeg", jumpLeg);
+				m_Animator.SetFloat("JumpLeg", jumpLeg);
 			}
 
 			// the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector,

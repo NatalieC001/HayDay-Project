@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{C680760B-E096-9FB9-2671-4E548477F93C}") = "HayDay-3D", "Assembly-CSharp-firstpass.csproj", "{10A7C3F4-3C78-1967-61A7-5AE7227BFC8D}"
 EndProject
+Project("{C680760B-E096-9FB9-2671-4E548477F93C}") = "HayDay-3D", "Assembly-CSharp.csproj", "{DBB48D21-765C-FC22-F646-DE3194CDCAE3}"
+EndProject
 Project("{C680760B-E096-9FB9-2671-4E548477F93C}") = "HayDay-3D", "Assembly-CSharp-Editor.csproj", "{103BA11A-5702-5B32-CBD7-B3225B237046}"
 EndProject
 Global
@@ -15,6 +17,10 @@ Global
 		{10A7C3F4-3C78-1967-61A7-5AE7227BFC8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10A7C3F4-3C78-1967-61A7-5AE7227BFC8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10A7C3F4-3C78-1967-61A7-5AE7227BFC8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBB48D21-765C-FC22-F646-DE3194CDCAE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBB48D21-765C-FC22-F646-DE3194CDCAE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBB48D21-765C-FC22-F646-DE3194CDCAE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBB48D21-765C-FC22-F646-DE3194CDCAE3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{103BA11A-5702-5B32-CBD7-B3225B237046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{103BA11A-5702-5B32-CBD7-B3225B237046}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{103BA11A-5702-5B32-CBD7-B3225B237046}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -23,7 +29,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
+																				GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
@@ -42,4 +48,5 @@ Global
 		$3.inheritsScope = text/plain
 		$3.scope = text/plain
 	EndGlobalSection
+
 EndGlobal
