@@ -4,7 +4,21 @@ timeCreated: 1434230989
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: Cylinder
+    100002: Surface
+    100004: //RootNode
+    400000: Cylinder
+    400002: Surface
+    400004: //RootNode
+    2300000: Cylinder
+    2300002: Surface
+    3300000: Cylinder
+    3300002: Surface
+    4300000: Surface
+    4300002: Cylinder
+    7400000: Default Take
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0

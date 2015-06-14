@@ -26,7 +26,8 @@ public class Movement : MonoBehaviour
         mainCamera = (Camera)GameObject.Find("MainCamera").GetComponent<Camera>();
         animator = GetComponent<Animator>();
         player = GameObject.Find("Player");
-        difVec = new Vector3(-10.3f, 16.1f, -11.6f);
+
+        difVec = mainCamera.transform.position - player.transform.position;
 	}
 
 	float UpdateMovement()
