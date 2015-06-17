@@ -2,7 +2,77 @@ fileFormatVersion: 2
 guid: 1d104c417c488944ebad16c0850ce9a5
 ModelImporter:
   serializedVersion: 18
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: COW_
+    100004: COW_ Head
+    100006: COW_ L Calf
+    100008: COW_ L Clavicle
+    100010: COW_ L Finger0
+    100012: COW_ L Foot
+    100014: COW_ L Forearm
+    100016: COW_ L Hand
+    100018: COW_ L HorseLink
+    100020: COW_ L Thigh
+    100022: COW_ L UpperArm
+    100024: COW_ Neck
+    100026: COW_ Neck1
+    100028: COW_ Neck2
+    100030: COW_ Pelvis
+    100032: COW_ Queue de cheval 1
+    100034: COW_ R Calf
+    100036: COW_ R Clavicle
+    100038: COW_ R Finger0
+    100040: COW_ R Foot
+    100042: COW_ R Forearm
+    100044: COW_ R Hand
+    100046: COW_ R HorseLink
+    100048: COW_ R Thigh
+    100050: COW_ R UpperArm
+    100052: COW_ Spine
+    100054: COW_ Spine1
+    100056: COW_ Tail
+    100058: COW_ Tail1
+    100060: COW_ Tail2
+    100062: COW_ Tail3
+    100064: COW_ Tail4
+    100066: COW_ Tail5
+    400000: //RootNode
+    400002: COW_
+    400004: COW_ Head
+    400006: COW_ L Calf
+    400008: COW_ L Clavicle
+    400010: COW_ L Finger0
+    400012: COW_ L Foot
+    400014: COW_ L Forearm
+    400016: COW_ L Hand
+    400018: COW_ L HorseLink
+    400020: COW_ L Thigh
+    400022: COW_ L UpperArm
+    400024: COW_ Neck
+    400026: COW_ Neck1
+    400028: COW_ Neck2
+    400030: COW_ Pelvis
+    400032: COW_ Queue de cheval 1
+    400034: COW_ R Calf
+    400036: COW_ R Clavicle
+    400038: COW_ R Finger0
+    400040: COW_ R Foot
+    400042: COW_ R Forearm
+    400044: COW_ R Hand
+    400046: COW_ R HorseLink
+    400048: COW_ R Thigh
+    400050: COW_ R UpperArm
+    400052: COW_ Spine
+    400054: COW_ Spine1
+    400056: COW_ Tail
+    400058: COW_ Tail1
+    400060: COW_ Tail2
+    400062: COW_ Tail3
+    400064: COW_ Tail4
+    400066: COW_ Tail5
+    7400000: Take 001
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0

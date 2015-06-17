@@ -2,7 +2,65 @@ fileFormatVersion: 2
 guid: 681d2f5c1e29f864a824b818181302c0
 ModelImporter:
   serializedVersion: 18
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: GOAT_
+    100004: GOAT_ Head
+    100006: GOAT_ L Calf
+    100008: GOAT_ L Clavicle
+    100010: GOAT_ L Finger0
+    100012: GOAT_ L Foot
+    100014: GOAT_ L Forearm
+    100016: GOAT_ L Hand
+    100018: GOAT_ L HorseLink
+    100020: GOAT_ L Thigh
+    100022: GOAT_ L UpperArm
+    100024: GOAT_ Neck
+    100026: GOAT_ Neck1
+    100028: GOAT_ Neck2
+    100030: GOAT_ Pelvis
+    100032: GOAT_ Queue de cheval 1
+    100034: GOAT_ R Calf
+    100036: GOAT_ R Clavicle
+    100038: GOAT_ R Finger0
+    100040: GOAT_ R Foot
+    100042: GOAT_ R Forearm
+    100044: GOAT_ R Hand
+    100046: GOAT_ R HorseLink
+    100048: GOAT_ R Thigh
+    100050: GOAT_ R UpperArm
+    100052: GOAT_ Spine
+    100054: GOAT_ Spine1
+    400000: //RootNode
+    400002: GOAT_
+    400004: GOAT_ Head
+    400006: GOAT_ L Calf
+    400008: GOAT_ L Clavicle
+    400010: GOAT_ L Finger0
+    400012: GOAT_ L Foot
+    400014: GOAT_ L Forearm
+    400016: GOAT_ L Hand
+    400018: GOAT_ L HorseLink
+    400020: GOAT_ L Thigh
+    400022: GOAT_ L UpperArm
+    400024: GOAT_ Neck
+    400026: GOAT_ Neck1
+    400028: GOAT_ Neck2
+    400030: GOAT_ Pelvis
+    400032: GOAT_ Queue de cheval 1
+    400034: GOAT_ R Calf
+    400036: GOAT_ R Clavicle
+    400038: GOAT_ R Finger0
+    400040: GOAT_ R Foot
+    400042: GOAT_ R Forearm
+    400044: GOAT_ R Hand
+    400046: GOAT_ R HorseLink
+    400048: GOAT_ R Thigh
+    400050: GOAT_ R UpperArm
+    400052: GOAT_ Spine
+    400054: GOAT_ Spine1
+    7400000: Take 001
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0

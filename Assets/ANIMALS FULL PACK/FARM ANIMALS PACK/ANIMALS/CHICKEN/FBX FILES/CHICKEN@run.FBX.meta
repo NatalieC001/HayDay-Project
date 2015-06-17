@@ -2,7 +2,67 @@ fileFormatVersion: 2
 guid: de32936bf6621dc40a58fbc46d046de3
 ModelImporter:
   serializedVersion: 18
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: CHICKEN_
+    100004: CHICKEN_ Head
+    100006: CHICKEN_ L Calf
+    100008: CHICKEN_ L Clavicle
+    100010: CHICKEN_ L Foot
+    100012: CHICKEN_ L Forearm
+    100014: CHICKEN_ L Hand
+    100016: CHICKEN_ L HorseLink
+    100018: CHICKEN_ L Thigh
+    100020: CHICKEN_ L Toe0
+    100022: CHICKEN_ L Toe1
+    100024: CHICKEN_ L UpperArm
+    100026: CHICKEN_ Neck
+    100028: CHICKEN_ Neck1
+    100030: CHICKEN_ Neck2
+    100032: CHICKEN_ Pelvis
+    100034: CHICKEN_ Queue de cheval 1
+    100036: CHICKEN_ R Calf
+    100038: CHICKEN_ R Clavicle
+    100040: CHICKEN_ R Foot
+    100042: CHICKEN_ R Forearm
+    100044: CHICKEN_ R Hand
+    100046: CHICKEN_ R HorseLink
+    100048: CHICKEN_ R Thigh
+    100050: CHICKEN_ R Toe0
+    100052: CHICKEN_ R Toe1
+    100054: CHICKEN_ R UpperArm
+    100056: CHICKEN_ Spine
+    400000: //RootNode
+    400002: CHICKEN_
+    400004: CHICKEN_ Head
+    400006: CHICKEN_ L Calf
+    400008: CHICKEN_ L Clavicle
+    400010: CHICKEN_ L Foot
+    400012: CHICKEN_ L Forearm
+    400014: CHICKEN_ L Hand
+    400016: CHICKEN_ L HorseLink
+    400018: CHICKEN_ L Thigh
+    400020: CHICKEN_ L Toe0
+    400022: CHICKEN_ L Toe1
+    400024: CHICKEN_ L UpperArm
+    400026: CHICKEN_ Neck
+    400028: CHICKEN_ Neck1
+    400030: CHICKEN_ Neck2
+    400032: CHICKEN_ Pelvis
+    400034: CHICKEN_ Queue de cheval 1
+    400036: CHICKEN_ R Calf
+    400038: CHICKEN_ R Clavicle
+    400040: CHICKEN_ R Foot
+    400042: CHICKEN_ R Forearm
+    400044: CHICKEN_ R Hand
+    400046: CHICKEN_ R HorseLink
+    400048: CHICKEN_ R Thigh
+    400050: CHICKEN_ R Toe0
+    400052: CHICKEN_ R Toe1
+    400054: CHICKEN_ R UpperArm
+    400056: CHICKEN_ Spine
+    7400000: Take 001
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0

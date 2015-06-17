@@ -3,7 +3,70 @@ guid: 66e95b734979027408c811b815689bc3
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
+    100000: //RootNode
+    100002: CHICKEN
+    100004: CHICKEN_
+    100006: CHICKEN_ Head
+    100008: CHICKEN_ L Calf
+    100010: CHICKEN_ L Clavicle
+    100012: CHICKEN_ L Foot
+    100014: CHICKEN_ L Forearm
+    100016: CHICKEN_ L Hand
+    100018: CHICKEN_ L HorseLink
+    100020: CHICKEN_ L Thigh
+    100022: CHICKEN_ L Toe0
+    100024: CHICKEN_ L Toe1
+    100026: CHICKEN_ L UpperArm
+    100028: CHICKEN_ Neck
+    100030: CHICKEN_ Neck1
+    100032: CHICKEN_ Neck2
+    100034: CHICKEN_ Pelvis
+    100036: CHICKEN_ Queue de cheval 1
+    100038: CHICKEN_ R Calf
+    100040: CHICKEN_ R Clavicle
+    100042: CHICKEN_ R Foot
+    100044: CHICKEN_ R Forearm
+    100046: CHICKEN_ R Hand
+    100048: CHICKEN_ R HorseLink
+    100050: CHICKEN_ R Thigh
+    100052: CHICKEN_ R Toe0
+    100054: CHICKEN_ R Toe1
+    100056: CHICKEN_ R UpperArm
+    100058: CHICKEN_ Spine
+    400000: CHICKEN
+    400002: //RootNode
+    400004: CHICKEN_
+    400006: CHICKEN_ Head
+    400008: CHICKEN_ L Calf
+    400010: CHICKEN_ L Clavicle
+    400012: CHICKEN_ L Foot
+    400014: CHICKEN_ L Forearm
+    400016: CHICKEN_ L Hand
+    400018: CHICKEN_ L HorseLink
+    400020: CHICKEN_ L Thigh
+    400022: CHICKEN_ L Toe0
+    400024: CHICKEN_ L Toe1
+    400026: CHICKEN_ L UpperArm
+    400028: CHICKEN_ Neck
+    400030: CHICKEN_ Neck1
+    400032: CHICKEN_ Neck2
+    400034: CHICKEN_ Pelvis
+    400036: CHICKEN_ Queue de cheval 1
+    400038: CHICKEN_ R Calf
+    400040: CHICKEN_ R Clavicle
+    400042: CHICKEN_ R Foot
+    400044: CHICKEN_ R Forearm
+    400046: CHICKEN_ R Hand
+    400048: CHICKEN_ R HorseLink
+    400050: CHICKEN_ R Thigh
+    400052: CHICKEN_ R Toe0
+    400054: CHICKEN_ R Toe1
+    400056: CHICKEN_ R UpperArm
+    400058: CHICKEN_ Spine
     4300000: CHICKEN
+    7400000: Take 001
+    11100000: //RootNode
+    13700000: CHICKEN
   materials:
     importMaterials: 1
     materialName: 0

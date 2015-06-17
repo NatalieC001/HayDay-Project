@@ -2,7 +2,65 @@ fileFormatVersion: 2
 guid: 8585764472b90aa48aa6a0d55791b981
 ModelImporter:
   serializedVersion: 18
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: PIG_
+    100004: PIG_ Head
+    100006: PIG_ L Calf
+    100008: PIG_ L Clavicle
+    100010: PIG_ L Finger0
+    100012: PIG_ L Foot
+    100014: PIG_ L Forearm
+    100016: PIG_ L Hand
+    100018: PIG_ L HorseLink
+    100020: PIG_ L Thigh
+    100022: PIG_ L UpperArm
+    100024: PIG_ Neck
+    100026: PIG_ Neck1
+    100028: PIG_ Neck2
+    100030: PIG_ Pelvis
+    100032: PIG_ Queue de cheval 1
+    100034: PIG_ R Calf
+    100036: PIG_ R Clavicle
+    100038: PIG_ R Finger0
+    100040: PIG_ R Foot
+    100042: PIG_ R Forearm
+    100044: PIG_ R Hand
+    100046: PIG_ R HorseLink
+    100048: PIG_ R Thigh
+    100050: PIG_ R UpperArm
+    100052: PIG_ Spine
+    100054: PIG_ Spine1
+    400000: //RootNode
+    400002: PIG_
+    400004: PIG_ Head
+    400006: PIG_ L Calf
+    400008: PIG_ L Clavicle
+    400010: PIG_ L Finger0
+    400012: PIG_ L Foot
+    400014: PIG_ L Forearm
+    400016: PIG_ L Hand
+    400018: PIG_ L HorseLink
+    400020: PIG_ L Thigh
+    400022: PIG_ L UpperArm
+    400024: PIG_ Neck
+    400026: PIG_ Neck1
+    400028: PIG_ Neck2
+    400030: PIG_ Pelvis
+    400032: PIG_ Queue de cheval 1
+    400034: PIG_ R Calf
+    400036: PIG_ R Clavicle
+    400038: PIG_ R Finger0
+    400040: PIG_ R Foot
+    400042: PIG_ R Forearm
+    400044: PIG_ R Hand
+    400046: PIG_ R HorseLink
+    400048: PIG_ R Thigh
+    400050: PIG_ R UpperArm
+    400052: PIG_ Spine
+    400054: PIG_ Spine1
+    7400000: Take 001
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0

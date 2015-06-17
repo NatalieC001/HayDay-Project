@@ -2,7 +2,65 @@ fileFormatVersion: 2
 guid: b3890ac5bcdc9cc4c97ebd498b17bf62
 ModelImporter:
   serializedVersion: 18
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: SHEEP_
+    100004: SHEEP_ Head
+    100006: SHEEP_ L Calf
+    100008: SHEEP_ L Clavicle
+    100010: SHEEP_ L Finger0
+    100012: SHEEP_ L Foot
+    100014: SHEEP_ L Forearm
+    100016: SHEEP_ L Hand
+    100018: SHEEP_ L HorseLink
+    100020: SHEEP_ L Thigh
+    100022: SHEEP_ L UpperArm
+    100024: SHEEP_ Neck
+    100026: SHEEP_ Neck1
+    100028: SHEEP_ Neck2
+    100030: SHEEP_ Pelvis
+    100032: SHEEP_ Queue de cheval 1
+    100034: SHEEP_ R Calf
+    100036: SHEEP_ R Clavicle
+    100038: SHEEP_ R Finger0
+    100040: SHEEP_ R Foot
+    100042: SHEEP_ R Forearm
+    100044: SHEEP_ R Hand
+    100046: SHEEP_ R HorseLink
+    100048: SHEEP_ R Thigh
+    100050: SHEEP_ R UpperArm
+    100052: SHEEP_ Spine
+    100054: SHEEP_ Spine1
+    400000: //RootNode
+    400002: SHEEP_
+    400004: SHEEP_ Head
+    400006: SHEEP_ L Calf
+    400008: SHEEP_ L Clavicle
+    400010: SHEEP_ L Finger0
+    400012: SHEEP_ L Foot
+    400014: SHEEP_ L Forearm
+    400016: SHEEP_ L Hand
+    400018: SHEEP_ L HorseLink
+    400020: SHEEP_ L Thigh
+    400022: SHEEP_ L UpperArm
+    400024: SHEEP_ Neck
+    400026: SHEEP_ Neck1
+    400028: SHEEP_ Neck2
+    400030: SHEEP_ Pelvis
+    400032: SHEEP_ Queue de cheval 1
+    400034: SHEEP_ R Calf
+    400036: SHEEP_ R Clavicle
+    400038: SHEEP_ R Finger0
+    400040: SHEEP_ R Foot
+    400042: SHEEP_ R Forearm
+    400044: SHEEP_ R Hand
+    400046: SHEEP_ R HorseLink
+    400048: SHEEP_ R Thigh
+    400050: SHEEP_ R UpperArm
+    400052: SHEEP_ Spine
+    400054: SHEEP_ Spine1
+    7400000: Take 001
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
