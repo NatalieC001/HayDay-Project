@@ -23,10 +23,9 @@ public class Movement : MonoBehaviour
 	void Start()
 	{
 		controller = (CharacterController)GetComponent(typeof(CharacterController));
-        mainCamera = (Camera)GameObject.Find("MainCamera").GetComponent<Camera>();
+        mainCamera = (Camera)GameObject.Find("Main Camera").GetComponent<Camera>();
         animator = GetComponent<Animator>();
         player = GameObject.Find("Player");
-
         difVec = mainCamera.transform.position - player.transform.position;
 	}
 

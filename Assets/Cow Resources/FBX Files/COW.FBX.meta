@@ -1,0 +1,137 @@
+fileFormatVersion: 2
+guid: 844d6ea2b40ab6e40a671a900439a11f
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: COW
+    100004: COW_
+    100006: COW_ Head
+    100008: COW_ L Calf
+    100010: COW_ L Clavicle
+    100012: COW_ L Finger0
+    100014: COW_ L Foot
+    100016: COW_ L Forearm
+    100018: COW_ L Hand
+    100020: COW_ L HorseLink
+    100022: COW_ L Thigh
+    100024: COW_ L UpperArm
+    100026: COW_ Neck
+    100028: COW_ Neck1
+    100030: COW_ Neck2
+    100032: COW_ Pelvis
+    100034: COW_ Queue de cheval 1
+    100036: COW_ R Calf
+    100038: COW_ R Clavicle
+    100040: COW_ R Finger0
+    100042: COW_ R Foot
+    100044: COW_ R Forearm
+    100046: COW_ R Hand
+    100048: COW_ R HorseLink
+    100050: COW_ R Thigh
+    100052: COW_ R UpperArm
+    100054: COW_ Spine
+    100056: COW_ Spine1
+    100058: COW_ Tail
+    100060: COW_ Tail1
+    100062: COW_ Tail2
+    100064: COW_ Tail3
+    100066: COW_ Tail4
+    100068: COW_ Tail5
+    400000: //RootNode
+    400002: COW
+    400004: COW_
+    400006: COW_ Head
+    400008: COW_ L Calf
+    400010: COW_ L Clavicle
+    400012: COW_ L Finger0
+    400014: COW_ L Foot
+    400016: COW_ L Forearm
+    400018: COW_ L Hand
+    400020: COW_ L HorseLink
+    400022: COW_ L Thigh
+    400024: COW_ L UpperArm
+    400026: COW_ Neck
+    400028: COW_ Neck1
+    400030: COW_ Neck2
+    400032: COW_ Pelvis
+    400034: COW_ Queue de cheval 1
+    400036: COW_ R Calf
+    400038: COW_ R Clavicle
+    400040: COW_ R Finger0
+    400042: COW_ R Foot
+    400044: COW_ R Forearm
+    400046: COW_ R Hand
+    400048: COW_ R HorseLink
+    400050: COW_ R Thigh
+    400052: COW_ R UpperArm
+    400054: COW_ Spine
+    400056: COW_ Spine1
+    400058: COW_ Tail
+    400060: COW_ Tail1
+    400062: COW_ Tail2
+    400064: COW_ Tail3
+    400066: COW_ Tail4
+    400068: COW_ Tail5
+    4300000: COW
+    7400000: Take 001
+    11100000: //RootNode
+    13700000: COW
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
