@@ -60,10 +60,18 @@ public class GameControl : MonoBehaviour
     {
         if (control.player.cash > 0)
         {
+
+          
             control.player.cash -= 100;
 
+
+            spawnLocation = new Vector3(Random.Range(50f, 100f), Random.Range(-10.0f, 10.0f), Random.Range(223f, 263f));
+
             GameObject cowGameObject =  Instantiate(Resources.Load("Cow")) as GameObject;
-           // cowGameObject.transform.localScale += new Vector3(3f, .3f, .3f);
+
+            spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
+
+            cowGameObject.transform.position = spawnLocation;
 
             Cow cow = new Cow("Tom", cowGameObject, 1, 1, 10, 100, true, true, 250f);
 
