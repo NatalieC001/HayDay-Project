@@ -6,32 +6,26 @@ using System.IO;
 
 public class GameControl : MonoBehaviour
 {
-
     public static GameControl control;
 
     public Player player;
     public List<Cow> cows;
     public Farm farm;
 
-
-    GameObject cow;
-
     Vector3 spawnLocation;
-    
 
     void Awake()
     {
-        if(control == null)
+        if (control == null)
         {
             DontDestroyOnLoad(gameObject);
             control = this;
             Load();
             //control.player.name = "Farmer Joe";
-            //control.player.cash = 400;
+            //control.player.cash = 2000;
             //Save();
-            
         }
-        else if(control != this)
+        else if (control != this)
         {
             Destroy(gameObject);
         }
@@ -40,21 +34,19 @@ public class GameControl : MonoBehaviour
     void OnGUI()
     {
         Rect windowRect = new Rect(20, 10, 230, 100);
-        windowRect = GUI.Window(0, windowRect, userInterface, control.player.name);       
+        windowRect = GUI.Window(0, windowRect, userInterface, control.player.name);
     }
-
 
     void userInterface(int windowID)
     {
         GUI.Label(new Rect(10, 20, 150, 30), "Cash: €" + control.player.cash);
 
-
         if (GUI.Button(new Rect(120, 20, 40, 20), "Buy"))
-            buy();
+            Buy();
 
         if (GUI.Button(new Rect(120, 60, 40, 20), "Sell"))
             Sell();
-        
+
 
         if (GUI.Button(new Rect(180, 20, 40, 20), "Load"))
             Load();
@@ -64,18 +56,32 @@ public class GameControl : MonoBehaviour
 
     }
 
-    public void buy()
+    public void Buy()
     {
-        control.player.cash -= 100;
+        if (control.player.cash > 0)
+        {
+            control.player.cash -= 100;
 
-        cow = Resources.Load("Cow") as GameObject;
-        Instantiate(cow);     
+            GameObject cowGameObject =  Instantiate(Resources.Load("Cow")) as GameObject;
+           // cowGameObject.transform.localScale += new Vector3(3f, .3f, .3f);
+
+            Cow cow = new Cow("Tom", cowGameObject, 1, 1, 10, 100, true, true, 250f);
+
+           
+            cows.Add(cow);
+        }
     }
 
     void Sell()
-    {
-        control.player.cash += 100;
-    }
+	{
+		control.player.cash += 100;
+
+
+		//Destroy (cows.
+        Destroy(cows[cows.Count - 1].cowGameObject, .5f);
+        cows.RemoveAt(cows.Count - 1);
+	}
+
     public void Save()
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -88,10 +94,10 @@ public class GameControl : MonoBehaviour
         bf.Serialize(file, player);
         file.Close();
     }
-     
+
     public void Load()
     {
-        if(File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
+        if (File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
@@ -105,7 +111,6 @@ public class GameControl : MonoBehaviour
         }
     }
 
-
     [System.Serializable]
     public class Player
     {
@@ -116,21 +121,43 @@ public class GameControl : MonoBehaviour
     [System.Serializable]
     public class Cow
     {
-        int age { get; set; }
+        public GameObject cowGameObject { get; set; }
 
-        int breed { get; set; }
+        public string name { get; set; }
 
-        int happiness { get; set; }
+        public int age { get; set; }
 
-        int health { get; set; }
+        public int breed { get; set; }
 
-        bool preggers { get; set; }
+        public int happiness { get; set; }
 
-        bool sex { get; set; }
+        public int health { get; set; }
 
-        float weight { get; set; }
+        public bool preggers { get; set; }
+
+        public bool sexMale { get; set; }
+
+        public float weight { get; set; }
+
+        public Cow(string name, GameObject cow)
+        {
+            this.name = name;
+            this.cowGameObject = cow;
+        }
+
+        public Cow(string name, GameObject cow, int age, int breed, int happiness, int health, bool preggers, bool sexMale, float weight)
+        {
+            this.name = name;
+            this.cowGameObject = cow;
+            this.age = age;
+            this.breed = breed;
+            this.happiness = happiness;
+            this.health = health;
+            this.sexMale = sexMale;
+            this.preggers = preggers;
+            this.weight = weight;
+        }
     }
-
 
     [System.Serializable]
     public class Farm
