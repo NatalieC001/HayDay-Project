@@ -32,9 +32,11 @@ public class Movement : MonoBehaviour
 	float UpdateMovement()
 	{ 
 		// Movement
-		float x = Input.GetAxis("Horizontal");
-		float z = Input.GetAxis("Vertical");
-		
+		//float x = Input.GetAxis("Horizontal");
+		//float z = Input.GetAxis("Vertical");
+		float z = Input.GetAxis("Horizontal");
+		float x = Input.GetAxis("Vertical");
+
 		Vector3 inputVec = new Vector3(x, 0, z);
 
 		inputVec *= Speed;
