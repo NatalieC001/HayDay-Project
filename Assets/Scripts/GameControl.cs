@@ -8,10 +8,11 @@ public class GameControl : MonoBehaviour
 {
     public static GameControl control;
 
-    public Player player;
-    public List<Cow> cows;
-    public Farm farm;
 
+
+    public Player player;
+    public Farm farm;
+    public Dictionary<int, Cow> cowIndex;
     Vector3 spawnLocation;
 
     void Awake()
@@ -20,9 +21,10 @@ public class GameControl : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             control = this;
-            Load();
+            cowIndex = new Dictionary<int, Cow>();
+            //Load();
             //control.player.name = "Farmer Joe";
-            //control.player.cash = 500;
+            control.player.cash = 500;
         }
         else if (control != this)
         {
@@ -30,9 +32,12 @@ public class GameControl : MonoBehaviour
         }
     }
 
-	void OnApplicationQuit() {
-		Save ();
-	}
+    void OnApplicationQuit()
+    {
+        Save();
+    }
+
+
 
     void OnGUI()
     {
@@ -49,7 +54,7 @@ public class GameControl : MonoBehaviour
 
         if (GUI.Button(new Rect(120, 60, 40, 20), "Sell"))
             Sell();
-		
+
         if (GUI.Button(new Rect(180, 20, 40, 20), "Load"))
             Load();
 
@@ -60,130 +65,125 @@ public class GameControl : MonoBehaviour
     public void Buy()
     {
         try
-		{
-			if (control.player.cash > 0)
-	        { 
-	            control.player.cash -= 100;
-
-				SpawnCow(Instantiate(Resources.Load("Cow")) as GameObject);
-			}
+        {
+            //	if (control.player.cash > 0)
+            {
+                control.player.cash -= 100;
+                //Prolly need a method to randomly create a cow here
+                Cow cow = new Cow("Carlos", 1, 1, 10, 100, true, true, 250f);
+                SpawnCow(cow);
+            }
         }
-		catch(UnityException e)
-		{
-			Debug.Log ("Buying Failed! - " + e);
-		}
+        catch (UnityException e)
+        {
+            Debug.Log("Buying Failed! - " + e);
+        }
     }
 
     void Sell()
-	{
-		try
-		{
-			if(cows.Count > 0)
-			{
-				control.player.cash += 100;
-				Destroy(cows[cows.Count - 1].cowGameObject, .5f);
-				cows.RemoveAt(cows.Count - 1);
-			}
-		}
-		catch(UnityException e)
-		{
-			Debug.Log ("Selling Failed! - " + e);
-		}
-	}
+    {
+        try
+        {
+            if (cowIndex.Values.Count > 0)
+            {
+                control.player.cash += 100;
+
+                //Need to get the instanceID of the cow in order to delete/sell them now
+                // Destroy(cowIndex(selectedCowGameObject.instanceID));
+
+                //   cowIndex.Remove(selectedCowGameObject.instanceID);
+                //cows.RemoveAt(cows.Count - 1);
+            }
+        }
+        catch (UnityException e)
+        {
+            Debug.Log("Selling Failed! - " + e);
+        }
+    }
 
     public void Save()
     {
         try
-		{
-			BinaryFormatter bf = new BinaryFormatter();
-	        FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.OpenOrCreate);
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.OpenOrCreate);
 
-	        Player player = new Player();
-	        player.name = control.player.name;
-	        player.cash = control.player.cash;
+            Player player = new Player();
+            player.name = control.player.name;
+            player.cash = control.player.cash;
+            player.cows = new List<Cow>();
 
-			player.cows = new List<Cow>();
+            Debug.Log("Number in list: " + cowIndex.Values.Count);
 
-			Debug.Log ("Number in list: " + cows.Count);
+            foreach (Cow cow in cowIndex.Values)
+                player.cows.Add(cow);
 
-			if(cows.Count > 0)
-			{
-				//if(player.cows.Count > 0)
-				{
-					//player.cows.Clear();
-				
-					for(int i = 0;i > cows.Count;i++)
-						player.cows.Add(cows[i]);
-				}
-			}
 
-	        bf.Serialize(file, player);
-	        file.Close();
-		}
-		catch(UnityException e)
-		{
-			Debug.Log ("Saving Failed! - " + e);
-		}
+            bf.Serialize(file, player);
+            file.Close();
+        }
+        catch (UnityException e)
+        {
+            Debug.Log("Saving Failed! - " + e);
+        }
     }
 
     public void Load()
     {
-		try
-		{
-	        if (File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
-	        {
-	            BinaryFormatter bf = new BinaryFormatter();
-	            FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
+        try
+        {
+            if (File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
 
-	            Player player = (Player)bf.Deserialize(file);
-	            file.Close();
+                Player player = (Player)bf.Deserialize(file);
+                file.Close();
 
-	            control.player.name = player.name;
-	            control.player.cash = player.cash;
+                control.player.name = player.name;
+                control.player.cash = player.cash;
 
-				Debug.Log ("Number in list: " + player.cows.Count);
+                Debug.Log("Number in list: " + cowIndex.Values.Count);
 
-				if(player.cows != null)
-				{
-					for(int i = 0;i > player.cows.Count;i++)
-					{
-						cows.Add(cows[i]);
-						SpawnCow(cows[i].cowGameObject);
-					}
-				}
-	        }
-		}
-		catch(UnityException e)
-		{
-			Debug.Log ("Loading Failed! - " + e);
-		}
+                if (player.cows != null)
+                {
+                    foreach (Cow cow in player.cows)
+                    {
+                        SpawnCow(cow);
+                    }
+                }
+            }
+        }
+        catch (UnityException e)
+        {
+            Debug.Log("Loading Failed! - " + e);
+        }
     }
 
-	public void SpawnCow(GameObject cowGameObject)
-	{
-		spawnLocation = new Vector3 (Random.Range (50f, 100f), Random.Range (-10.0f, 10.0f), Random.Range (223f, 263f));
-		
-		spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
-		
-		cowGameObject.transform.position = spawnLocation;
-		
-		Cow cow = new Cow("Tom", cowGameObject, 1, 1, 10, 100, true, true, 250f);
-		
-		cows.Add(cow);
-	}
+    public void SpawnCow(Cow cow)
+    {
+        GameObject cowGameObject = Instantiate(Resources.Load("Cow") as GameObject);
+
+        cowIndex.Add(cowGameObject.GetInstanceID(), cow);
+
+        spawnLocation = new Vector3(Random.Range(50f, 100f), Random.Range(-10.0f, 10.0f), Random.Range(223f, 263f));
+
+        spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
+
+        cowGameObject.transform.position = spawnLocation;
+    }
 
     [System.Serializable]
     public class Player
     {
         public string name;
         public double cash;
-		public List<Cow> cows;
+        public List<Cow> cows;
     }
 
     [System.Serializable]
     public class Cow
     {
-        public GameObject cowGameObject { get; set; }
         public string name { get; set; }
         public int age { get; set; }
         public int breed { get; set; }
@@ -193,16 +193,14 @@ public class GameControl : MonoBehaviour
         public bool sexMale { get; set; }
         public float weight { get; set; }
 
-        public Cow(string name, GameObject cow)
+        public Cow(string name)
         {
             this.name = name;
-            this.cowGameObject = cow;
         }
 
-        public Cow(string name, GameObject cow, int age, int breed, int happiness, int health, bool preggers, bool sexMale, float weight)
+        public Cow(string name, int age, int breed, int happiness, int health, bool preggers, bool sexMale, float weight)
         {
             this.name = name;
-            this.cowGameObject = cow;
             this.age = age;
             this.breed = breed;
             this.happiness = happiness;
