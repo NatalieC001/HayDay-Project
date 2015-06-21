@@ -8,8 +8,6 @@ public class GameControl : MonoBehaviour
 {
     public static GameControl control;
 
-
-
     public Player player;
     public Farm farm;
     public Dictionary<int, Cow> cowIndex;
@@ -36,8 +34,6 @@ public class GameControl : MonoBehaviour
     {
         Save();
     }
-
-
 
     void OnGUI()
     {

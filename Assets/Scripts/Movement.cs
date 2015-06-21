@@ -9,39 +9,38 @@ public class Movement : MonoBehaviour
 	public float Speed = 10f;
 	public int gravity = 20;
 	public float jumpSpeed = 8;
-	
-	bool canJump;
+
 	float moveSpeed;
-	float verticalVel;  // Used for continuing momentum while in air    
 	CharacterController controller;
-
-    Camera mainCamera;
-    GameObject player;
-    Animator animator;
-    Vector3 difVec;
-
+	
+	Camera mainCamera;
+	GameObject player;
+	Animator animator;
+	Vector3 difVec;
+	
 	void Start()
 	{
 		controller = (CharacterController)GetComponent(typeof(CharacterController));
-        mainCamera = (Camera)GameObject.Find("Main Camera").GetComponent<Camera>();
-        animator = GetComponent<Animator>();
-        player = GameObject.Find("Player");
-        difVec = mainCamera.transform.position - player.transform.position;
+		mainCamera = (Camera)GameObject.Find("Main Camera").GetComponent<Camera>();
+		animator = GetComponent<Animator>();
+		player = GameObject.Find("Player");
+		difVec = mainCamera.transform.position - player.transform.position;
 	}
-
+	
 	float UpdateMovement()
 	{ 
-		// Movement
-		//float x = Input.GetAxis("Horizontal");
-		//float z = Input.GetAxis("Vertical");
-		float z = Input.GetAxis("Horizontal");
-		float x = Input.GetAxis("Vertical");
-
-		Vector3 inputVec = new Vector3(x, 0, z);
-
+		// These values are for keyboard use, enable them if needed
+		//float z = Input.GetAxis("Horizontal");
+		//float x = Input.GetAxis("Vertical");
+		
+		// Get input from the joystick
+		VCAnalogJoystickBase joy = VCAnalogJoystickBase.GetInstance("stick");
+		
+		Vector3 inputVec = new Vector3(joy.AxisY, 0, -joy.AxisX);
+		
 		inputVec *= Speed;
 		
-		controller.Move((inputVec + Vector3.up * -gravity + new Vector3(0, verticalVel, 0)) * Time.deltaTime);
+		controller.Move((inputVec + Vector3.up * -gravity + new Vector3(0, 0, 0)) * Time.deltaTime);
 		
 		// Rotation
 		if (inputVec != Vector3.zero)
@@ -49,35 +48,15 @@ public class Movement : MonoBehaviour
 			                                      Quaternion.LookRotation(inputVec), 
 			                                      Time.deltaTime * rotationDamping);
 		
-        mainCamera.transform.position = player.transform.position + difVec;
+		mainCamera.transform.position = player.transform.position + difVec;
 		return inputVec.magnitude;
 	}
-
+	
 	void Update()
 	{
-		// Check for jump
-		if (controller.isGrounded )
-		{
-			canJump = true;
-			if ( canJump && Input.GetKeyDown("space") )
-			{
-				// Apply the current movement to launch velocity
-				verticalVel = jumpSpeed;
-				canJump = false;
-			}
-		}
-		else
-		{           
-			// Apply gravity to our velocity to diminish it over time
-			verticalVel += Physics.gravity.y * Time.deltaTime;
-		}
-		
 		// Actually move the character
 		moveSpeed = UpdateMovement();
-
+		
 		animator.SetFloat("Speed", moveSpeed, 0.1f, Time.deltaTime);
-
-		if ( controller.isGrounded )
-			verticalVel = 0f;// Remove any persistent velocity after landing
 	}
 }
