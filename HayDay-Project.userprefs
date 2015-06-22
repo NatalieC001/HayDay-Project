@@ -1,16 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Movement.cs">
+    <Files>
+      <File FileName="Assets\Scripts\Movement.cs" Line="15" Column="2" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
+        <State expanded="True" selected="True">
           <Node name="Assembly-CSharp" expanded="True">
-            <Node name="Scripts" expanded="True">
-              <Node name="Movement.cs" selected="True" />
-            </Node>
+            <Node name="Scripts" expanded="True" />
             <Node name="VirtualControls" expanded="True">
-              <Node name="Examples" expanded="True">
-                <Node name="Scripts" expanded="True" />
+              <Node name="Scripts" expanded="True">
+                <Node name="GUITexture" expanded="True" />
               </Node>
             </Node>
           </Node>

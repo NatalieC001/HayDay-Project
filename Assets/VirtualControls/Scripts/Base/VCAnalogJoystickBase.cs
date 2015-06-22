@@ -152,7 +152,7 @@ public abstract class VCAnalogJoystickBase : VCCollideableObject
 	/// <summary>
 	/// The maximum length of the distance the movingPart may be dragged away from origin, in pixels.
 	/// </summary>
-	public float dragDeltaMagnitudeMaxPixels = 50.0f;
+	public float dragDeltaMagnitudeMaxPixels = 30.0f;
 	
 	/// <summary>
 	/// The period of time in seconds after which TapCount is reset to 0.
