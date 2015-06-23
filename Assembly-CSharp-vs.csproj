@@ -46,9 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\CowMovement.cs" />
+     <Compile Include="Assets\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\CowController.cs" />
+     <Compile Include="Assets\Scripts\CowMaker.cs" />
      <Compile Include="Assets\Scripts\GameControl.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
+     <Compile Include="Assets\Scripts\UI.cs" />
      <Compile Include="Assets\TerrainToolkit\TerrainToolkit.cs" />
      <Compile Include="Assets\VirtualControls\Scripts\Base\VCAnalogJoystickBase.cs" />
      <Compile Include="Assets\VirtualControls\Scripts\Base\VCButtonBase.cs" />
@@ -83,6 +86,10 @@
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
+      <Project>{C07E22DB-7F82-A9C7-6238-907B2E034034}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
