@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public class GameControl : MonoBehaviour
+public class GameController : MonoBehaviour
 {
-    public static GameControl game;
+    public static GameController game;
 
     public Player player;
     public Farm farm;
@@ -24,7 +24,7 @@ public class GameControl : MonoBehaviour
         }
         else if (game != this)
         {
-            Destroy(gameObject);
+         //   Destroy(gameObject);
         }
     }
 

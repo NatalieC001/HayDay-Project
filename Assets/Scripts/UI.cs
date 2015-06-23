@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UI : GameControl {
+public class UI : GameController {
 
     public bool playerUI;
     public bool cowUI;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CowMaker : GameControl{
+public class CowMaker : GameController{
 
     public static int SpawnCow()
     {

@@ -49,7 +49,7 @@
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\CowController.cs" />
      <Compile Include="Assets\Scripts\CowMaker.cs" />
-     <Compile Include="Assets\Scripts\GameControl.cs" />
+     <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\UI.cs" />
      <Compile Include="Assets\TerrainToolkit\TerrainToolkit.cs" />

@@ -62,7 +62,7 @@ public class CowController : MonoBehaviour {
 
 
         //Finds the cow with the same instance Id as the parent gameobject
-        Userinterface.cow = GameControl.game.cows.Find(cow => cow.gameObjectID == this.gameObject.GetInstanceID());
+        Userinterface.cow = GameController.game.cows.Find(cow => cow.gameObjectID == this.gameObject.GetInstanceID());
         Userinterface.cowGameObject = this.gameObject;
 
         Userinterface.cowUI = true;
