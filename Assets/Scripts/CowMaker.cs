@@ -16,7 +16,6 @@ public class CowMaker : GameController{
         return cowGameObject.GetInstanceID();
     }
 
-
     public static void generateCow()
     {
         Cow cow = new Cow("Carlos", 1, 1, 10, 100, true, true, 250f);
@@ -24,6 +23,5 @@ public class CowMaker : GameController{
         cow.gameObjectID = SpawnCow();
 
         game.cows.Add(cow);
-
     }
 }

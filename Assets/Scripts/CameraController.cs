@@ -15,17 +15,16 @@ public class CameraController : MonoBehaviour {
         followPlayer = true;
         player = GameObject.Find("Player");
         difVec = transform.position - player.transform.position;
-
 	}
-
 
     void LateUpdate()
     {
-	
         if(followPlayer)
+		{
             transform.position = player.transform.position + difVec;
-                  
+		}
         else
+		{
             if (target != null)
             {
                 transform.position = position;
@@ -37,5 +36,6 @@ public class CameraController : MonoBehaviour {
                 followPlayer = true;
                 
             }
+		}
 	}
 }

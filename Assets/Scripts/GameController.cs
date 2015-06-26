@@ -18,13 +18,13 @@ public class GameController : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             game = this;
-            //Load();
-            //control.player.name = "Farmer Joe";
+            Load();
+            game.player.name = "Farmer Joe";
             game.player.cash = 500;
         }
         else if (game != this)
         {
-         //   Destroy(gameObject);
+         	Destroy(gameObject);
         }
     }
 
@@ -39,7 +39,6 @@ public class GameController : MonoBehaviour
         {
             FileStream file;
             BinaryFormatter bf = new BinaryFormatter();
-
 
             //save player data
             file = File.Open(Application.persistentDataPath + "/player.dat", FileMode.OpenOrCreate);
@@ -97,14 +96,11 @@ public class GameController : MonoBehaviour
         }
     }
 
-
-
     [System.Serializable]
     public class Player
     {
         public string name;
         public double cash;
-
     }
 
     [System.Serializable]
@@ -137,9 +133,8 @@ public class GameController : MonoBehaviour
             this.preggers = preggers;
             this.weight = weight;
         }
-
-
-        public void buy()
+		
+        public void Buy()
         {
             if (game.player.cash > 100)
             {
@@ -149,8 +144,7 @@ public class GameController : MonoBehaviour
 
             }
         }
-
-
+		
         public void Sell()
         {
             if (ownedByPlayer)
@@ -168,6 +162,4 @@ public class GameController : MonoBehaviour
     {
         // Maybe save state of the farm here, the amount of cows the player has...etc
     }
-
-
 }
