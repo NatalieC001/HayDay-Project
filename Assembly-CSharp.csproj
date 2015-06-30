@@ -50,6 +50,8 @@
      <Compile Include="Assets\Scripts\CowController.cs" />
      <Compile Include="Assets\Scripts\CowMaker.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\HappinessBar.cs" />
+     <Compile Include="Assets\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\UI.cs" />
      <Compile Include="Assets\TerrainToolkit\TerrainToolkit.cs" />

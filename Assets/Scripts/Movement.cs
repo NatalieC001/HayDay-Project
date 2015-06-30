@@ -18,10 +18,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         controller = (CharacterController)GetComponent(typeof(CharacterController));
-
         animator = GetComponent<Animator>();
-
-
     }
 
     public float UpdateMovement()

@@ -34,7 +34,8 @@ public class CameraController : MonoBehaviour {
             {
                 transform.forward = defaultLookat;
                 followPlayer = true;
-                
+				HealthBar.SetHealth(0f);
+				HappinessBar.SetHappiness(0f);
             }
 		}
 	}

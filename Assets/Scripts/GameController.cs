@@ -88,7 +88,6 @@ public class GameController : MonoBehaviour
                 farm = (Farm)bf.Deserialize(file);
                 file.Close();
             }
-
         }
         catch (UnityException e)
         {
@@ -141,7 +140,6 @@ public class GameController : MonoBehaviour
                 print("You bought " + name + "!");
                 ownedByPlayer = true;
                 game.player.cash -= 100;
-
             }
         }
 		
@@ -152,7 +150,6 @@ public class GameController : MonoBehaviour
                 print("You Sold " + name + " :(");
                 ownedByPlayer = false;
                 game.player.cash += 100;
-
             }
         }
     }
