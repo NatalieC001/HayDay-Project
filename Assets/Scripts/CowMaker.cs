@@ -7,9 +7,20 @@ public class CowMaker : GameController{
     {
         GameObject cowGameObject = Instantiate(Resources.Load("Cow") as GameObject);
 
-        Vector3 spawnLocation = new Vector3(Random.Range(50f, 100f), Random.Range(-10.0f, 10.0f), Random.Range(223f, 263f));
+        Vector3 spawnLocation;
+        int count=0;
 
-        spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
+        do{
+
+            if (count++ > 100)
+                return 0;
+
+            spawnLocation = new Vector3(Random.Range(50f, 100f), 0, Random.Range(223f, 263f));
+
+            spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
+
+        }while (Physics.CheckSphere(spawnLocation +  new Vector3(0,3.5f,0), 3));
+
 
         cowGameObject.transform.position = spawnLocation;
 

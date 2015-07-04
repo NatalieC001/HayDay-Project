@@ -14,11 +14,13 @@ public class CowController : MonoBehaviour
     public string state;
     Movement movement;
 
-
+    public float speed = 3;
+    public float rotationSpeed = 10;
+    Vector3 targetDestination;
         
     void Start()
     {
-        state = "idle";
+        state = "wander";
 
         player = GameObject.Find("Player");
         movement = player.GetComponent<Movement>();
@@ -35,7 +37,35 @@ public class CowController : MonoBehaviour
 
         switch (state)
         {
-            case "wandering":
+            case "moving":
+                if (Vector3.Distance(transform.position, targetDestination) < 2)
+                {
+                    state = "idle";
+                }
+                else if (targetDestination != Vector3.zero)
+                {
+                    Quaternion lookRotation;
+                    Vector3 direction;
+
+                    direction = (targetDestination - transform.position).normalized;
+                    lookRotation = Quaternion.LookRotation(direction);
+
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+                    //transform.LookAt(targetDestination);
+                    Vector3 yVec = Vector3.zero;
+                    Vector3 fwd = transform.TransformDirection(Vector3.forward);
+                    yVec.y += 1;
+                    if (!Physics.Raycast(transform.position, transform.forward, 2))
+                    {
+                        transform.position += transform.forward * speed * Time.deltaTime;
+                    }
+                    else
+                    {
+                        state = "idle";
+                    }
+                    
+                }
+               
                 break;
             case "wander":
                 wander();
@@ -49,6 +79,7 @@ public class CowController : MonoBehaviour
             case "lookingAtPlayer":
                 if (movement.currentFocus != this.gameObject)
                 {
+                    print("Look at me!!");
                     state = "wander";
                 }
                 anim.Play("idle3");
@@ -78,18 +109,14 @@ public class CowController : MonoBehaviour
 
     public void wander()
     {
-        state = "wandering";
+        state = "moving";
         anim.Play("walk");
-        Vector3 targetLocation  = new Vector3(Random.Range(50f, 100f), 0f, Random.Range(223f, 263f));
-        
-        targetLocation.y = Terrain.activeTerrain.SampleHeight(targetLocation);
-        transform.LookAt(targetLocation * Time.deltaTime);
-        transform.position += transform.forward * 4 * Time.deltaTime;
+        targetDestination = new Vector3(transform.position.x + Random.Range(-10, 10), 0f, transform.position.z + Random.Range(-10, 10));
+        targetDestination.y = Terrain.activeTerrain.SampleHeight(targetDestination);
 
-        if (transform.position == targetLocation)
-        {
-            state = "idle";
-        }
+     //   print(targetDestination);
+
+      
     }
 
     public void follow()
@@ -104,7 +131,7 @@ public class CowController : MonoBehaviour
         transform.LookAt(targetPosition);
        
 
-        
+     
 
         transform.position += transform.forward * 4 * Time.deltaTime;
 
