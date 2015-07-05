@@ -25,13 +25,9 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-
-
         freeRoam = true;
         controller = (CharacterController)GetComponent(typeof(CharacterController));
-        animator = GetComponent<Animator>();
-
-       
+        animator = GetComponent<Animator>(); 
     }
 
     public float UpdateMovement()
@@ -44,16 +40,14 @@ public class Movement : MonoBehaviour
 
         if (freeRoam)
         {
-
-        // Rotation
-        if (inputVec != Vector3.zero)
-            transform.rotation = Quaternion.Slerp(transform.rotation,
-                                                  Quaternion.LookRotation(inputVec),
-                                                  Time.deltaTime * rotationDamping);
+	        // Rotation
+	        if (inputVec != Vector3.zero)
+	            transform.rotation = Quaternion.Slerp(transform.rotation,
+	                                                  Quaternion.LookRotation(inputVec),
+	                                                  Time.deltaTime * rotationDamping);
         }
         else if (currentFocus != null)
         {
-           
             Quaternion lookRotation;
             Vector3 direction;
 
@@ -66,11 +60,9 @@ public class Movement : MonoBehaviour
         {
             freeRoam = true;
         }
-
-
+		
         return inputVec.magnitude;
     }
-
 
     public void lookAt(GameObject target)
     {
@@ -78,13 +70,9 @@ public class Movement : MonoBehaviour
         freeRoam = false;  
     }
 
-
-
     void Update()
     {
-        
-            moveSpeed = UpdateMovement();
-            animator.SetFloat("Speed", moveSpeed, 0.1f, Time.deltaTime);
-       
+        moveSpeed = UpdateMovement();
+        animator.SetFloat("Speed", moveSpeed, 0.1f, Time.deltaTime);
     }
 }

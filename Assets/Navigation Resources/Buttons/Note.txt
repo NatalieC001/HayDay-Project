@@ -1,0 +1,8 @@
+www.cooltext.com
+
+Start: #F28F16
+End: #E08012
+
+Size: 70
+
+Border: 4

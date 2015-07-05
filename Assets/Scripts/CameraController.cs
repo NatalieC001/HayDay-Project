@@ -8,12 +8,9 @@ public class CameraController : MonoBehaviour {
     public bool closeUpView;
     GameObject player;
 
-
     public GameObject currentFocus;
 
-
     Vector3 difVec;
-
 
     Vector3 startingFocus;
     Vector3 endingFocus;
@@ -21,23 +18,17 @@ public class CameraController : MonoBehaviour {
     Vector3 startingPositon;
     Vector3 endingPosition;
 
-   
     float speed = 10;
-    public float startTime;
 
+    public float startTime;
     public float journeyLength;
    
-
 	void Start () {
      
         player = GameObject.Find("Player");
         transform.LookAt(player.transform.position);
         difVec = transform.position - player.transform.position;
 	}
-
-
-
-
 
     public void lookAt(GameObject target)
     {
@@ -50,7 +41,6 @@ public class CameraController : MonoBehaviour {
             startingPositon = transform.position;
             startingFocus = player.transform.position;
             
-
             journeyLength = Vector3.Distance(startingPositon, player.transform.position - player.transform.forward * 4 + new Vector3(0f, 5f, 0f));   
 
             closeUpView = true;
@@ -61,14 +51,9 @@ public class CameraController : MonoBehaviour {
         //    {
         //        startTime = Time.time;
         //        translationTime = Vector3.Distance(currentFocus.tr, transform.position);
-
-
-
         //    }
-
         //}
     }
-
 
     void resetCamera()
     {
@@ -94,24 +79,19 @@ public class CameraController : MonoBehaviour {
 
                 if (fracComplete < 1)
                 {
-
                     transform.position = Vector3.Lerp(startingPositon, player.transform.position - player.transform.forward * 4 + new Vector3(0f, 5f, 0f), fracComplete);
                     transform.LookAt(Vector3.Slerp(startingFocus, currentFocus.transform.position, fracComplete));
-
                 }
                 else
                 {
                     startingFocus = currentFocus.transform.position;
-                }
-
-
-                
+                }  
             }  
             else
             {
                 resetCamera();
-				HealthBar.SetHealth(0f);
-				HappinessBar.SetHappiness(0f);
+				UI.SetHealth(0f);
+				UI.SetHappiness(0f);
             }
 		}
         else
