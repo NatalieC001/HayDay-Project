@@ -3,28 +3,28 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
-    public Vector3 position;
+    public static Vector3 position;
 
-    public bool closeUpView;
-    GameObject player;
+    public static bool closeUpView;
+    public static GameObject player;
 
     public GameObject currentFocus;
 
-    Vector3 difVec;
+    public static Vector3 difVec;
 
-    Vector3 startingFocus;
-    Vector3 endingFocus;
+	public static Vector3 startingFocus;
+	public Vector3 endingFocus;
 
-    Vector3 startingPositon;
-    Vector3 endingPosition;
+	public static Vector3 startingPositon;
+	public Vector3 endingPosition;
 
-    float speed = 10;
+	public float speed = 10;
 
-    public float startTime;
-    public float journeyLength;
+	public static float startTime;
+	public static float journeyLength;
    
-	void Start () {
-     
+	void Start ()
+	{
         player = GameObject.Find("Player");
         transform.LookAt(player.transform.position);
         difVec = transform.position - player.transform.position;
@@ -55,18 +55,21 @@ public class CameraController : MonoBehaviour {
         //}
     }
 
-    void resetCamera()
+    public static void ResetCamera(Vector3 transCameraPos)
     {
         startTime = Time.time;
-        journeyLength = Vector3.Distance(transform.position, player.transform.position + difVec);
+		journeyLength = Vector3.Distance(transCameraPos, player.transform.position + difVec);
 
-        startingPositon = transform.position;
+		startingPositon = transCameraPos;
         closeUpView = false;
+
+		UI.SetHealth(0f);
+		UI.SetHappiness(0f);
     }
 
     void LateUpdate()
     {
-        if(!closeUpView && Vector3.Distance(transform.position, player.transform.position + difVec)<1)
+        if(!closeUpView && Vector3.Distance(transform.position, player.transform.position + difVec) < 1)
 		{          
             transform.position = player.transform.position + difVec;
 		}
@@ -89,9 +92,7 @@ public class CameraController : MonoBehaviour {
             }  
             else
             {
-                resetCamera();
-				UI.SetHealth(0f);
-				UI.SetHappiness(0f);
+                ResetCamera(transform.position);
             }
 		}
         else
@@ -103,7 +104,4 @@ public class CameraController : MonoBehaviour {
             transform.LookAt(Vector3.Slerp(startingFocus, player.transform.position, fracJourney));
         }
 	}
-
-   
-
 }

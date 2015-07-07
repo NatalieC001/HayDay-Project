@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour
 
     public GameObject currentFocus; 
 
-    bool freeRoam;
+    public static bool freeRoam;
 
     void Start()
     {

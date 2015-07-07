@@ -33,6 +33,14 @@ public class GameController : MonoBehaviour
         Save();
     }
 
+	void Update()
+	{
+		if(Input.GetKeyDown (KeyCode.Escape)) 
+		{
+			Application.Quit();
+		}
+	}
+
     public void Save()
     {
         try
