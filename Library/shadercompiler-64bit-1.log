@@ -1,3 +1,998 @@
 Base path: C:/Program Files/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-5016
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-5512
 Cmd: getPlatforms
+Cmd: preprocess
+  insize=9195 outsize=2321 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6522 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6522 outsize=1899 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6517 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6517 outsize=3565 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6517 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6517 outsize=1485 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6517 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6517 outsize=1485 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6519 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6519 outsize=1810 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6519 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6519 outsize=1485 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6528 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6528 outsize=1444 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6533 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6533 outsize=1363 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6526 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6526 outsize=868 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6524 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6524 outsize=1526 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6531 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6531 outsize=1948 kw= ok=1
+Cmd: preprocess
+  insize=11276 outsize=717 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10591 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10591 outsize=1688 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10613 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10613 outsize=9285 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10612 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10612 outsize=9301 kw= ok=1
+Cmd: preprocess
+  insize=1209 outsize=458 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=997 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=997 outsize=859 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=996 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=996 outsize=859 kw= ok=1
+Cmd: preprocess
+  insize=9741 outsize=918 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=9031 outsize=1924 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=9031 outsize=3110 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=9035 outsize=2013 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=9035 outsize=3313 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=9055 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=9055 outsize=4979 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=9050 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=9050 outsize=5239 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=9054 outsize=1493 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=9054 outsize=1518 kw= ok=1
+Cmd: preprocess
+  insize=1685 outsize=352 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1635 outsize=1363 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1635 outsize=1981 kw= ok=1
+Cmd: preprocess
+  insize=919 outsize=355 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=869 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=869 outsize=1241 kw= ok=1
+Cmd: preprocess
+  insize=1006 outsize=316 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=995 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=995 outsize=973 kw= ok=1
+Cmd: preprocess
+  insize=1989 outsize=486 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1805 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1805 outsize=1704 kw= ok=1
+Cmd: preprocess
+  insize=1291 outsize=412 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1184 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1184 outsize=1542 kw= ok=1
+Cmd: preprocess
+  insize=3615 outsize=712 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3140 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3140 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3138 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3138 outsize=1225 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3183 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3183 outsize=2801 kw= ok=1
+Cmd: preprocess
+  insize=1235 outsize=409 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1131 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1131 outsize=1973 kw= ok=1
+Cmd: preprocess
+  insize=6551 outsize=798 ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (42): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  error: 1 plat 4 at (45): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  error: 1 plat 4 at (48): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  api=4 type=0 insize=1797 outsize=1225 kw= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (42): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  error: 1 plat 4 at (45): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  error: 1 plat 4 at (48): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  api=4 type=1 insize=1797 outsize=12251 kw= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (42): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  error: 1 plat 4 at (45): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  error: 1 plat 4 at (48): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  api=4 type=0 insize=2061 outsize=1225 kw= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (42): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  error: 1 plat 4 at (45): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  error: 1 plat 4 at (48): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  api=4 type=1 insize=2061 outsize=20148 kw= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (42): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  error: 1 plat 4 at (45): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  error: 1 plat 4 at (48): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  api=4 type=0 insize=2567 outsize=1225 kw= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (42): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  error: 1 plat 4 at (45): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  error: 1 plat 4 at (48): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  api=4 type=1 insize=2567 outsize=35943 kw= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (42): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  error: 1 plat 4 at (45): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  error: 1 plat 4 at (48): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  error: 1 plat 4 at (228): 's': loop control variable conflicts with a previous declaration in the outer scope; most recent declaration will be used\nCompiling Vertex program
+  api=4 type=0 insize=2840 outsize=1087 kw= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (42): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  error: 1 plat 4 at (45): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  error: 1 plat 4 at (48): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  error: 1 plat 4 at (228): 's': loop control variable conflicts with a previous declaration in the outer scope; most recent declaration will be used\nCompiling Fragment program
+  api=4 type=1 insize=2840 outsize=4028 kw= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (42): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  error: 1 plat 4 at (45): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  error: 1 plat 4 at (48): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Vertex program
+  api=4 type=0 insize=1780 outsize=1119 kw= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (42): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  error: 1 plat 4 at (45): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  error: 1 plat 4 at (48): 'INPUT_SAMPLE_COUNT' : macro redefinition\nCompiling Fragment program
+  api=4 type=1 insize=1780 outsize=1111 kw= ok=1
+Cmd: preprocess
+  insize=1173 outsize=314 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1164 outsize=1753 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1164 outsize=1412 kw= ok=1
+Cmd: preprocess
+  insize=2636 outsize=773 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1965 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1965 outsize=1217 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1962 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1962 outsize=949 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1975 outsize=1656 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1975 outsize=1323 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1974 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1974 outsize=868 kw= ok=1
+Cmd: preprocess
+  insize=968 outsize=305 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=968 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=968 outsize=1006 kw= ok=1
+Cmd: preprocess
+  insize=1377 outsize=384 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1295 outsize=1469 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1295 outsize=1453 kw= ok=1
+Cmd: preprocess
+  insize=1420 outsize=347 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1379 outsize=1802 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1379 outsize=1347 kw= ok=1
+Cmd: preprocess
+  insize=1709 outsize=728 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1287 outsize=1843 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1287 outsize=1371 kw= ok=1
+Cmd: preprocess
+  insize=1403 outsize=346 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1359 outsize=1363 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1359 outsize=1518 kw= ok=1
+Cmd: preprocess
+  insize=1268 outsize=329 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1244 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1244 outsize=1444 kw= ok=1
+Cmd: preprocess
+  insize=2306 outsize=643 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1968 outsize=1444 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1968 outsize=3224 kw= ok=1
+Cmd: preprocess
+  insize=965 outsize=271 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=994 outsize=1071 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=994 outsize=1233 kw= ok=1
+Cmd: preprocess
+  insize=790 outsize=320 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=772 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=772 outsize=1119 kw= ok=1
+Cmd: preprocess
+  insize=6455 outsize=995 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5436 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5436 outsize=892 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5443 outsize=1599 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5443 outsize=1534 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5447 outsize=1412 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5447 outsize=1534 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5448 outsize=1412 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5448 outsize=1534 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5452 outsize=1769 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5452 outsize=1802 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5453 outsize=1769 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5453 outsize=1802 kw= ok=1
+Cmd: preprocess
+  insize=32636 outsize=273 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=32665 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=32665 outsize=10764 kw= ok=1
+Cmd: preprocess
+  insize=1216 outsize=260 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1258 outsize=1274 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1258 outsize=1453 kw= ok=1
+Cmd: preprocess
+  insize=3601 outsize=704 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2929 outsize=1859 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2929 outsize=2314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2920 outsize=1859 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2920 outsize=1721 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2919 outsize=1859 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2919 outsize=1769 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2931 outsize=1859 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2931 outsize=2249 kw= ok=1
+Cmd: preprocess
+  insize=1000 outsize=249 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1053 outsize=1550 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1053 outsize=1160 kw= ok=1
+Cmd: preprocess
+  insize=5357 outsize=1799 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3204 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3204 outsize=1176 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3201 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3201 outsize=949 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3217 outsize=1769 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3217 outsize=1444 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3209 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3209 outsize=868 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3209 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3209 outsize=1176 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3206 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3206 outsize=949 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3218 outsize=1769 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3218 outsize=1371 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3211 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3211 outsize=786 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3203 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3203 outsize=575 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3207 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3207 outsize=778 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3202 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3202 outsize=664 kw= ok=1
+Cmd: preprocess
+  insize=13833 outsize=2059 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=11195 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=11195 outsize=2176 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=11186 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=11186 outsize=859 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=11194 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=11194 outsize=1932 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=11199 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=11199 outsize=3719 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=11209 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=11209 outsize=5897 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=11196 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=11196 outsize=1631 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=11195 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=11195 outsize=3029 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=11201 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=11201 outsize=9293 kw= ok=1
+Cmd: preprocess
+  insize=1038 outsize=358 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=985 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=985 outsize=1054 kw= ok=1
+Cmd: preprocess
+  insize=6289 outsize=752 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5327 outsize=1875 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5327 outsize=4394 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5335 outsize=1875 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5335 outsize=3508 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5329 outsize=1875 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5329 outsize=3524 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5340 outsize=1875 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5340 outsize=2704 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5335 outsize=1875 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5335 outsize=1924 kw= ok=1
+Cmd: preprocess
+  insize=2832 outsize=782 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2099 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2099 outsize=949 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2099 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2099 outsize=1176 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2103 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2103 outsize=989 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2102 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2102 outsize=1989 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2105 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2105 outsize=973 kw= ok=1
+Cmd: preprocess
+  insize=11446 outsize=2624 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=8607 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=8607 outsize=4475 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=8611 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=8611 outsize=2558 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=8610 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=8610 outsize=892 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=8614 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=8614 outsize=1745 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=8613 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=8613 outsize=1347 kw= ok=1
+Cmd: preprocess
+  insize=977 outsize=438 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=841 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=841 outsize=794 kw= ok=1
+Cmd: preprocess
+  insize=13814 outsize=2625 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10228 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10228 outsize=1193 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10227 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10227 outsize=1631 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10227 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10227 outsize=1704 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10209 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10209 outsize=1225 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10228 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10228 outsize=1355 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10209 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10209 outsize=1623 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10254 outsize=1363 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10254 outsize=1867 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10208 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10208 outsize=526 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10212 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10212 outsize=616 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10234 outsize=2176 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10234 outsize=3281 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10228 outsize=2176 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10228 outsize=3443 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=10234 outsize=2176 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=10234 outsize=3281 kw= ok=1
+Cmd: preprocess
+  insize=1950 outsize=490 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1736 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1736 outsize=1615 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1749 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1749 outsize=1916 kw= ok=1
+Cmd: preprocess
+  insize=1692 outsize=302 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1695 outsize=1753 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1695 outsize=2371 kw= ok=1
+Cmd: preprocess
+  insize=27271 outsize=4693 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19248 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19248 outsize=1436 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19254 outsize=2111 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19254 outsize=3931 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19257 outsize=2111 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19257 outsize=7587 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19236 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19236 outsize=664 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19252 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19252 outsize=1428 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19239 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19239 outsize=2574 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19250 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19250 outsize=2111 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19246 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19246 outsize=843 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19256 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19256 outsize=1501 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19249 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19249 outsize=1233 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19256 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19256 outsize=1818 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19244 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (92): gradient-based operations must be moved out of flow control to prevent divergence. Performance may improve by using a non-gradient operation\nCompiling Fragment program
+  error: 1 plat 4 at (168): gradient-based operations must be moved out of flow control to prevent divergence. Performance may improve by using a non-gradient operation\nCompiling Fragment program
+  api=4 type=1 insize=19244 outsize=3102 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19253 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19253 outsize=3500 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19240 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19240 outsize=1558 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19255 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19255 outsize=1046 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19245 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19245 outsize=1404 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19238 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19238 outsize=859 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19245 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (97): gradient-based operations must be moved out of flow control to prevent divergence. Performance may improve by using a non-gradient operation\nCompiling Fragment program
+  error: 1 plat 4 at (200): gradient-based operations must be moved out of flow control to prevent divergence. Performance may improve by using a non-gradient operation\nCompiling Fragment program
+  api=4 type=1 insize=19245 outsize=3858 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19253 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19253 outsize=3760 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19263 outsize=2111 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19263 outsize=4670 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19241 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19241 outsize=778 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19243 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19243 outsize=2574 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=19261 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=19261 outsize=664 kw= ok=1
+Cmd: preprocess
+  insize=4106 outsize=553 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3754 outsize=1753 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3754 outsize=3305 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3766 outsize=1753 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3766 outsize=1794 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3757 outsize=1753 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3757 outsize=2395 kw= ok=1
+Cmd: preprocess
+  insize=2274 outsize=1208 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1310 outsize=1924 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1310 outsize=1599 kw= ok=1
+Cmd: preprocess
+  insize=1737 outsize=297 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1742 outsize=1729 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1742 outsize=4629 kw= ok=1
+Cmd: preprocess
+  insize=1026 outsize=351 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=977 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=977 outsize=1298 kw= ok=1
+Cmd: preprocess
+  insize=1123 outsize=458 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=940 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=940 outsize=965 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=946 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=946 outsize=1022 kw= ok=1
+Cmd: preprocess
+  insize=738 outsize=267 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=771 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=771 outsize=835 kw= ok=1
+Cmd: preprocess
+  insize=5837 outsize=873 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4927 outsize=1574 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4927 outsize=2151 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4929 outsize=1574 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4929 outsize=1656 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4933 outsize=1574 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4933 outsize=1818 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4942 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4942 outsize=1054 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4923 outsize=1574 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4923 outsize=2151 kw= ok=1
+Cmd: preprocess
+  insize=5633 outsize=757 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4670 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4670 outsize=1201 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4674 outsize=2151 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4674 outsize=1851 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4684 outsize=2159 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4684 outsize=2753 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4679 outsize=2159 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4679 outsize=2419 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4685 outsize=1753 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4685 outsize=2371 kw= ok=1
+Cmd: preprocess
+  insize=586 outsize=360 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=528 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=528 outsize=1274 kw= ok=1
+Cmd: preprocess
+  insize=7257 outsize=922 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5673 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5673 outsize=811 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5672 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5672 outsize=908 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5666 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5666 outsize=2639 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5665 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5665 outsize=2793 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5668 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5668 outsize=2907 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5667 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5667 outsize=2964 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=5669 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=5669 outsize=1014 kw= ok=1
+Cmd: preprocess
+  insize=32646 outsize=272 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=32675 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=32675 outsize=10699 kw= ok=1
+Cmd: preprocess
+  insize=5149 outsize=1741 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3712 outsize=1769 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3712 outsize=6961 kw= ok=1
+Cmd: preprocess
+  insize=6801 outsize=255 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6848 outsize=1396 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6848 outsize=4434 kw= ok=1
+Cmd: preprocess
+  insize=4528 outsize=555 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4182 outsize=2216 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4182 outsize=7043 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4186 outsize=2216 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4186 outsize=6108 kw= ok=1
+Cmd: preprocess
+  insize=4848 outsize=1016 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3817 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3817 outsize=1217 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3824 outsize=1249 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3824 outsize=1201 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3822 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3822 outsize=1688 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3824 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3824 outsize=1989 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3814 outsize=1314 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3814 outsize=989 kw= ok=1
+Cmd: preprocess
+  insize=5752 outsize=1269 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4241 outsize=1444 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4241 outsize=3208 kw= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (72): Output value 'vertApply' is not completely initialized\nCompiling Vertex program
+  api=4 type=0 insize=3327 outsize=1201 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3327 outsize=1672 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=4 insize=3327 outsize=3606 kw= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (72): Output value 'vertApply' is not completely initialized\nCompiling Vertex program
+  api=4 type=0 insize=3327 outsize=1201 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3327 outsize=1672 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=4 insize=3327 outsize=3606 kw= ok=1
+Cmd: preprocess
+  insize=778 outsize=304 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=776 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=776 outsize=673 kw= ok=1
+Cmd: preprocess
+  insize=721 outsize=317 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=706 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=706 outsize=1404 kw= ok=1
+Cmd: preprocess
+  insize=3918 outsize=651 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3312 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3312 outsize=1274 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3319 outsize=2151 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3319 outsize=1851 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3328 outsize=2135 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3328 outsize=2208 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3323 outsize=2135 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3323 outsize=2419 kw= ok=1
+Cmd: preprocess
+  insize=873 outsize=301 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=877 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=877 outsize=1103 kw= ok=1
+Cmd: preprocess
+  insize=1339 outsize=296 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1347 outsize=1574 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1347 outsize=1956 kw= ok=1
+Cmd: preprocess
+  insize=2143 outsize=982 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=905 outsize=1087 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=905 outsize=754 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=860 outsize=1087 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=860 outsize=616 kw= ok=1
+Cmd: preprocess
+  insize=5314 outsize=775 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4700 outsize=1014 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4700 outsize=1964 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4705 outsize=1014 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4705 outsize=1696 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4715 outsize=1014 kw= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (151): integer modulus may be much slower, try using uints if possible.\nCompiling Fragment program
+  api=4 type=1 insize=4715 outsize=6466 kw= ok=1
+Cmd: preprocess
+  insize=1080 outsize=489 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=893 outsize=1144 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=893 outsize=1038 kw= ok=1
+Cmd: preprocess
+  insize=1213 outsize=389 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1129 outsize=1249 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1129 outsize=1201 kw= ok=1
+Cmd: preprocess
+  insize=574 outsize=259 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=617 outsize=843 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=617 outsize=453 kw= ok=1
+Cmd: preprocess
+  insize=724 outsize=315 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=714 outsize=1006 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=714 outsize=729 kw= ok=1
+Cmd: preprocess
+  insize=5281 outsize=888 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4431 outsize=1599 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4431 outsize=1323 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4435 outsize=1412 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4435 outsize=1534 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4436 outsize=1412 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4436 outsize=1534 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4440 outsize=1769 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4440 outsize=1802 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4441 outsize=1769 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4441 outsize=1802 kw= ok=1
+Cmd: preprocess
+  insize=1727 outsize=682 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1346 outsize=1542 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1346 outsize=1258 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6862 outsize=3663 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6862 outsize=1493 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3686 outsize=2753 kw=DIRECTIONAL ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3686 outsize=1347 kw=DIRECTIONAL ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=577 outsize=3533 kw=SHADOWS_DEPTH ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=577 outsize=453 kw=SHADOWS_DEPTH ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=7080 outsize=4784 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=7080 outsize=1989 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6800 outsize=3663 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6800 outsize=1249 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
