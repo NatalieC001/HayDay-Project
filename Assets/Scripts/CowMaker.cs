@@ -3,9 +3,9 @@ using System.Collections;
 
 public class CowMaker : GameController{
 
-    public static int SpawnCow()
+    public static int SpawnCow(string cowType)
     {
-        GameObject cowGameObject = Instantiate(Resources.Load("Cow") as GameObject);
+		GameObject cowGameObject = Instantiate(Resources.Load(cowType) as GameObject);
 
         Vector3 spawnLocation;
         int count = 0;
@@ -28,11 +28,11 @@ public class CowMaker : GameController{
         return cowGameObject.GetInstanceID();
     }
 
-    public static void GenerateCow()
+    public static void GenerateCow(string cowType)
     {
-		Cow cow = new Cow("Carlos", 1, 1, Random.Range(1, 10), Random.Range(5, 100), true, true, 250f);
+		Cow cow = new Cow(cowType + " - Breed", 1, 1, Random.Range(1, 10), Random.Range(5, 100), true, true, 250f);
 
-        cow.gameObjectID = SpawnCow();
+		cow.gameObjectID = SpawnCow(cowType);
 
         game.cows.Add(cow);
     }

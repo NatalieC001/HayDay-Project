@@ -61,29 +61,24 @@ public class CowController : MonoBehaviour
                         state = "idle";
                     }  
                 }
-               
-                break;
+            break;
             case "wander":
                 wander();
-                break;
-
+            break;
             case "idle":
                 if (!idleRunning)
                     StartCoroutine(idle(Random.Range(5, 40)));
-                break;
-			
+            break;
             case "lookingAtPlayer":
                 if (movement.currentFocus != this.gameObject)
                 {
-                    print("Look at me!!");
                     state = "wander";
                 }
                 anim.Play("idle3");
-                break;
-
+            break;
             case "following":
                 follow();
-                break;
+            break;
         }
     }
 
@@ -102,7 +97,6 @@ public class CowController : MonoBehaviour
         anim.Play("walk");
         targetDestination = new Vector3(transform.position.x + Random.Range(-10, 10), 0f, transform.position.z + Random.Range(-10, 10));
         targetDestination.y = Terrain.activeTerrain.SampleHeight(targetDestination);
-     	//print(targetDestination);
     }
 
     public void follow()
