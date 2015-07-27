@@ -68,29 +68,8 @@ public class UI : GameController
 		
 		if (GUI.Button(new Rect(270, 30, 150, 50), "", buttonCattle))
 		{
-			int cowType = Random.Range(1, 6);
-
-			switch(cowType)
-			{
-				case 1:
-					CowMaker.GenerateCow("Angus");
-				break;
-				case 2:
-					CowMaker.GenerateCow("Brangus");
-				break;
-				case 3:
-					CowMaker.GenerateCow("Charolais");
-				break;
-				case 4:
-					CowMaker.GenerateCow("Hereford");
-				break;
-				case 5:
-					CowMaker.GenerateCow("Holstein Friesian");
-				break;
-				case 6:
-					CowMaker.GenerateCow("Shorthorn");
-				break;
-			}
+			Vector3 spawnLocation = new Vector3(Random.Range(50f, 100f), 0, Random.Range(223f, 263f));
+			CowMaker.GenerateCow(spawnLocation);
 		}
     }
 

@@ -3,11 +3,10 @@ using System.Collections;
 
 public class CowMaker : GameController{
 
-    public static int SpawnCow(string cowType)
+    public static int SpawnCow(string cowType, Vector3 spawnLocation)
     {
 		GameObject cowGameObject = Instantiate(Resources.Load(cowType) as GameObject);
-
-        Vector3 spawnLocation;
+		
         int count = 0;
 
         do
@@ -17,7 +16,7 @@ public class CowMaker : GameController{
                 return 0;
 			}
 
-            spawnLocation = new Vector3(Random.Range(50f, 100f), 0, Random.Range(223f, 263f));
+            //spawnLocation = new Vector3(Random.Range(50f, 100f), 0, Random.Range(223f, 263f));
 
             spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
 
@@ -28,11 +27,36 @@ public class CowMaker : GameController{
         return cowGameObject.GetInstanceID();
     }
 
-    public static void GenerateCow(string cowType)
+    public static void GenerateCow(Vector3 spawnLocation)
     {
+		int cowGen = Random.Range(1, 6);
+		string cowType = "Angus";
+
+		switch(cowGen)
+		{
+			case 1:
+				cowType = "Angus";
+			break;
+			case 2:
+				cowType = "Brangus";
+			break;
+			case 3:
+				cowType = "Charolais";
+			break;
+			case 4:
+				cowType = "Hereford";
+			break;
+			case 5:
+				cowType = "Holstein Friesian";
+			break;
+			case 6:
+				cowType = "Shorthorn";
+			break;
+		}
+
 		Cow cow = new Cow(cowType + " - Breed", 1, 1, Random.Range(1, 10), Random.Range(5, 100), true, true, 250f);
 
-		cow.gameObjectID = SpawnCow(cowType);
+		cow.gameObjectID = SpawnCow(cowType, spawnLocation);
 
         game.cows.Add(cow);
     }

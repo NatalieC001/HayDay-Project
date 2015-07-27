@@ -1,12 +1,20 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CameraController.cs">
+    <Files>
+      <File FileName="Assets\Scripts\CameraController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CowController.cs" Line="79" Column="4" />
+      <File FileName="Assets\Scripts\CowMaker.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Movement.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI.cs" Line="1" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="Movement.cs" selected="True" />
+              <Node name="CameraController.cs" selected="True" />
             </Node>
           </Node>
         </State>
