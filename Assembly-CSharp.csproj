@@ -69,7 +69,8 @@
      <Compile Include="Assets\Scripts\CowMaker.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
-     <Compile Include="Assets\Scripts\UI.cs" />
+     <Compile Include="Assets\Scripts\UIFarm.cs" />
+     <Compile Include="Assets\Scripts\UIMart.cs" />
      <Compile Include="Assets\TerrainToolkit\TerrainToolkit.cs" />
      <Compile Include="Assets\VirtualControls\Scripts\Base\VCAnalogJoystickBase.cs" />
      <Compile Include="Assets\VirtualControls\Scripts\Base\VCButtonBase.cs" />

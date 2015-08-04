@@ -8,7 +8,7 @@
 -- TerrainToolkitEditor.cs
 --
 -------------------------------------------------------------------
-*/
+
 
 using UnityEngine;
 using UnityEditor;
@@ -1337,5 +1337,5 @@ public class TerrainToolkitEditor : Editor {
 		EditorUtility.DisplayProgressBar(titleString, displayString, percentComplete);
 	}
 }
-
+*/
 // -------------------------------------------------------------------------------------------------------- END

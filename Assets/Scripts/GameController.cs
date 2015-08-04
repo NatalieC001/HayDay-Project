@@ -20,7 +20,13 @@ public class GameController : MonoBehaviour
             game = this;
             Load();
             game.player.name = "Farmer Joe";
-            game.player.cash = 500;
+            game.player.cash = 50000;
+
+			if (Application.loadedLevelName.Equals ("Mart"))
+			{
+				Vector3 spawnLocation = new Vector3(112f, 0, 154f);
+				CowMaker.GenerateCow(spawnLocation);
+			}
         }
         else if (game != this)
         {
@@ -117,7 +123,7 @@ public class GameController : MonoBehaviour
         public int gameObjectID { get; set; }
         public bool ownedByPlayer { get; set; }
         public int age { get; set; }
-        public int breed { get; set; }
+        public string breed { get; set; }
         public int happiness { get; set; }
         public int health { get; set; }
         public bool preggers { get; set; }
@@ -129,7 +135,7 @@ public class GameController : MonoBehaviour
             this.name = name;
         }
 
-        public Cow(string name, int age, int breed, int happiness, int health, bool preggers, bool sexMale, float weight)
+        public Cow(string name, int age, string breed, int happiness, int health, bool preggers, bool sexMale, float weight)
         {
             this.name = name;
             this.age = age;

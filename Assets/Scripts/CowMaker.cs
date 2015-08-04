@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CowMaker : GameController{
-
+public class CowMaker : GameController
+{
     public static int SpawnCow(string cowType, Vector3 spawnLocation)
     {
 		GameObject cowGameObject = Instantiate(Resources.Load(cowType) as GameObject);
@@ -54,10 +54,25 @@ public class CowMaker : GameController{
 			break;
 		}
 
-		Cow cow = new Cow(cowType + " - Breed", 1, 1, Random.Range(1, 10), Random.Range(5, 100), true, true, 250f);
+		Cow cow = new Cow(cowType + " - Breed", Random.Range(1, 15), cowType, Random.Range(1, 10), Random.Range(5, 100), true, true, Random.Range(250f, 600f));
 
-		cow.gameObjectID = SpawnCow(cowType, spawnLocation);
+		if (Application.loadedLevelName.Equals ("Mart"))
+		{
+			UIMart.cowAge = cow.age;
+			UIMart.breed = cow.breed;
+			UIMart.happiness = cow.happiness;
+			UIMart.health = cow.health;
+			UIMart.preggers = cow.preggers;
+			UIMart.sexMale = cow.sexMale;
+			UIMart.weight = cow.weight;
 
-        game.cows.Add(cow);
+			cow.gameObjectID = SpawnCow(cowType, spawnLocation);
+			game.cows.Add(cow);
+		}
+		else
+		{
+			cow.gameObjectID = SpawnCow(cowType, spawnLocation);
+	        game.cows.Add(cow);
+		}
     }
 }
