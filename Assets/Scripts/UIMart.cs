@@ -41,6 +41,8 @@ public class UIMart : GameController
 	float doesAIBid;
 	double startMoney = 0;
 
+	public GameObject AudioObject;
+
 	Rect windowRect;
 
     void Start()
@@ -50,6 +52,9 @@ public class UIMart : GameController
 		bars = GetComponentsInChildren<Image>();
 		healthBar = bars[0];
 		happinessBar = bars[1];
+
+		AudioObject = GameObject.Find("Background Music");
+		Destroy(AudioObject);
     }
 
     void OnGUI()

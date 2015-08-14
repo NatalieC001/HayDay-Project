@@ -27,6 +27,8 @@ public class UIFarm : GameController
 
 	public Image[] bars = new Image[2];
 
+	public GameObject AudioObject;
+
 	Rect windowRect;
 
     void Start()
@@ -37,6 +39,9 @@ public class UIFarm : GameController
 		bars = GetComponentsInChildren<Image>();
 		healthBar = bars[0];
 		happinessBar = bars[1];
+
+		AudioObject = GameObject.Find("Background Music");
+		Destroy(AudioObject);
     }
 
     void OnGUI()
@@ -102,7 +107,7 @@ public class UIFarm : GameController
             }
 		}
 
-		if (GUI.Button(new Rect(535, 30, 50, 50), "", buttonExit))
+		if (GUI.Button(new Rect(520, 30, 68, 50), "", buttonExit))
 		{
 			CameraController.ResetCamera(GameObject.Find("Main Camera").transform.position);
 			playerUI = true;

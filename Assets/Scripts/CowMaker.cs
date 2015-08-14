@@ -16,7 +16,7 @@ public class CowMaker : GameController
                 return 0;
 			}
 
-            //spawnLocation = new Vector3(Random.Range(50f, 100f), 0, Random.Range(223f, 263f));
+            spawnLocation = new Vector3(Random.Range(50f, 100f), 0, Random.Range(223f, 263f));
 
             spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
 

@@ -23,11 +23,15 @@ public class Movement : MonoBehaviour
 
     public static bool freeRoam;
 
+	public AudioClip moveSound;
+	AudioSource audio;
+
     void Start()
     {
         freeRoam = true;
         controller = (CharacterController)GetComponent(typeof(CharacterController));
-        animator = GetComponent<Animator>(); 
+        animator = GetComponent<Animator>();
+		audio = GetComponent<AudioSource>();
     }
 
     public float UpdateMovement()
@@ -35,6 +39,19 @@ public class Movement : MonoBehaviour
         VCAnalogJoystickBase joy = VCAnalogJoystickBase.GetInstance("stick");
         Vector3 inputVec = new Vector3(joy.AxisY, 0, -joy.AxisX);
         inputVec *= Speed;
+
+		if((inputVec.z != 0 || inputVec.x != 0))
+		{
+			if(!audio.isPlaying)
+			{
+				audio.clip = moveSound;
+				audio.Play();
+			}
+		}
+		else
+		{
+			GetComponent<AudioSource>().Stop();
+		}
 
         controller.Move((inputVec + Vector3.up * -gravity + new Vector3(0, 0, 0)) * Time.deltaTime);
 

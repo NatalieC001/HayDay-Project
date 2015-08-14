@@ -7,6 +7,7 @@ using System.IO;
 public class GameController : MonoBehaviour
 {
     public static GameController game;
+	public static string playerName;
 
     public Player player;
     public Farm farm;
@@ -19,7 +20,7 @@ public class GameController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             game = this;
             Load();
-            game.player.name = "Farmer Joe";
+            game.player.name = playerName;
             game.player.cash = 50000;
 
 			if (Application.loadedLevelName.Equals ("Mart"))

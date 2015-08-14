@@ -16,6 +16,7 @@ public class CowController : MonoBehaviour
     public float speed = 3;
     public float rotationSpeed = 10;
 	public string state;
+	public AudioClip cowSound;
 
 	// Mart Vars
 	bool inMart = false;
@@ -118,6 +119,8 @@ public class CowController : MonoBehaviour
 	public void Wander()
     {
 		anim.Play("walk");
+
+		GetComponent<AudioSource>().PlayOneShot(cowSound, 0.9f);
 
 		targetDestination = new Vector3(transform.position.x + Random.Range(-10, 10), 0f, transform.position.z + Random.Range(-10, 10));
 		targetDestination.y = Terrain.activeTerrain.SampleHeight(targetDestination);
