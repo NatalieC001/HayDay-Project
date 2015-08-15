@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 		if (GUI.Button (new Rect (Screen.width * .7f, Screen.height * .8f, Screen.width * .275f, Screen.height * .180f), "", buttonPlayStyle))
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			GameController.playerName = playerName;
+			//GameController.playerName = playerName;
 			StartCoroutine(WaitFor(2));	// Load farm scene
 		}
 

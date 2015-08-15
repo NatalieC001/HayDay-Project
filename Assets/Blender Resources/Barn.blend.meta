@@ -88,6 +88,7 @@ ModelImporter:
     2300048: Cylinder_005
     2300050: Plane
     2300052: Plane_001
+    2300054: //RootNode
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
@@ -115,6 +116,7 @@ ModelImporter:
     3300048: Cylinder_005
     3300050: Plane
     3300052: Plane_001
+    3300054: //RootNode
     4300000: Cube_018
     4300002: Cube_017
     4300004: Cube_016
@@ -153,6 +155,10 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5

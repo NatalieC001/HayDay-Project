@@ -14,6 +14,7 @@ public class UIMart : GameController
 	public GUIStyle customTextStyle;
 
     public Cow cow;
+    Cow defaultCow;
     public GameObject cowGameObject;
 	
 	public static Image healthBar;
@@ -22,8 +23,12 @@ public class UIMart : GameController
 	public Color backgroundColor = new Color(0.2f, 0.3f, 0.4f, 0.5f);
 	public Color foregroundColor = new Color(0.2f, 0.3f, 0.4f, 0.5f);
 
-	public Image[] bars = new Image[2];
+    Vector3 topLeft = new Vector2(112f, 156f);
+    Vector3 bottomRight = new Vector2(112f, 156f);
 
+<<<<<<< HEAD
+	public Image[] bars = new Image[2];
+=======
 	public static int cowAge;
 	public static string breed;
 	public static int happiness;
@@ -35,8 +40,9 @@ public class UIMart : GameController
 	public Cow cowMart;
 	public GameObject cowGameObjectMart;
 	
+>>>>>>> origin/master
 	public static int currentCowBid = 0;
-	public static int currentTimer = 60;
+	public static int currentTimer = 10;
 	public static bool playerBidLast = false;
 
 	bool timerStart = false;
@@ -46,8 +52,6 @@ public class UIMart : GameController
 	int bidCount = 0;
 	double startMoney = 0;
 
-	public GameObject AudioObject;
-
 	Rect windowRect;
 
     void Start()
@@ -56,10 +60,8 @@ public class UIMart : GameController
 		//bars = new Image[2];
 		bars = GetComponentsInChildren<Image>();
 		healthBar = bars[0];
-		happinessBar = bars[1];
-
-		AudioObject = GameObject.Find("Background Music");
-		Destroy(AudioObject);
+		happinessBar = bars[1];      
+        defaultCow = new Cow("", 0, "", 0, 0, false, false, 0);
     }
 
     void OnGUI()
@@ -89,6 +91,15 @@ public class UIMart : GameController
 		GUI.Label(new Rect(110, 20, 150, 30), game.player.name, customTextStyle);
 		GUI.Label(new Rect(90, 50, 150, 30), "Cash: € " + game.player.cash, customTextStyle);
 		GUI.Label(new Rect(110, 90, 150, 30), "Timer: " + currentTimer, customTextStyle);
+<<<<<<< HEAD
+		GUI.Label(new Rect(25, 128, 150, 30), "Age: " + cow.age, customTextStyle);
+		GUI.Label(new Rect(25, 158, 150, 30), "Breed: " + cow.breed, customTextStyle);
+		GUI.Label(new Rect(25, 188, 150, 30), "Happiness: " + cow.happiness, customTextStyle);
+		GUI.Label(new Rect(25, 218, 150, 30), "Health: " + cow.health, customTextStyle);
+		GUI.Label(new Rect(25, 248, 150, 30), "Preggers: " + cow.preggers, customTextStyle);
+		GUI.Label(new Rect(25, 278, 150, 30), "Sex: " + cow.sexMale, customTextStyle);
+		GUI.Label(new Rect(25, 308, 150, 30), "Weight: " + cow.weight, customTextStyle);
+=======
 		GUI.Label(new Rect(25, 128, 150, 30), "Age: " + cowAge, customTextStyle);
 		GUI.Label(new Rect(25, 158, 150, 30), "Breed: " + breed, customTextStyle);
 		GUI.Label(new Rect(25, 188, 150, 30), "Happiness: " + happiness, customTextStyle);
@@ -96,6 +107,7 @@ public class UIMart : GameController
 		GUI.Label(new Rect(25, 248, 150, 30), "Preggers: " + preggers, customTextStyle);
 		GUI.Label(new Rect(25, 278, 150, 30), "Sex: " + sexMale, customTextStyle);
 		GUI.Label(new Rect(25, 308, 150, 30), "Weight: " + weight + " KG", customTextStyle);
+>>>>>>> origin/master
 
 		GUI.Label(new Rect(25, 350, 150, 30), "Current Bid: € " + currentCowBid, customTextStyle);
 
@@ -109,8 +121,15 @@ public class UIMart : GameController
 
 		if (GUI.Button (new Rect (105, 400, 120, 40), "", buttonCattle))
 		{
+<<<<<<< HEAD
+			
+            cow = CowMaker.generateCow();
+            cow.gameObjectID = CowMaker.spawnCow(cow.breed, topLeft, bottomRight);
+      
+=======
 			Vector3 spawnLocation = new Vector3(112.3f, 0, 156f);
 			CowMaker.GenerateCow(spawnLocation);
+>>>>>>> origin/master
 		}
 
 		if(GUI.Button (new Rect (125, 450, 80, 40), "", buttonBid) && !playerBidLast)
@@ -172,6 +191,10 @@ public class UIMart : GameController
 
 	public void ClearStats()
 	{
+<<<<<<< HEAD
+      
+        cow = defaultCow;
+=======
 		cowAge = 0;
 		breed = "";
 		happiness = 0;
@@ -181,6 +204,7 @@ public class UIMart : GameController
 		weight = 0;
 
 		bidCount = 0;
+>>>>>>> origin/master
 		currentTimer = 60;
 		currentCowBid = 0;
 

@@ -7,7 +7,6 @@ using System.IO;
 public class GameController : MonoBehaviour
 {
     public static GameController game;
-	public static string playerName;
 
     public Player player;
     public Farm farm;
@@ -20,13 +19,13 @@ public class GameController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             game = this;
             Load();
-            game.player.name = playerName;
+            game.player.name = "Farmer Joe";
             game.player.cash = 50000;
 
 			if (Application.loadedLevelName.Equals ("Mart"))
 			{
-				Vector3 spawnLocation = new Vector3(112f, 0, 154f);
-				CowMaker.GenerateCow(spawnLocation);
+				//Vector3 spawnLocation = new Vector3(112f, 0, 154f);
+				CowMaker.generateCow();
 			}
         }
         else if (game != this)
