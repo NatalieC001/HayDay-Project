@@ -3,7 +3,6 @@ using System.Collections;
 
 public class CowMaker : GameController
 {
-
     public static int spawnCow(string breed, Vector2 topLeft, Vector2 bottomRight)
     {
         Vector3 spawnLocation;
@@ -13,18 +12,15 @@ public class CowMaker : GameController
             if (count++ > 100)
             {
                 return 0;
-<<<<<<< HEAD
             }
+
             print(topLeft.x + " " + bottomRight.y);
             spawnLocation = new Vector3(Random.Range(topLeft.x, bottomRight.x), 0, Random.Range(topLeft.y, bottomRight.y));
-=======
-			}
 
 			if (!(Application.loadedLevelName.Equals ("Mart")))
 			{
             	spawnLocation = new Vector3(Random.Range(50f, 100f), 0, Random.Range(223f, 263f));
 			}
->>>>>>> origin/master
 
             spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
 
@@ -64,14 +60,9 @@ public class CowMaker : GameController
 			break;
 		}
 
-<<<<<<< HEAD
-		Cow cow = new Cow(cowType + " - Breed", Random.Range(1, 15), cowType, Random.Range(1, 10), Random.Range(5, 100), true, true, Random.Range(250f, 600f));
-		
+		Cow cow = new Cow(cowType + " - Breed", Random.Range(1, 15), cowType, Random.Range(1, 10), Random.Range(5, 100), true, true, Random.Range(150, 400));
+
 		game.cows.Add(cow);
         return cow;
-=======
-		Cow cow = new Cow(cowType + " - Breed", Random.Range(1, 15), cowType, Random.Range(1, 10), Random.Range(5, 100), true, true, Random.Range(150, 400));
->>>>>>> origin/master
-
     }
 }

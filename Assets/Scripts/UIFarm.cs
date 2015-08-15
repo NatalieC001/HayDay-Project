@@ -22,6 +22,9 @@ public class UIFarm : GameController
 	public static Image healthBar;
 	public static Image happinessBar;
 
+	Vector3 topLeft = new Vector2(105f, 265f);
+	Vector3 bottomRight = new Vector2(55f, 220f);
+
 	public Color backgroundColor = new Color(0.2f, 0.3f, 0.4f, 0.5f);
 	public Color foregroundColor = new Color(0.2f, 0.3f, 0.4f, 0.5f);
 
@@ -69,7 +72,8 @@ public class UIFarm : GameController
 		if (GUI.Button(new Rect(270, 30, 150, 50), "", buttonCattle))
 		{
 			//Vector3 spawnLocation = new Vector3(Random.Range(50f, 100f), 0, Random.Range(223f, 263f));
-			CowMaker.generateCow();
+			cow = CowMaker.generateCow();
+			CowMaker.spawnCow(cow.breed, topLeft, bottomRight);
 		}
     }
 

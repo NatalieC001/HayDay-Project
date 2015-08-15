@@ -18,19 +18,11 @@ public class CowController : MonoBehaviour
     public string state;
     public AudioClip cowSound;
 
-<<<<<<< HEAD
     // Mart Vars
     bool inMart = false;
     bool cowInRing = false;
     bool inWander = false;
     public static string martState;
-=======
-	// Mart Vars
-	bool inMart = false;
-	bool cowInRing = false;
-	bool inWander = false;
-	public static string martState;
->>>>>>> origin/master
 
     void Start()
     {
@@ -86,7 +78,7 @@ public class CowController : MonoBehaviour
             if (!cowInRing)
             {
                 // Set location for cow to spawn in mart
-                Vector3 spawnLocation = new Vector3(112f, 0, 154f);
+                Vector3 spawnLocation = new Vector3(113f, 0, 156f);
                 CowMaker.generateCow();
                 cowInRing = true;
                 martState = "enterCow";
@@ -133,8 +125,7 @@ public class CowController : MonoBehaviour
 
         targetDestination = new Vector3(transform.position.x + Random.Range(-10, 10), 0f, transform.position.z + Random.Range(-10, 10));
         targetDestination.y = Terrain.activeTerrain.SampleHeight(targetDestination);
-
-<<<<<<< HEAD
+		
         Debug.Log("Wander Ran");
 
         if (!inMart)
@@ -145,7 +136,7 @@ public class CowController : MonoBehaviour
         {
             martState = "movingCow";
         }
-=======
+
 		Debug.Log("Wander Ran");
 
         if(!inMart)
@@ -156,7 +147,6 @@ public class CowController : MonoBehaviour
 		{
 			martState = "movingCow";
 		}
->>>>>>> origin/master
     }
 
     public void MoveTo(Vector3 targetDestinationInput)
@@ -209,7 +199,6 @@ public class CowController : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
     public void MartControl(string martState)
     {
         switch (martState)
@@ -255,56 +244,12 @@ public class CowController : MonoBehaviour
                 break;
         }
     }
-=======
-	public void MartControl(string martState)
-	{
-		switch(martState)
-		{
-			case "movingCow":
-				MoveTo(targetDestination);
-			break;
-			case "enterCow":
-				// Cow will spawn somewhere off screen, then
-				// Move cow towards center of the ring
-				Vector3 bidArea = new Vector3(105f, 0f, 131f);
-				MoveTo(bidArea);
-				StartCoroutine(WaitFor(5f, 0));
-				// Add function here to start bidding, when bidding starts let the cow wander around the ring
-				// When bidding is finished change state to "exitCow"
-				
-			break;
-			case "wanderCow":
-				Wander();
-			break;
-			case "stopCow":
-				// Stop cow in center of ring
-				// After cow stops, display start bid of cow on screen
-				// Stats of the cow will appear somewhere on screen etc
-				if (!idleRunning)
-					StartCoroutine(Idle(Random.Range(5, 40)));
-			break;
-			case "exitCow":
-				// Bidding has ended, moving cow from the bidding area
-				// If player has bought this cow, add it to a list to bring back to farm
-				// De-spawn cow after moving cow out of sight
-				Vector3 exitArea = new Vector3(102f, 0f, 159f);
-				MoveTo(exitArea);
-				//StartCoroutine(WaitFor(5f, 0));
-			break;
-			case "biddingCow":
-				//StartCoroutine(WaitFor(5f, 0));
-				// Logic for bidding on cow maybe here, bidding time of 1 minute maybe?
-			break;
-			case "sellingCow":
-				//StartCoroutine(WaitFor(5f, 0));
-				// Logic for selling player cow here, bidding time of 1 minute maybe?
-			break;
-		}
-	}
->>>>>>> origin/master
 
     void OnMouseDown()
     {
+		if (inMart)
+			return;
+
         state = "following";
 
         movement.lookAt(this.gameObject);
