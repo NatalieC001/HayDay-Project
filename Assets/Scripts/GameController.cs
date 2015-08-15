@@ -129,14 +129,14 @@ public class GameController : MonoBehaviour
         public int health { get; set; }
         public bool preggers { get; set; }
         public bool sexMale { get; set; }
-        public float weight { get; set; }
+        public int weight { get; set; }
 
         public Cow(string name)
         {
             this.name = name;
         }
 
-        public Cow(string name, int age, string breed, int happiness, int health, bool preggers, bool sexMale, float weight)
+        public Cow(string name, int age, string breed, int happiness, int health, bool preggers, bool sexMale, int weight)
         {
             this.name = name;
             this.age = age;
@@ -150,11 +150,11 @@ public class GameController : MonoBehaviour
 		
         public void Buy()
         {
-            if (game.player.cash > 100)
+            if (game.player.cash > 10000)
             {
                 print("You bought " + name + "!");
                 ownedByPlayer = true;
-                game.player.cash -= 100;
+                game.player.cash -= 10000;
             }
         }
 		

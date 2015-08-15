@@ -30,7 +30,10 @@ public class UIMart : GameController
 	public static int health;
 	public static bool preggers;
 	public static bool sexMale;
-	public static float weight;
+	public static int weight;
+
+	public Cow cowMart;
+	public GameObject cowGameObjectMart;
 	
 	public static int currentCowBid = 0;
 	public static int currentTimer = 60;
@@ -38,7 +41,9 @@ public class UIMart : GameController
 
 	bool timerStart = false;
 	bool timerChecked = true;
+	bool bidStarted = false;
 	float doesAIBid;
+	int bidCount = 0;
 	double startMoney = 0;
 
 	public GameObject AudioObject;
@@ -68,9 +73,12 @@ public class UIMart : GameController
 			windowRect = GUI.Window(0, windowRect, PlayerInfo, "Mart");
 		}
 
-		if(!timerChecked)
+		if(timerStart)
 		{
-			StartCoroutine(TimerDec(1));
+			if(!timerChecked)
+			{
+				StartCoroutine(TimerDec(1));
+			}
 		}
 	}
 
@@ -87,24 +95,35 @@ public class UIMart : GameController
 		GUI.Label(new Rect(25, 218, 150, 30), "Health: " + health, customTextStyle);
 		GUI.Label(new Rect(25, 248, 150, 30), "Preggers: " + preggers, customTextStyle);
 		GUI.Label(new Rect(25, 278, 150, 30), "Sex: " + sexMale, customTextStyle);
-		GUI.Label(new Rect(25, 308, 150, 30), "Weight: " + weight, customTextStyle);
+		GUI.Label(new Rect(25, 308, 150, 30), "Weight: " + weight + " KG", customTextStyle);
 
 		GUI.Label(new Rect(25, 350, 150, 30), "Current Bid: € " + currentCowBid, customTextStyle);
 
+		/*if(!bidStarted)
+		{
+			bidStarted = true;
+			StartCoroutine(AIBid(Random.Range(2, 5),Random.Range(0,2), 100f));
+			timerStart = true;
+			timerChecked = false;
+		}*/
+
 		if (GUI.Button (new Rect (105, 400, 120, 40), "", buttonCattle))
 		{
-			Vector3 spawnLocation = new Vector3(112f, 0, 154f);
+			Vector3 spawnLocation = new Vector3(112.3f, 0, 156f);
 			CowMaker.GenerateCow(spawnLocation);
 		}
 
-		if(GUI.Button (new Rect (125, 450, 80, 40), "", buttonBid))
+		if(GUI.Button (new Rect (125, 450, 80, 40), "", buttonBid) && !playerBidLast)
 		{
 			if(game.player.cash > currentCowBid)
 			{
-				currentCowBid += 500;
+				currentCowBid += 1000;
 				playerBidLast = true;
+				bidCount++;
+
 				if(!timerStart)
 				{
+					bidStarted = true;
 					timerStart = true;
 					timerChecked = false;
 					startMoney = game.player.cash;
@@ -115,9 +134,10 @@ public class UIMart : GameController
 
 			Debug.Log ("AI bid: " + doesAIBid);
 
-			if(doesAIBid > 50f)
+			if(doesAIBid > 45f)
 			{
 				StartCoroutine(AIBid(Random.Range(2, 5),Random.Range(0,2), doesAIBid));
+				bidCount++;
 			}
 		}
 
@@ -129,14 +149,24 @@ public class UIMart : GameController
 			{
 				Debug.Log ("Player won the bid!");
 				game.player.cash -= currentCowBid;
+				Debug.Log ("1: TimerStart: " + timerStart);
+				// If the player won the bid add the cow to a little of cows the owner has
+				//cowMart.Buy();
+				//Destroy(cowGameObjectMart);
 			}
 			else
 			{
 				Debug.Log ("Player lost the bid!");
 				game.player.cash = startMoney;
+				// Wait for cow to leave bidding area and destory the cow object
+				Debug.Log ("2: TimerStart: " + timerStart);
+				//cowMart.Buy();
+				//Destroy(cowGameObjectMart);
 			}
 
 			ClearStats();
+
+			Debug.Log ("3: TimerStart: " + timerStart);
 		}
     }
 
@@ -148,17 +178,24 @@ public class UIMart : GameController
 		health = 0;
 		preggers = false;
 		sexMale = false;
-		weight = 0f;
+		weight = 0;
 
+		bidCount = 0;
 		currentTimer = 60;
 		currentCowBid = 0;
 
 		timerStart = false;
+		bidStarted = false;
+		timerChecked = true;
 	}
 
 	IEnumerator AIBid(float seconds, int option, float aiInterestPercentage) 
 	{
 		yield return new WaitForSeconds(seconds);
+
+		// Override AI interest if bidding has only begun, makes a little more difficult
+		if (bidCount < 6)
+			aiInterestPercentage = 95f;
 
 		// Override AI option with its interest in bidding for that cow
 		// If the AI is really interested in bidding then set option to 3 for example
@@ -197,7 +234,9 @@ public class UIMart : GameController
 	}
 
 	IEnumerator TimerDec(int seconds) 
-	{	
+	{
+		Debug.Log ("4: TimerStart: " + timerStart);
+
 		if(timerStart)
 		{
 			currentTimer -= seconds;

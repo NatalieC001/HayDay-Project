@@ -21,6 +21,7 @@ public class CowController : MonoBehaviour
 	// Mart Vars
 	bool inMart = false;
 	bool cowInRing = false;
+	bool inWander = false;
 	public static string martState;
 
     void Start()
@@ -125,13 +126,15 @@ public class CowController : MonoBehaviour
 		targetDestination = new Vector3(transform.position.x + Random.Range(-10, 10), 0f, transform.position.z + Random.Range(-10, 10));
 		targetDestination.y = Terrain.activeTerrain.SampleHeight(targetDestination);
 
+		Debug.Log("Wander Ran");
+
         if(!inMart)
 		{
 			state = "moving";
 		}
 		else
 		{
-			MoveTo(targetDestination);
+			martState = "movingCow";
 		}
     }
 
@@ -189,6 +192,9 @@ public class CowController : MonoBehaviour
 	{
 		switch(martState)
 		{
+			case "movingCow":
+				MoveTo(targetDestination);
+			break;
 			case "enterCow":
 				// Cow will spawn somewhere off screen, then
 				// Move cow towards center of the ring

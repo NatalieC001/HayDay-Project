@@ -17,7 +17,7 @@ public class UIFarm : GameController
 	public GUIStyle customTextStyle;
 
     public Cow cow;
-    public GameObject cowGameObject;
+	public GameObject cowGameObject;
 	
 	public static Image healthBar;
 	public static Image happinessBar;

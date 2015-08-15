@@ -16,7 +16,10 @@ public class CowMaker : GameController
                 return 0;
 			}
 
-            spawnLocation = new Vector3(Random.Range(50f, 100f), 0, Random.Range(223f, 263f));
+			if (!(Application.loadedLevelName.Equals ("Mart")))
+			{
+            	spawnLocation = new Vector3(Random.Range(50f, 100f), 0, Random.Range(223f, 263f));
+			}
 
             spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
 
@@ -54,7 +57,7 @@ public class CowMaker : GameController
 			break;
 		}
 
-		Cow cow = new Cow(cowType + " - Breed", Random.Range(1, 15), cowType, Random.Range(1, 10), Random.Range(5, 100), true, true, Random.Range(250f, 600f));
+		Cow cow = new Cow(cowType + " - Breed", Random.Range(1, 15), cowType, Random.Range(1, 10), Random.Range(5, 100), true, true, Random.Range(150, 400));
 
 		if (Application.loadedLevelName.Equals ("Mart"))
 		{
