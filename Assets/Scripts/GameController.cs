@@ -7,7 +7,7 @@ using System.IO;
 public class GameController : MonoBehaviour
 {
     public static GameController game;
-
+	public static string playerName;
     public Player player;
     public Farm farm;
     public List<Cow> cows;
@@ -19,14 +19,8 @@ public class GameController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             game = this;
             Load();
-            game.player.name = "Farmer Joe";
+			game.player.name = playerName;
             game.player.cash = 50000;
-
-			if (Application.loadedLevelName.Equals ("Mart"))
-			{
-				//Vector3 spawnLocation = new Vector3(112f, 0, 154f);
-				CowMaker.generateCow();
-			}
         }
         else if (game != this)
         {
@@ -126,8 +120,8 @@ public class GameController : MonoBehaviour
         public string breed { get; set; }
         public int happiness { get; set; }
         public int health { get; set; }
-        public bool preggers { get; set; }
-        public bool sexMale { get; set; }
+		public bool pregnant { get; set; }
+        public bool gender { get; set; }
         public int weight { get; set; }
 
         public Cow(string name)
@@ -135,15 +129,15 @@ public class GameController : MonoBehaviour
             this.name = name;
         }
 
-        public Cow(string name, int age, string breed, int happiness, int health, bool preggers, bool sexMale, int weight)
+		public Cow(string name, int age, string breed, int happiness, int health, bool pregnant, bool sexMale, int weight)
         {
             this.name = name;
             this.age = age;
             this.breed = breed;
             this.happiness = happiness;
             this.health = health;
-            this.sexMale = sexMale;
-            this.preggers = preggers;
+			this.pregnant = pregnant;
+			this.gender = sexMale;
             this.weight = weight;
         }
 		
@@ -163,7 +157,7 @@ public class GameController : MonoBehaviour
             {
                 print("You Sold " + name + " :(");
                 ownedByPlayer = false;
-                game.player.cash += 100;
+                game.player.cash += 10000;
             }
         }
     }

@@ -12,7 +12,8 @@ public class BackgroundMusic : MonoBehaviour
 
 	void Awake() 
 	{
-		if (instance != null && instance != this) {
+		if (instance != null && instance != this) 
+		{
 			Destroy(this.gameObject);
 			return;
 		} 
@@ -20,6 +21,7 @@ public class BackgroundMusic : MonoBehaviour
 		{
 			instance = this;
 		}
+
 		DontDestroyOnLoad(this.gameObject);
 	}
 }

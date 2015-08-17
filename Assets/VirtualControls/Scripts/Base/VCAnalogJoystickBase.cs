@@ -255,7 +255,7 @@ public abstract class VCAnalogJoystickBase : VCCollideableObject
 		// make sure we have a VCTouchController
 		if (VCTouchController.Instance == null)
 		{
-			Debug.LogWarning("Cannot find VCTouchController!\nVirtualControls requires a gameObject which has VCTouchController component attached in scene. Adding one for you...");
+			//Debug.LogWarning("Cannot find VCTouchController!\nVirtualControls requires a gameObject which has VCTouchController component attached in scene. Adding one for you...");
 			//gameObject.AddComponent<VCTouchController>();
 			VCUtils.AddTouchController(gameObject);
 		}

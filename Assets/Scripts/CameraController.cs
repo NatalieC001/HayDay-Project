@@ -11,12 +11,8 @@ public class CameraController : MonoBehaviour {
     public GameObject currentFocus;
 
     public static Vector3 difVec;
-
 	public static Vector3 startingFocus;
-	public Vector3 endingFocus;
-
 	public static Vector3 startingPositon;
-	public Vector3 endingPosition;
 
 	public float speed = 10;
 
@@ -32,27 +28,15 @@ public class CameraController : MonoBehaviour {
 
     public void lookAt(GameObject target)
     {
-        //just used to check if the gameobject still exists
-       // if (!closeUpView)
-        //{
-            currentFocus = target;
-            startTime = Time.time;
+        currentFocus = target;
+        startTime = Time.time;
 
-            startingPositon = transform.position;
-            startingFocus = player.transform.position;
-            
-            journeyLength = Vector3.Distance(startingPositon, player.transform.position - player.transform.forward * 4 + new Vector3(0f, 5f, 0f));   
+        startingPositon = transform.position;
+        startingFocus = player.transform.position;
+        
+        journeyLength = Vector3.Distance(startingPositon, player.transform.position - player.transform.forward * 4 + new Vector3(0f, 5f, 0f));   
 
-            closeUpView = true;
-        //}
-        //else
-        //{
-        //    if (currentFocus != null && currentFocus != target)
-        //    {
-        //        startTime = Time.time;
-        //        translationTime = Vector3.Distance(currentFocus.tr, transform.position);
-        //    }
-        //}
+        closeUpView = true;
     }
 
     public static void ResetCamera(Vector3 transCameraPos)

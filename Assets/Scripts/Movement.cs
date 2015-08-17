@@ -8,23 +8,17 @@ public class Movement : MonoBehaviour
     public float rotationDamping = 20f;
     public float Speed = 0.1f;
     public int gravity = 20;
-    public float jumpSpeed = 8;
 
     float moveSpeed;
     CharacterController controller;
-
     Animator animator;
 
-    public float speed = 0.5F;
-    public float startTime;
-    public float journeyLength;
+    public GameObject currentFocus;
+	public AudioClip moveSound;
 
-    public GameObject currentFocus; 
+	AudioSource audio;
 
     public static bool freeRoam;
-
-	public AudioClip moveSound;
-	AudioSource audio;
 
     void Start()
     {

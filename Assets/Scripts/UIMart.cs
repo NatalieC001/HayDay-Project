@@ -7,15 +7,23 @@ using System.IO;
 
 public class UIMart : GameController 
 {
-    public bool playerUI;
-
 	public GUIStyle buttonBid;
 	public GUIStyle buttonCattle;
+
+	public GUIStyle labelAge;
+	public GUIStyle labelBreed;
+	public GUIStyle labelHappiness;
+	public GUIStyle labelHealth;
+	public GUIStyle labelPregnant;
+	public GUIStyle labelGender;
+	public GUIStyle labelWeight;
+
 	public GUIStyle customTextStyle;
 
     public Cow cow;
     Cow defaultCow;
     public GameObject cowGameObject;
+	string cowGender = "Male";
 	
 	public static Image healthBar;
 	public static Image happinessBar;
@@ -23,35 +31,35 @@ public class UIMart : GameController
 	public Color backgroundColor = new Color(0.2f, 0.3f, 0.4f, 0.5f);
 	public Color foregroundColor = new Color(0.2f, 0.3f, 0.4f, 0.5f);
 
-    Vector3 topLeft = new Vector2(112f, 156f);
-    Vector3 bottomRight = new Vector2(112f, 156f);
-
 	public Image[] bars = new Image[2];
-
-	public Cow cowMart;
-	public GameObject cowGameObjectMart;
 
 	public static int currentCowBid = 0;
 	public static int currentTimer = 10;
 	public static bool playerBidLast = false;
+	public static bool biddingOver = false;
 
 	bool timerStart = false;
 	bool timerChecked = true;
 	bool bidStarted = false;
+	bool cowInRing = false;
 	float doesAIBid;
 	int bidCount = 0;
 	double startMoney = 0;
+
+	public GameObject AudioObject;
 
 	Rect windowRect;
 
     void Start()
     {
-        playerUI = true;
-		//bars = new Image[2];
 		bars = GetComponentsInChildren<Image>();
 		healthBar = bars[0];
 		happinessBar = bars[1];      
-        defaultCow = new Cow("", 0, "", 0, 0, false, false, 0);
+        defaultCow = new Cow("", 0, "N/A", 0, 0, false, false, 0);
+
+		AudioObject = GameObject.Find("Background Music");
+		if(AudioObject != null)
+			Destroy(AudioObject);
     }
 
     void OnGUI()
@@ -59,11 +67,8 @@ public class UIMart : GameController
 		windowRect = new Rect(Screen.width * .72f, Screen.height - 550f, 350, 500);
 
 		GUI.color = foregroundColor;
-		
-        if (playerUI)
-        {
-			windowRect = GUI.Window(0, windowRect, PlayerInfo, "Mart");
-		}
+
+		windowRect = GUI.Window(0, windowRect, PlayerInfo, "Mart");
 
 		if(timerStart)
 		{
@@ -78,89 +83,98 @@ public class UIMart : GameController
     {
 		GUI.contentColor = backgroundColor;
 
+		if (!cow.gender == true)
+		{
+			cowGender = "Female";
+		}
+		else
+		{
+			cowGender = "Male";
+			cow.pregnant = false;
+		}
+
 		GUI.Label(new Rect(110, 20, 150, 30), game.player.name, customTextStyle);
 		GUI.Label(new Rect(90, 50, 150, 30), "Cash: € " + game.player.cash, customTextStyle);
 		GUI.Label(new Rect(110, 90, 150, 30), "Timer: " + currentTimer, customTextStyle);
-		GUI.Label(new Rect(25, 128, 150, 30), "Age: " + cow.age, customTextStyle);
-		GUI.Label(new Rect(25, 158, 150, 30), "Breed: " + cow.breed, customTextStyle);
-		GUI.Label(new Rect(25, 188, 150, 30), "Happiness: " + cow.happiness, customTextStyle);
-		GUI.Label(new Rect(25, 218, 150, 30), "Health: " + cow.health, customTextStyle);
-		GUI.Label(new Rect(25, 248, 150, 30), "Preggers: " + cow.preggers, customTextStyle);
-		GUI.Label(new Rect(25, 278, 150, 30), "Sex: " + cow.sexMale, customTextStyle);
-		GUI.Label(new Rect(25, 308, 150, 30), "Weight: " + cow.weight + " KG", customTextStyle);
+		GUI.Label(new Rect(25, 135, 90, 25), "", labelAge);
+		GUI.Label(new Rect(132, 135, 150, 30), "" + cow.age, customTextStyle);
+		GUI.Label(new Rect(25, 170, 90, 25), "", labelBreed);
+		GUI.Label(new Rect(132, 170, 150, 30), "" + cow.breed, customTextStyle);
+		GUI.Label(new Rect(25, 205, 110, 30), "", labelHappiness);
+		GUI.Label(new Rect(150, 205, 150, 30), "" + cow.happiness, customTextStyle);
+		GUI.Label(new Rect(25, 240, 90, 25), "", labelHealth);
+		GUI.Label(new Rect(132, 240, 150, 30), "" + cow.health, customTextStyle);
+		GUI.Label(new Rect(25, 275, 110, 30), "", labelPregnant);
+		GUI.Label(new Rect(150, 275, 150, 30), "" + cow.pregnant, customTextStyle);
+		GUI.Label(new Rect(25, 310, 90, 25), "", labelGender);
+		GUI.Label(new Rect(132, 310, 150, 30), "" + cow.gender, customTextStyle);
+		GUI.Label(new Rect(25, 350, 90, 30), "", labelWeight);
+		GUI.Label(new Rect(132, 350, 150, 30), "" + cow.weight, customTextStyle);
 
-		GUI.Label(new Rect(25, 350, 150, 30), "Current Bid: € " + currentCowBid, customTextStyle);
+		GUI.Label(new Rect(70, 390, 150, 30), "Current Bid: € " + currentCowBid, customTextStyle);
 
-		/*if(!bidStarted)
+		if(!cowInRing)
 		{
-			bidStarted = true;
-			StartCoroutine(AIBid(Random.Range(2, 5),Random.Range(0,2), 100f));
-			timerStart = true;
-			timerChecked = false;
-		}*/
-
-		if (GUI.Button (new Rect (105, 400, 120, 40), "", buttonCattle))
-		{	
-            cow = CowMaker.generateCow();
-            cow.gameObjectID = CowMaker.spawnCow(cow.breed, topLeft, bottomRight);
-			Vector3 spawnLocation = new Vector3(112.3f, 0, 156f);
-			CowMaker.generateCow();
+			if (GUI.Button (new Rect (105, 445, 120, 40), "", buttonCattle))
+			{	
+				Vector3 spawnLocation = new Vector3(Random.Range(112f, 112f), 0, Random.Range(156f, 156f));
+				cow = CowMaker.GenerateCow(spawnLocation);
+				cowInRing = true;
+			}
 		}
 
-		if(GUI.Button (new Rect (125, 450, 80, 40), "", buttonBid) && !playerBidLast)
+		if(!playerBidLast && cowInRing)
 		{
-			if(game.player.cash > currentCowBid)
+			if(GUI.Button (new Rect (105, 445, 80, 40), "", buttonBid))
 			{
-				currentCowBid += 1000;
-				playerBidLast = true;
-				bidCount++;
-
-				if(!timerStart)
+				if(game.player.cash > currentCowBid)
 				{
-					bidStarted = true;
-					timerStart = true;
-					timerChecked = false;
-					startMoney = game.player.cash;
+					currentCowBid += 1000;
+					playerBidLast = true;
+					bidCount++;
+
+					if(!timerStart)
+					{
+						bidStarted = true;
+						timerStart = true;
+						timerChecked = false;
+						startMoney = game.player.cash;
+					}
 				}
-			}
 
-			doesAIBid = Random.Range(45f, 100f);
+				doesAIBid = Random.Range(45f, 100f);
 
-			Debug.Log ("AI bid: " + doesAIBid);
+				Debug.Log ("AI bid: " + doesAIBid);
 
-			if(doesAIBid > 45f)
-			{
-				StartCoroutine(AIBid(Random.Range(2, 5),Random.Range(0,2), doesAIBid));
-				bidCount++;
+				if(doesAIBid > 45f)
+				{
+					if(bidStarted)
+					{
+						StartCoroutine(AIBid(Random.Range(2, 5),Random.Range(0,2), doesAIBid));
+						bidCount++;
+					}
+				}
 			}
 		}
 
 		if(currentTimer <= 0)
 		{
-			CowController.martState = "exitCow";
-
 			if(playerBidLast)
 			{
 				Debug.Log ("Player won the bid!");
 				game.player.cash -= currentCowBid;
-				Debug.Log ("1: TimerStart: " + timerStart);
-				// If the player won the bid add the cow to a little of cows the owner has
-				//cowMart.Buy();
-				//Destroy(cowGameObjectMart);
+				// If the player won the bid add the cow to list player owns
+
 			}
 			else
 			{
 				Debug.Log ("Player lost the bid!");
 				game.player.cash = startMoney;
 				// Wait for cow to leave bidding area and destory the cow object
-				Debug.Log ("2: TimerStart: " + timerStart);
-				//cowMart.Buy();
-				//Destroy(cowGameObjectMart);
+
 			}
 
 			ClearStats();
-
-			Debug.Log ("3: TimerStart: " + timerStart);
 		}
     }
 
@@ -169,62 +183,66 @@ public class UIMart : GameController
         cow = defaultCow;
 
 		bidCount = 0;
-		currentTimer = 60;
+		currentTimer = 10;
 		currentCowBid = 0;
 
 		timerStart = false;
 		bidStarted = false;
 		timerChecked = true;
+		cowInRing = false;
+		biddingOver = true;
+		playerBidLast = false;
 	}
 
 	IEnumerator AIBid(float seconds, int option, float aiInterestPercentage) 
 	{
 		yield return new WaitForSeconds(seconds);
 
-		// Override AI interest if bidding has only begun, makes a little more difficult
-		if (bidCount < 6)
-			aiInterestPercentage = 95f;
+		if(bidStarted)
+		{
+			// Override AI interest if bidding has only begun, makes a little more difficult
+			if (bidCount < 6)
+				aiInterestPercentage = 95f;
 
-		// Override AI option with its interest in bidding for that cow
-		// If the AI is really interested in bidding then set option to 3 for example
-		if (aiInterestPercentage > 90f)
-		{
-			option = 3;
-		}
-		else if(aiInterestPercentage > 75f)
-		{
-			option = 2;
-		}
-		else if(aiInterestPercentage > 60f)
-		{
-			option = 1;
-		}
+			// Override AI option with its interest in bidding for that cow
+			// If the AI is really interested in bidding then set option to 3 for example
+			if (aiInterestPercentage > 90f)
+			{
+				option = 3;
+			}
+			else if(aiInterestPercentage > 75f)
+			{
+				option = 2;
+			}
+			else if(aiInterestPercentage > 60f)
+			{
+				option = 1;
+			}
 
-		switch(option)
-		{
-			case 0:
-				currentCowBid += 500;
-				playerBidLast = false;
-			break;
-			case 1:
-				currentCowBid += 1000;
-				playerBidLast = false;
-			break;
-			case 2:
-				currentCowBid += 2500;
-				playerBidLast = false;
-			break;
-			case 3:
-				currentCowBid += 5000;
-				playerBidLast = false;
-			break;
+			switch(option)
+			{
+				case 0:
+					currentCowBid += 1000;
+					playerBidLast = false;
+				break;
+				case 1:
+					currentCowBid += 2000;
+					playerBidLast = false;
+				break;
+				case 2:
+					currentCowBid += 3500;
+					playerBidLast = false;
+				break;
+				case 3:
+					currentCowBid += 5000;
+					playerBidLast = false;
+				break;
+			}
 		}
 	}
 
 	IEnumerator TimerDec(int seconds) 
 	{
-		Debug.Log ("4: TimerStart: " + timerStart);
-
 		if(timerStart)
 		{
 			currentTimer -= seconds;

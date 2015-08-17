@@ -22,13 +22,12 @@ public class UIFarm : GameController
 	public static Image healthBar;
 	public static Image happinessBar;
 
-	Vector3 topLeft = new Vector2(105f, 265f);
-	Vector3 bottomRight = new Vector2(55f, 220f);
-
 	public Color backgroundColor = new Color(0.2f, 0.3f, 0.4f, 0.5f);
 	public Color foregroundColor = new Color(0.2f, 0.3f, 0.4f, 0.5f);
 
 	public Image[] bars = new Image[2];
+
+	public GameObject AudioObject;
 
 	Rect windowRect;
 
@@ -36,10 +35,13 @@ public class UIFarm : GameController
     {
         playerUI = true;
 		//loadSaveUI = true;
-		//bars = new Image[2];
 		bars = GetComponentsInChildren<Image>();
 		healthBar = bars[0];
 		happinessBar = bars[1];
+
+		AudioObject = GameObject.Find("Background Music");
+		if(AudioObject != null)
+			Destroy(AudioObject);
     }
 
     void OnGUI()
@@ -71,9 +73,8 @@ public class UIFarm : GameController
 		
 		if (GUI.Button(new Rect(270, 30, 150, 50), "", buttonCattle))
 		{
-			//Vector3 spawnLocation = new Vector3(Random.Range(50f, 100f), 0, Random.Range(223f, 263f));
-			cow = CowMaker.generateCow();
-			CowMaker.spawnCow(cow.breed, topLeft, bottomRight);
+			Vector3 spawnLocation = new Vector3(Random.Range(55f, 105f), 0, Random.Range(220f, 265f));
+			cow = CowMaker.GenerateCow(spawnLocation);
 		}
     }
 

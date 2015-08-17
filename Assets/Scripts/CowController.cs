@@ -3,26 +3,20 @@ using System.Collections;
 
 public class CowController : MonoBehaviour
 {
-    // Farm Vars
     GameObject player;
-    Animation _animation;
     Animation anim;
     CameraController camera;
-    Vector3 cameraPosition;
-    UIFarm Userinterface;
-    bool idleRunning;
+    UIFarm userInterface;
     Vector3 targetDestination;
     Movement movement;
-    public float speed = 3;
-    public float rotationSpeed = 10;
-    public string state;
-    public AudioClip cowSound;
 
-    // Mart Vars
+	bool idleRunning;
     bool inMart = false;
-    bool cowInRing = false;
-    bool inWander = false;
-    public static string martState;
+
+	public float speed = 3;
+	public float rotationSpeed = 10;
+	public string state;
+	public AudioClip cowSound;
 
     void Start()
     {
@@ -36,56 +30,59 @@ public class CowController : MonoBehaviour
         }
         else
         {
+			state = "enter";
             inMart = true;
-            cowInRing = true;
-            martState = "enterCow";
         }
-
-        Debug.Log("Cow Controller Starting!");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!inMart)
+        switch (state)
         {
-            switch (state)
-            {
-                case "moving":
-                    MoveTo(targetDestination);
-                    break;
-                case "wander":
-                    Wander();
-                    break;
-                case "idle":
-                    if (!idleRunning)
-                        StartCoroutine(Idle(Random.Range(5, 40)));
-                    break;
-                case "lookingAtPlayer":
-                    if (movement.currentFocus != this.gameObject)
-                    {
-                        state = "wander";
-                    }
-                    anim.Play("idle3");
-                    break;
-                case "following":
-                    Follow(player.transform.position);
-                    break;
-            }
-        }
-        else
-        {
-            if (!cowInRing)
-            {
-                // Set location for cow to spawn in mart
-                Vector3 spawnLocation = new Vector3(113f, 0, 156f);
-                CowMaker.generateCow();
-                cowInRing = true;
-                martState = "enterCow";
-            }
+            case "moving":
+                MoveTo(targetDestination);
+            break;
+			case "enter":
+				// Cow will spawn somewhere off screen, then
+				// Move cow towards center of the ring
+				Vector3 bidArea = new Vector3(105f, 0f, 131f);
+				MoveTo(bidArea);
+				StartCoroutine(WaitFor(5f, 0));
+				// Add function here to start bidding, when bidding starts let the cow wander around the ring
+				// When bidding is finished change state to "exitCow"
+			break;
+            case "wander":
+                Wander();
+            break;
+			case "exit":
+				// Bidding has ended, moving cow from the bidding area
+				// If player has bought this cow, add it to a list to bring back to farm
+				// De-spawn cow after moving cow out of sight
+				Vector3 exitArea = new Vector3(102f, 0f, 159f);
+				MoveTo(exitArea);
+			break;
+            case "idle":
+                if (!idleRunning)
+                    StartCoroutine(Idle(Random.Range(5, 40)));
+            break;
+            case "lookingAtPlayer":
+                if (movement.currentFocus != this.gameObject)
+                {
+                    state = "wander";
+                }
+                anim.Play("idle3");
+            break;
+            case "following":
+                Follow(player.transform.position);
+			break;
+		}
 
-            MartControl(martState);
-        }
+		if(UIMart.biddingOver)
+		{
+			state = "exit";
+			UIMart.biddingOver = false;
+		}
     }
 
     IEnumerator Idle(int seconds)
@@ -93,18 +90,7 @@ public class CowController : MonoBehaviour
         idleRunning = true;
         anim.Play("idle2");
         yield return new WaitForSeconds(seconds);
-
-        Debug.Log("In Idle " + seconds);
-
-        if (!(Application.loadedLevelName.Equals("Mart")))
-        {
-            state = "wander";
-        }
-        else
-        {
-            martState = "wanderCow";
-        }
-
+        state = "wander";
         idleRunning = false;
     }
 
@@ -126,27 +112,7 @@ public class CowController : MonoBehaviour
         targetDestination = new Vector3(transform.position.x + Random.Range(-10, 10), 0f, transform.position.z + Random.Range(-10, 10));
         targetDestination.y = Terrain.activeTerrain.SampleHeight(targetDestination);
 		
-        Debug.Log("Wander Ran");
-
-        if (!inMart)
-        {
-            state = "moving";
-        }
-        else
-        {
-            martState = "movingCow";
-        }
-
-		Debug.Log("Wander Ran");
-
-        if(!inMart)
-		{
-			state = "moving";
-		}
-		else
-		{
-			martState = "movingCow";
-		}
+        state = "moving";
     }
 
     public void MoveTo(Vector3 targetDestinationInput)
@@ -154,7 +120,6 @@ public class CowController : MonoBehaviour
         if (Vector3.Distance(transform.position, targetDestinationInput) < 2)
         {
             state = "idle";
-            martState = "stopCow";
         }
         else if (targetDestinationInput != Vector3.zero)
         {
@@ -177,7 +142,6 @@ public class CowController : MonoBehaviour
             else
             {
                 state = "idle";
-                martState = "stopCow";
             }
         }
     }
@@ -199,52 +163,6 @@ public class CowController : MonoBehaviour
         }
     }
 
-    public void MartControl(string martState)
-    {
-        switch (martState)
-        {
-            case "movingCow":
-                MoveTo(targetDestination);
-                break;
-            case "enterCow":
-                // Cow will spawn somewhere off screen, then
-                // Move cow towards center of the ring
-                Vector3 bidArea = new Vector3(105f, 0f, 131f);
-                MoveTo(bidArea);
-                StartCoroutine(WaitFor(5f, 0));
-                // Add function here to start bidding, when bidding starts let the cow wander around the ring
-                // When bidding is finished change state to "exitCow"
-
-                break;
-            case "wanderCow":
-                Wander();
-                break;
-            case "stopCow":
-                // Stop cow in center of ring
-                // After cow stops, display start bid of cow on screen
-                // Stats of the cow will appear somewhere on screen etc
-                if (!idleRunning)
-                    StartCoroutine(Idle(Random.Range(5, 40)));
-                break;
-            case "exitCow":
-                // Bidding has ended, moving cow from the bidding area
-                // If player has bought this cow, add it to a list to bring back to farm
-                // De-spawn cow after moving cow out of sight
-                Vector3 exitArea = new Vector3(102f, 0f, 159f);
-                MoveTo(exitArea);
-                //StartCoroutine(WaitFor(5f, 0));
-                break;
-            case "biddingCow":
-                //StartCoroutine(WaitFor(5f, 0));
-                // Logic for bidding on cow maybe here, bidding time of 1 minute maybe?
-                break;
-            case "sellingCow":
-                //StartCoroutine(WaitFor(5f, 0));
-                // Logic for selling player cow here, bidding time of 1 minute maybe?
-                break;
-        }
-    }
-
     void OnMouseDown()
     {
 		if (inMart)
@@ -253,16 +171,24 @@ public class CowController : MonoBehaviour
         state = "following";
 
         movement.lookAt(this.gameObject);
-        Userinterface = GameObject.FindGameObjectWithTag("UI").GetComponent<UIFarm>();
+		userInterface = GameObject.FindGameObjectWithTag("UI").GetComponent<UIFarm>();
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         camera.lookAt(this.gameObject);
 
-        //Finds the cow with the same instance Id as the parent gameobject
-        Userinterface.cow = GameController.game.cows.Find(cow => cow.gameObjectID == this.gameObject.GetInstanceID());
-        Userinterface.cowGameObject = this.gameObject;
+		//Finds the cow with the same instance Id as the parent gameobject
+		userInterface.cow = GameController.game.cows.Find(cow => cow.gameObjectID == this.gameObject.GetInstanceID());
+		userInterface.cowGameObject = this.gameObject;
 
-        Userinterface.cowUI = true;
-        Userinterface.playerUI = false;
+		Debug.Log ("Cow Name: " + userInterface.cow.name);
+
+		if(userInterface.cowGameObject == null)
+			Debug.Log ("User Interface is null:");
+
+		if(userInterface.cow == null)
+			Debug.Log ("Cow is null");
+
+		userInterface.cowUI = true;
+		userInterface.playerUI = false;
     }
 
     IEnumerator WaitFor(float seconds, int option)
@@ -272,7 +198,7 @@ public class CowController : MonoBehaviour
         switch (option)
         {
             case 0:
-                martState = "stopCow";
+                state = "idle";
                 break;
             case 1:
                 break;
