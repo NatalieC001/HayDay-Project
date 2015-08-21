@@ -129,7 +129,7 @@ public class GameController : MonoBehaviour
             this.name = name;
         }
 
-		public Cow(string name, int age, string breed, int happiness, int health, bool pregnant, bool sexMale, int weight)
+		public Cow(string name, int age, string breed, int happiness, int health, bool pregnant, bool gender, int weight)
         {
             this.name = name;
             this.age = age;
@@ -137,7 +137,7 @@ public class GameController : MonoBehaviour
             this.happiness = happiness;
             this.health = health;
 			this.pregnant = pregnant;
-			this.gender = sexMale;
+			this.gender = gender;
             this.weight = weight;
         }
 		

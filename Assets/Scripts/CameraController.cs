@@ -46,9 +46,6 @@ public class CameraController : MonoBehaviour {
 
 		startingPositon = transCameraPos;
         closeUpView = false;
-
-		UIFarm.SetHealth(0f);
-		UIFarm.SetHappiness(0f);
     }
 
     void LateUpdate()

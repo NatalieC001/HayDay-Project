@@ -25,8 +25,8 @@ public class UIMart : GameController
     public GameObject cowGameObject;
 	string cowGender = "Male";
 	
-	public static Image healthBar;
-	public static Image happinessBar;
+	public Image healthBar;
+	public Image happinessBar;
 
 	public Color backgroundColor = new Color(0.2f, 0.3f, 0.4f, 0.5f);
 	public Color foregroundColor = new Color(0.2f, 0.3f, 0.4f, 0.5f);
@@ -64,11 +64,10 @@ public class UIMart : GameController
 
     void OnGUI()
     {
-		windowRect = new Rect(Screen.width * .72f, Screen.height - 550f, 350, 500);
-
 		GUI.color = foregroundColor;
 
-		windowRect = GUI.Window(0, windowRect, PlayerInfo, "Mart");
+		windowRect = new Rect(Screen.width * .72f, Screen.height - 550f, 350, 500);
+		windowRect = GUI.Window(0, windowRect, CowInfo, "Mart");
 
 		if(timerStart)
 		{
@@ -79,10 +78,16 @@ public class UIMart : GameController
 		}
 	}
 
-    void PlayerInfo(int windowID)
+    void CowInfo(int windowID)
     {
 		GUI.contentColor = backgroundColor;
 
+		SetHealth(cow.health / 100f);
+		SetHappiness(cow.happiness / 10f);
+		
+		healthBar.transform.position = new Vector2 (windowRect.center.x + 64, 330);
+		happinessBar.transform.position = new Vector2 (windowRect.center.x + 64, 295);
+		
 		if (!cow.gender == true)
 		{
 			cowGender = "Female";
@@ -101,9 +106,7 @@ public class UIMart : GameController
 		GUI.Label(new Rect(25, 170, 90, 25), "", labelBreed);
 		GUI.Label(new Rect(132, 170, 150, 30), "" + cow.breed, customTextStyle);
 		GUI.Label(new Rect(25, 205, 110, 30), "", labelHappiness);
-		GUI.Label(new Rect(150, 205, 150, 30), "" + cow.happiness, customTextStyle);
 		GUI.Label(new Rect(25, 240, 90, 25), "", labelHealth);
-		GUI.Label(new Rect(132, 240, 150, 30), "" + cow.health, customTextStyle);
 		GUI.Label(new Rect(25, 275, 110, 30), "", labelPregnant);
 		GUI.Label(new Rect(150, 275, 150, 30), "" + cow.pregnant, customTextStyle);
 		GUI.Label(new Rect(25, 310, 90, 25), "", labelGender);
@@ -111,7 +114,7 @@ public class UIMart : GameController
 		GUI.Label(new Rect(25, 350, 90, 30), "", labelWeight);
 		GUI.Label(new Rect(132, 350, 150, 30), "" + cow.weight, customTextStyle);
 
-		GUI.Label(new Rect(70, 390, 150, 30), "Current Bid: € " + currentCowBid, customTextStyle);
+		GUI.Label(new Rect(70, 400, 150, 30), "Current Bid: € " + currentCowBid, customTextStyle);
 
 		if(!cowInRing)
 		{
@@ -125,7 +128,7 @@ public class UIMart : GameController
 
 		if(!playerBidLast && cowInRing)
 		{
-			if(GUI.Button (new Rect (105, 445, 80, 40), "", buttonBid))
+			if(GUI.Button (new Rect (125, 445, 80, 40), "", buttonBid))
 			{
 				if(game.player.cash > currentCowBid)
 				{
@@ -192,6 +195,9 @@ public class UIMart : GameController
 		cowInRing = false;
 		biddingOver = true;
 		playerBidLast = false;
+
+		SetHealth(0);
+		SetHappiness(0);
 	}
 
 	IEnumerator AIBid(float seconds, int option, float aiInterestPercentage) 
@@ -254,12 +260,12 @@ public class UIMart : GameController
 		timerChecked = false;
 	}
 
-	public static void SetHealth(float health)
+	void SetHealth(float health)
 	{
 		healthBar.fillAmount = health;
 	}
-
-	public static void SetHappiness(float happiness)
+	
+	void SetHappiness(float happiness)
 	{
 		happinessBar.fillAmount = happiness;
 	}
