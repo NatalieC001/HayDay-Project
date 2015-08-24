@@ -14,18 +14,10 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        if (game == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            game = this;
-            Load();
-			game.player.name = playerName;
-            game.player.cash = 50000;
-        }
-        else if (game != this)
-        {
-         	Destroy(gameObject);
-        }
+        game = this;
+        Load();
+		game.player.name = playerName;
+        game.player.cash = 50000;
     }
 
     void OnApplicationQuit()

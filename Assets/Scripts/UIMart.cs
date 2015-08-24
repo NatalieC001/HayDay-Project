@@ -55,11 +55,7 @@ public class UIMart : GameController
 		bars = GetComponentsInChildren<Image>();
 		healthBar = bars[0];
 		happinessBar = bars[1];      
-        defaultCow = new Cow("", 0, "N/A", 0, 0, false, false, 0);
-
-		AudioObject = GameObject.Find("Background Music");
-		if(AudioObject != null)
-			Destroy(AudioObject);
+        defaultCow = new Cow("", 0, "", 0, 0, false, false, 0);
     }
 
     void OnGUI()
@@ -101,16 +97,16 @@ public class UIMart : GameController
 		GUI.Label(new Rect(110, 20, 150, 30), game.player.name, customTextStyle);
 		GUI.Label(new Rect(90, 50, 150, 30), "Cash: € " + game.player.cash, customTextStyle);
 		GUI.Label(new Rect(110, 90, 150, 30), "Timer: " + currentTimer, customTextStyle);
-		GUI.Label(new Rect(25, 135, 90, 25), "", labelAge);
-		GUI.Label(new Rect(132, 135, 150, 30), "" + cow.age, customTextStyle);
+		GUI.Label(new Rect(25, 135, 80, 25), "", labelAge);
+		GUI.Label(new Rect(132, 132, 150, 30), "" + cow.age, customTextStyle);
 		GUI.Label(new Rect(25, 170, 90, 25), "", labelBreed);
 		GUI.Label(new Rect(132, 170, 150, 30), "" + cow.breed, customTextStyle);
 		GUI.Label(new Rect(25, 205, 110, 30), "", labelHappiness);
 		GUI.Label(new Rect(25, 240, 90, 25), "", labelHealth);
 		GUI.Label(new Rect(25, 275, 110, 30), "", labelPregnant);
 		GUI.Label(new Rect(150, 275, 150, 30), "" + cow.pregnant, customTextStyle);
-		GUI.Label(new Rect(25, 310, 90, 25), "", labelGender);
-		GUI.Label(new Rect(132, 310, 150, 30), "" + cow.gender, customTextStyle);
+		GUI.Label(new Rect(25, 313, 90, 25), "", labelGender);
+		GUI.Label(new Rect(132, 313, 150, 30), "" + cowGender, customTextStyle);
 		GUI.Label(new Rect(25, 350, 90, 30), "", labelWeight);
 		GUI.Label(new Rect(132, 350, 150, 30), "" + cow.weight, customTextStyle);
 

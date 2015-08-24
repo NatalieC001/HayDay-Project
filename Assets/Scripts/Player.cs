@@ -4,6 +4,7 @@ using System.Collections;
 public class Player : MonoBehaviour 
 {
 	public Texture backgroundTexture;
+	public Texture backgroundLoading;
 	public GUIStyle labelPlayer;
 	public GUIStyle buttonPlayStyle;
 	public GUIStyle buttonBackStyle;
@@ -11,29 +12,35 @@ public class Player : MonoBehaviour
 	public AudioClip buttonSound;
 	public string playerName = "Joe";
 
-	void OnEnable()
-	{
-	}
+	bool isLoading = false;
 
 	void OnGUI()
 	{
 		GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroundTexture);
-		GUI.Label (new Rect (Screen.width * .262f, Screen.height * .05f, Screen.width * .5f, Screen.height * .18f), "", labelPlayer);
-		GUI.SetNextControlName ("PlayerInput");
-		playerName = GUI.TextField(new Rect(0, Screen.height * .40f, Screen.width, Screen.height * .22f), playerName, textFieldStyle);
 
-		if (GUI.Button (new Rect (Screen.width * .7f, Screen.height * .8f, Screen.width * .275f, Screen.height * .180f), "", buttonPlayStyle))
+		if(!isLoading)
 		{
-			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			GameController.playerName = playerName;
-			StartCoroutine(WaitFor(2));	// Load farm scene
+			GUI.Label (new Rect (Screen.width * .272f, Screen.height * .05f, Screen.width * .45f, Screen.height * .16f), "", labelPlayer);
+			GUI.SetNextControlName ("PlayerInput");
+			playerName = GUI.TextField(new Rect(0, Screen.height * .40f, Screen.width, Screen.height * .22f), playerName, textFieldStyle);
 		}
 
-		if (GUI.Button (new Rect (Screen.width * .035f, Screen.height * .79f, Screen.width * .265f, Screen.height * .170f), "", buttonBackStyle))
-		{
-			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			StartCoroutine(WaitFor(0));	// Back to main menu
-		}
+		if(!isLoading)
+			if (GUI.Button (new Rect (Screen.width * .7f, Screen.height * .8f, Screen.width * .275f, Screen.height * .180f), "", buttonPlayStyle))
+			{
+				isLoading = true;
+				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
+				GameController.playerName = playerName;
+				StartCoroutine(WaitFor(2));	// Load farm scene
+				backgroundTexture = backgroundLoading;
+			}
+
+		if(!isLoading)
+			if (GUI.Button (new Rect (Screen.width * .035f, Screen.height * .79f, Screen.width * .260f, Screen.height * .165f), "", buttonBackStyle))
+			{
+				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
+				StartCoroutine(WaitFor(0));	// Back to main menu
+			}
 	}
 
 	void Update() 
