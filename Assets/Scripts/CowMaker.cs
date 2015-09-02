@@ -51,6 +51,9 @@ public class CowMaker : GameController
 		}
 		
 		Cow cow = new Cow(cowType + " - Breed", Random.Range(1, 15), cowType, Random.Range(1, 10), Random.Range(5, 100), true, true, Random.Range(150, 400));
+
+		// 
+
 		cow.gameObjectID = SpawnCow(cowType, spawnLocation);
 		game.cows.Add(cow);
 		return cow;

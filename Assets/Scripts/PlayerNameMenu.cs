@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour 
+public class PlayerNameMenu : MonoBehaviour 
 {
 	public Texture backgroundTexture;
 	public Texture backgroundLoading;
@@ -26,17 +26,17 @@ public class Player : MonoBehaviour
 		}
 
 		if(!isLoading)
-			if (GUI.Button (new Rect (Screen.width * .7f, Screen.height * .8f, Screen.width * .275f, Screen.height * .180f), "", buttonPlayStyle))
+			if (GUI.Button (new Rect (Screen.width * .7f, Screen.height * .8f, Screen.width * .255f, Screen.height * .160f), "", buttonPlayStyle))
 			{
 				isLoading = true;
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				GameController.playerName = playerName;
-				StartCoroutine(WaitFor(2));	// Load farm scene
+				StartCoroutine(WaitFor(3));	// Load farm scene
 				backgroundTexture = backgroundLoading;
 			}
 
 		if(!isLoading)
-			if (GUI.Button (new Rect (Screen.width * .035f, Screen.height * .79f, Screen.width * .260f, Screen.height * .165f), "", buttonBackStyle))
+			if (GUI.Button (new Rect (Screen.width * .035f, Screen.height * .79f, Screen.width * .240f, Screen.height * .145f), "", buttonBackStyle))
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				StartCoroutine(WaitFor(0));	// Back to main menu
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			StartCoroutine(WaitFor(10));
+			StartCoroutine(WaitFor(0));
 		}
 	}
 

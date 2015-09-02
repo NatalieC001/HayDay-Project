@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
     public GameObject currentFocus;
 	public AudioClip moveSound;
 
-	AudioSource audio;
+	AudioSource audioSource;
 
     public static bool freeRoam;
 
@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
         freeRoam = true;
         controller = (CharacterController)GetComponent(typeof(CharacterController));
         animator = GetComponent<Animator>();
-		audio = GetComponent<AudioSource>();
+		audioSource = GetComponent<AudioSource>();
     }
 
     public float UpdateMovement()
@@ -36,10 +36,10 @@ public class Movement : MonoBehaviour
 
 		if((inputVec.z != 0 || inputVec.x != 0))
 		{
-			if(!audio.isPlaying)
+			if(!audioSource.isPlaying)
 			{
-				audio.clip = moveSound;
-				audio.Play();
+				audioSource.clip = moveSound;
+				audioSource.Play();
 			}
 		}
 		else

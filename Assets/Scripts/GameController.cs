@@ -8,16 +8,32 @@ public class GameController : MonoBehaviour
 {
     public static GameController game;
 	public static string playerName;
-    public Player player;
+	public Player player;
     public Farm farm;
     public List<Cow> cows;
 
-    void Awake()
+	public Cow cow;
+	public GameObject cowGameObject;
+
+	public static bool loadPlayer = false;
+
+    void Start()
     {
         game = this;
-        Load();
-		game.player.name = playerName;
-        game.player.cash = 50000;
+
+		if(!loadPlayer)
+		{
+			game.player.name = playerName;
+			game.player.cash = 50000;
+			game.player.grain = 0;
+			game.player.hay = 0;
+			game.player.pellet = 0;
+		}
+		else
+		{
+			Load();
+			loadPlayer = false;
+		}
     }
 
     void OnApplicationQuit()
@@ -25,11 +41,16 @@ public class GameController : MonoBehaviour
         Save();
     }
 
+	void OnDisable()
+	{
+		Save();
+	}
+
 	void Update()
 	{
 		if(Input.GetKeyDown (KeyCode.Escape)) 
 		{
-			Application.Quit();
+			StartCoroutine(WaitFor(0));
 		}
 	}
 
@@ -42,17 +63,17 @@ public class GameController : MonoBehaviour
 
             //save player data
             file = File.Open(Application.persistentDataPath + "/player.dat", FileMode.OpenOrCreate);
-            bf.Serialize(file, player);
+            bf.Serialize(file, game.player);
             file.Close();
 
             //save cow data
             file = File.Open(Application.persistentDataPath + "/cows.dat", FileMode.OpenOrCreate);
-            bf.Serialize(file, cows);
+			bf.Serialize(file, game.cows);
             file.Close();
 
             //save farm data
             file = File.Open(Application.persistentDataPath + "/farm.dat", FileMode.OpenOrCreate);
-            bf.Serialize(file, farm);
+			bf.Serialize(file, game.farm);
             file.Close();
         }
         catch (UnityException e)
@@ -88,6 +109,16 @@ public class GameController : MonoBehaviour
                 farm = (Farm)bf.Deserialize(file);
                 file.Close();
             }
+
+			game.player = player;
+			game.cows = cows;
+			game.farm = farm;
+
+			for(int i = 0;i < game.cows.Count; i++)
+			{
+				Vector3 spawnLocation = new Vector3(Random.Range(55f, 105f), 0, Random.Range(220f, 265f));
+				game.cows[i].gameObjectID = CowMaker.SpawnCow(game.cows[i].breed, spawnLocation);
+			}
         }
         catch (UnityException e)
         {
@@ -100,6 +131,9 @@ public class GameController : MonoBehaviour
     {
         public string name;
         public double cash;
+		public int grain;
+		public int hay;
+		public int pellet;
     }
 
     [System.Serializable]
@@ -115,6 +149,7 @@ public class GameController : MonoBehaviour
 		public bool pregnant { get; set; }
         public bool gender { get; set; }
         public int weight { get; set; }
+		public int estimatedValue { get; set; }
 
         public Cow(string name)
         {
@@ -139,7 +174,7 @@ public class GameController : MonoBehaviour
             {
                 print("You bought " + name + "!");
                 ownedByPlayer = true;
-                game.player.cash -= 10000;
+				game.player.cash -= 10000;
             }
         }
 		
@@ -149,7 +184,7 @@ public class GameController : MonoBehaviour
             {
                 print("You Sold " + name + " :(");
                 ownedByPlayer = false;
-                game.player.cash += 10000;
+				game.player.cash += 10000;
             }
         }
     }
@@ -159,4 +194,18 @@ public class GameController : MonoBehaviour
     {
         // Maybe save state of the farm here, the amount of cows the player has...etc
     }
+
+	IEnumerator WaitFor(int level) 
+	{
+		yield return new WaitForSeconds(1.0f);
+		
+		if (level == 10) 
+		{
+			Application.Quit ();	
+		} 
+		else 
+		{
+			Application.LoadLevel (level);
+		}
+	}
 }

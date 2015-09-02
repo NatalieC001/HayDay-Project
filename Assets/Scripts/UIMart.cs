@@ -9,7 +9,6 @@ public class UIMart : GameController
 {
 	public GUIStyle buttonBid;
 	public GUIStyle buttonCattle;
-
 	public GUIStyle labelAge;
 	public GUIStyle labelBreed;
 	public GUIStyle labelHappiness;
@@ -20,11 +19,9 @@ public class UIMart : GameController
 
 	public GUIStyle customTextStyle;
 
-    public Cow cow;
-    Cow defaultCow;
-    public GameObject cowGameObject;
-	string cowGender = "Male";
-	
+    //public Cow cow;
+    //public GameObject cowGameObject;
+
 	public Image healthBar;
 	public Image happinessBar;
 
@@ -34,10 +31,12 @@ public class UIMart : GameController
 	public Image[] bars = new Image[2];
 
 	public static int currentCowBid = 0;
-	public static int currentTimer = 10;
+	public static int currentTimer = 60;
 	public static bool playerBidLast = false;
 	public static bool biddingOver = false;
 
+	Cow defaultCow;
+	string cowGender = "Male";
 	bool timerStart = false;
 	bool timerChecked = true;
 	bool bidStarted = false;
@@ -47,6 +46,8 @@ public class UIMart : GameController
 	double startMoney = 0;
 
 	public GameObject AudioObject;
+
+	public AudioClip buttonSound;
 
 	Rect windowRect;
 
@@ -116,6 +117,7 @@ public class UIMart : GameController
 		{
 			if (GUI.Button (new Rect (105, 445, 120, 40), "", buttonCattle))
 			{	
+				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				Vector3 spawnLocation = new Vector3(Random.Range(112f, 112f), 0, Random.Range(156f, 156f));
 				cow = CowMaker.GenerateCow(spawnLocation);
 				cowInRing = true;
@@ -126,7 +128,9 @@ public class UIMart : GameController
 		{
 			if(GUI.Button (new Rect (125, 445, 80, 40), "", buttonBid))
 			{
-				if(game.player.cash > currentCowBid)
+				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
+
+				if(game.player.cash >= currentCowBid)
 				{
 					currentCowBid += 1000;
 					playerBidLast = true;
@@ -163,14 +167,12 @@ public class UIMart : GameController
 				Debug.Log ("Player won the bid!");
 				game.player.cash -= currentCowBid;
 				// If the player won the bid add the cow to list player owns
-
 			}
 			else
 			{
 				Debug.Log ("Player lost the bid!");
 				game.player.cash = startMoney;
 				// Wait for cow to leave bidding area and destory the cow object
-
 			}
 
 			ClearStats();
@@ -182,7 +184,7 @@ public class UIMart : GameController
         cow = defaultCow;
 
 		bidCount = 0;
-		currentTimer = 10;
+		currentTimer = 60;
 		currentCowBid = 0;
 
 		timerStart = false;

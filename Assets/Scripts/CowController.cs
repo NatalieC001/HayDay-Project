@@ -5,7 +5,7 @@ public class CowController : MonoBehaviour
 {
     GameObject player;
     Animation anim;
-    CameraController camera;
+    CameraController cameraControl;
     UIFarm userInterface;
     Vector3 targetDestination;
     Movement movement;
@@ -172,20 +172,20 @@ public class CowController : MonoBehaviour
 
         movement.lookAt(this.gameObject);
 		userInterface = GameObject.FindGameObjectWithTag("UI").GetComponent<UIFarm>();
-        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
-        camera.lookAt(this.gameObject);
+		cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+		cameraControl.lookAt(this.gameObject);
 
 		//Finds the cow with the same instance Id as the parent gameobject
 		userInterface.cow = GameController.game.cows.Find(cow => cow.gameObjectID == this.gameObject.GetInstanceID());
 		userInterface.cowGameObject = this.gameObject;
 
-		Debug.Log ("Cow Name: " + userInterface.cow.name);
+		//Debug.Log ("Cow Name: " + userInterface.cow.name);
 
 		if(userInterface.cowGameObject == null)
-			Debug.Log ("User Interface is null:");
+			Debug.Log ("User Interface is null!");
 
 		if(userInterface.cow == null)
-			Debug.Log ("Cow is null");
+			Debug.Log ("Cow is null!");
 
 		userInterface.cowUI = true;
 		userInterface.playerUI = false;
