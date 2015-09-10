@@ -7,7 +7,7 @@ using System.IO;
 public class GameController : MonoBehaviour
 {
     public static GameController game;
-	public static string playerName;
+	public static string playerName = "Joe";
 	public Player player;
     public Farm farm;
     public List<Cow> cows;
@@ -21,15 +21,13 @@ public class GameController : MonoBehaviour
     {
         game = this;
 
-		if(!loadPlayer)
-		{
-			game.player.name = playerName;
-			game.player.cash = 50000;
-			game.player.grain = 0;
-			game.player.hay = 0;
-			game.player.pellet = 0;
-		}
-		else
+		game.player.name = playerName;
+		game.player.cash = 50000;
+		game.player.grain = 0;
+		game.player.hay = 0;
+		game.player.pellet = 0;
+
+		if(loadPlayer)
 		{
 			Load();
 			loadPlayer = false;
@@ -170,7 +168,7 @@ public class GameController : MonoBehaviour
 		
         public void Buy()
         {
-            if (game.player.cash > 10000)
+            if (game.player.cash >= 10000)
             {
                 print("You bought " + name + "!");
                 ownedByPlayer = true;
@@ -189,12 +187,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    [System.Serializable]
-    public class Farm
-    {
-        // Maybe save state of the farm here, the amount of cows the player has...etc
-    }
-
 	IEnumerator WaitFor(int level) 
 	{
 		yield return new WaitForSeconds(1.0f);
@@ -207,5 +199,10 @@ public class GameController : MonoBehaviour
 		{
 			Application.LoadLevel (level);
 		}
+	}
+
+	[System.Serializable]
+	public class Farm
+	{
 	}
 }

@@ -27,6 +27,7 @@ public class CowMaker : GameController
 	{
 		int cowGen = Random.Range(1, 6);
 		string cowType = "Angus";
+		double valueGen = 0;
 		
 		switch(cowGen)
 		{
@@ -52,7 +53,9 @@ public class CowMaker : GameController
 		
 		Cow cow = new Cow(cowType + " - Breed", Random.Range(1, 15), cowType, Random.Range(1, 10), Random.Range(5, 100), true, true, Random.Range(150, 400));
 
-		// 
+		// Generate the price of the cow here
+		valueGen = cow.age + cow.happiness + cow.health + cow.weight;
+		cow.estimatedValue = ((int)valueGen / 5) * 1000;
 
 		cow.gameObjectID = SpawnCow(cowType, spawnLocation);
 		game.cows.Add(cow);

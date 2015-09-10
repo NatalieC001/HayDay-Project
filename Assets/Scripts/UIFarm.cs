@@ -36,9 +36,8 @@ public class UIFarm : GameController
 	public GUIStyle labelLoading;
 	public GUIStyle customTextStyle;
 
-    //public Cow cow;
-	//public GameObject cowGameObject;
 	string cowGender = "Male";
+	string cowPregnant = "No";
 	
 	public Image healthBar;
 	public Image happinessBar;
@@ -54,9 +53,6 @@ public class UIFarm : GameController
 
 	Rect windowRect;
 	bool isLoading = false;
-
-	//Vector3 spawnLocation = new Vector3(Random.Range(55f, 105f), 0, Random.Range(220f, 265f));
-	//cow = CowMaker.GenerateCow(spawnLocation);
 
     void Start()
     {
@@ -121,10 +117,6 @@ public class UIFarm : GameController
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 			playerUI = false;
 			buySuppliesUI = true;
-
-			// For testing only
-			Vector3 spawnLocation = new Vector3(Random.Range(55f, 105f), 0, Random.Range(220f, 265f));
-			cow = CowMaker.GenerateCow(spawnLocation);
 		}
     }
 
@@ -144,7 +136,7 @@ public class UIFarm : GameController
 
 		if (GUI.Button(new Rect(80, 105, 75, 75), "", buttonGrain))	// Add to player class / inventory
 		{
-			if(game.player.cash >= 500)
+			if(game.player.cash >= 1000)
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				game.player.grain++;
@@ -154,7 +146,7 @@ public class UIFarm : GameController
 
 		if (GUI.Button(new Rect(230, 105, 75, 75), "", buttonHay))		// Add to player class / inventory
 		{
-			if(game.player.cash >= 500)
+			if(game.player.cash >= 1500)
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				game.player.hay++;
@@ -164,7 +156,7 @@ public class UIFarm : GameController
 
 		if (GUI.Button(new Rect(380, 105, 75, 75), "", buttonPellets))	// Add to player class / inventory
 		{
-			if(game.player.cash >= 500)
+			if(game.player.cash >= 2500)
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				game.player.pellet++;
@@ -227,11 +219,15 @@ public class UIFarm : GameController
 		if (!cow.gender == true)
 		{
 			cowGender = "Female";
+
+			if(cow.pregnant == true)
+				cowPregnant = "Yes";
 		}
 		else
 		{
 			cowGender = "Male";
 			cow.pregnant = false;
+			cowPregnant = "No";
 		}
 
 		GUI.Label(new Rect(35, 40, 80, 25), "", labelAge);
@@ -241,7 +237,7 @@ public class UIFarm : GameController
 		GUI.Label(new Rect(35, 105, 110, 30), "", labelHappiness);
 		GUI.Label(new Rect(35, 140, 90, 25), "", labelHealth);
 		GUI.Label(new Rect(35, 175, 110, 30), "", labelPregnant);
-		GUI.Label(new Rect(160, 175, 150, 30), "" + cow.pregnant, customTextStyle);
+		GUI.Label(new Rect(160, 175, 150, 30), "" + cowPregnant, customTextStyle);
 		GUI.Label(new Rect(35, 210, 90, 25), "", labelGender);
 		GUI.Label(new Rect(142, 210, 150, 30), "" + cowGender, customTextStyle);
 		GUI.Label(new Rect(35, 245, 90, 30), "", labelWeight);
