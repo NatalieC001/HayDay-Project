@@ -149,11 +149,6 @@ public class GameController : MonoBehaviour
         public int weight { get; set; }
 		public int estimatedValue { get; set; }
 
-        public Cow(string name)
-        {
-            this.name = name;
-        }
-
 		public Cow(string name, int age, string breed, int happiness, int health, bool pregnant, bool gender, int weight)
         {
             this.name = name;

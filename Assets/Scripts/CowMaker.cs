@@ -9,7 +9,7 @@ public class CowMaker : GameController
 		
 		do
 		{
-			if (count++ > 100)
+			if (count++ > 1000)
 			{
 				return 0;
 			}

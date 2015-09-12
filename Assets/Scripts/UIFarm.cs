@@ -117,6 +117,9 @@ public class UIFarm : GameController
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 			playerUI = false;
 			buySuppliesUI = true;
+
+			Vector3 spawnLocation = new Vector3(Random.Range(55f, 105f), 0, Random.Range(220f, 265f));
+			cow = CowMaker.GenerateCow(spawnLocation);
 		}
     }
 
@@ -366,13 +369,13 @@ public class UIFarm : GameController
 		if (GUI.Button(new Rect(50, 30, 150, 50), "", buttonLoad))
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			game.Load();
+			Load();
 		}
 		
 		if (GUI.Button(new Rect(275, 30, 150, 50), "", buttonSave))
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			game.Save();
+			Save();
 		}
 	}
 

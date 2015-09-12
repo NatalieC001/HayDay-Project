@@ -66,8 +66,10 @@
      <Compile Include="Assets\Cartoon Town and Farm\Tools\ScrollingUVs.cs" />
      <Compile Include="Assets\Scripts\BackgroundMusic.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\CowButton.cs" />
      <Compile Include="Assets\Scripts\CowController.cs" />
      <Compile Include="Assets\Scripts\CowMaker.cs" />
+     <Compile Include="Assets\Scripts\CreateScrollList.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\Help.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />

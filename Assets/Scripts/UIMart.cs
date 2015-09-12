@@ -26,6 +26,7 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
 	public GUIStyle labelGender;
 	public GUIStyle labelWeight;
 	public GUIStyle labelLoading;
+	public GUIStyle labelSelect;
 
 	public GUIStyle customTextStyle;
 
@@ -41,6 +42,9 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
 	public static int currentTimer = 60;
 	public static bool playerBidLast = false;
 	public static bool biddingOver = false;
+	public static bool cowSelected = false;
+	public static int cowIndex = 0;
+	public static GameObject cowList;
 
 	Cow defaultCow;
 	string cowGender = "Male";
@@ -52,6 +56,8 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
 	float doesAIBid;
 	int bidCount = 0;
 	double startMoney = 0;
+
+	GameObject scrollCowList;
 
 	public GameObject AudioObject;
 
@@ -66,6 +72,9 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
 		healthBar = bars[0];
 		happinessBar = bars[1];      
         defaultCow = new Cow("", 0, "", 0, 0, false, false, 0);
+		cowList = GameObject.Find ("CowSelectList");
+		scrollCowList = cowList.transform.Find ("Panel").gameObject;
+		cowList.SetActive (false);
     }
 
     void OnGUI()
@@ -74,17 +83,17 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
 		
 		if(cowMenuUI)
 		{
-			windowRect = new Rect(Screen.width * .7f, Screen.height - 500f, 350, 450);
+			windowRect = new Rect(Screen.width * .7f, Screen.height - 550f, 350, 450);
 			windowRect = GUI.Window(0, windowRect, Menu, "Menu");
 		}
 		else if(cowBuyBidUI)
 		{
-			windowRect = new Rect(Screen.width * .7f, Screen.height - 550f, 350, 500);
+			windowRect = new Rect(Screen.width * .7f, Screen.height - 600f, 350, 500);
 			windowRect = GUI.Window(0, windowRect, CowBuyBid, "Buying");
 		}
 		else if(cowSellBidUI)
 		{
-			windowRect = new Rect(Screen.width * .7f, Screen.height - 550f, 350, 500);
+			windowRect = new Rect(Screen.width * .7f, Screen.height - 600f, 350, 500);
 			windowRect = GUI.Window(0, windowRect, CowSellBid, "Selling");
 		}
 
@@ -129,6 +138,7 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				cowMenuUI = false;
 				cowSellBidUI = true;
+				cowList.SetActive (true);
 			}
 
 		if(!isLoading)
@@ -147,8 +157,8 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
 		SetHealth(cow.health / 100f);
 		SetHappiness(cow.happiness / 10f);
 		
-		healthBar.transform.position = new Vector2 (windowRect.center.x + 64, 330);
-		happinessBar.transform.position = new Vector2 (windowRect.center.x + 64, 295);
+		healthBar.transform.position = new Vector2 (windowRect.center.x + 64, 380);
+		happinessBar.transform.position = new Vector2 (windowRect.center.x + 64, 345);
 		
 		if (!cow.gender == true)
 		{
@@ -259,29 +269,32 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
 	{
 		GUI.contentColor = backgroundColor;
 
-		bool cowSelected = false;
+		if(!cowSelected)
+		{
+			GUI.Label(new Rect(70, 30, 210, 45), "", labelSelect);
+		}
 
-		// Generate list of cows here using 'game.cows' list
+		scrollCowList.transform.position = new Vector2 (windowRect.center.x, 310);
 
 		if(cowSelected)
 		{
-			SetHealth(cow.health / 100f);
-			SetHappiness(cow.happiness / 10f);
+			SetHealth(game.cows[cowIndex].health / 100f);
+			SetHappiness(game.cows[cowIndex].happiness / 10f);
 			
-			healthBar.transform.position = new Vector2 (windowRect.center.x + 64, 330);
-			happinessBar.transform.position = new Vector2 (windowRect.center.x + 64, 295);
+			healthBar.transform.position = new Vector2 (windowRect.center.x + 64, 380);
+			happinessBar.transform.position = new Vector2 (windowRect.center.x + 64, 345);
 			
-			if (!cow.gender == true)
+			if (!game.cows[cowIndex].gender == true)
 			{
 				cowGender = "Female";
 				
-				if(cow.pregnant == true)
+				if(game.cows[cowIndex].pregnant == true)
 					cowPregnant = "Yes";
 			}
 			else
 			{
 				cowGender = "Male";
-				cow.pregnant = false;
+				game.cows[cowIndex].pregnant = false;
 				cowPregnant = "No";
 			}
 			
@@ -289,9 +302,9 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
 			GUI.Label(new Rect(90, 50, 150, 30), "Cash: € " + game.player.cash, customTextStyle);
 			GUI.Label(new Rect(110, 90, 150, 30), "Timer: " + currentTimer, customTextStyle);
 			GUI.Label(new Rect(25, 135, 80, 25), "", labelAge);
-			GUI.Label(new Rect(132, 132, 150, 30), "" + cow.age, customTextStyle);
+			GUI.Label(new Rect(132, 132, 150, 30), "" + game.cows[cowIndex].age, customTextStyle);
 			GUI.Label(new Rect(25, 170, 90, 25), "", labelBreed);
-			GUI.Label(new Rect(132, 170, 150, 30), "" + cow.breed, customTextStyle);
+			GUI.Label(new Rect(132, 170, 150, 30), "" + game.cows[cowIndex].breed, customTextStyle);
 			GUI.Label(new Rect(25, 205, 110, 30), "", labelHappiness);
 			GUI.Label(new Rect(25, 240, 90, 25), "", labelHealth);
 			GUI.Label(new Rect(25, 275, 110, 30), "", labelPregnant);
@@ -299,27 +312,39 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
 			GUI.Label(new Rect(25, 313, 90, 25), "", labelGender);
 			GUI.Label(new Rect(132, 313, 150, 30), "" + cowGender, customTextStyle);
 			GUI.Label(new Rect(25, 350, 90, 30), "", labelWeight);
-			GUI.Label(new Rect(132, 350, 150, 30), "" + cow.weight, customTextStyle);
+			GUI.Label(new Rect(132, 350, 150, 30), "" + game.cows[cowIndex].weight, customTextStyle);
 			
 			GUI.Label(new Rect(70, 400, 150, 30), "Current Bid: € " + currentCowBid, customTextStyle);
-		}
-		
-		if(!cowInRing)
-		{
-			if (GUI.Button (new Rect (105, 445, 120, 40), "", buttonCattle))
+
+			if (GUI.Button (new Rect (105, 445, 120, 40), "", buttonSell))
 			{	
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				Vector3 spawnLocation = new Vector3(Random.Range(112f, 112f), 0, Random.Range(156f, 156f));
-				cow = CowMaker.GenerateCow(spawnLocation);
+				game.cows[cowIndex].gameObjectID = CowMaker.SpawnCow(game.cows[cowIndex].breed, spawnLocation);
 				cowInRing = true;
+				
+				// Fire off the bidding process here
 			}
 		}
-
+		
 		if (GUI.Button(new Rect(295, 450, 35, 35), "", buttonX))
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			cowMenuUI = true;
-			cowSellBidUI = false;
+
+			if(cowSelected)
+			{
+				cowSelected = false;
+				cowList.SetActive(true);
+
+				SetHealth(0f);
+				SetHappiness(0f);
+			}
+			else
+			{
+				cowSellBidUI = false;
+				cowMenuUI = true;
+				cowList.SetActive(false);
+			}
 		}
 	}
 
@@ -423,6 +448,7 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
 		else 
 		{
 			Application.LoadLevel (level);
+			loadPlayer = true;
 		}
 	}
 }
