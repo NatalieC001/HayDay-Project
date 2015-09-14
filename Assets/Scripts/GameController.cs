@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
 	public GameObject cowGameObject;
 
 	public static bool loadPlayer = false;
+	public static bool newGame = false;
 
     void Start()
     {
@@ -26,6 +27,14 @@ public class GameController : MonoBehaviour
 		game.player.grain = 0;
 		game.player.hay = 0;
 		game.player.pellet = 0;
+
+		if(newGame)
+		{
+			Vector3 spawnLocation = new Vector3(Random.Range(58f, 105f), 0, Random.Range(245f, 263f));
+			spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
+			cow = CowMaker.GenerateCow(spawnLocation);
+			newGame = false;
+		}
 
 		if(loadPlayer)
 		{
@@ -114,7 +123,8 @@ public class GameController : MonoBehaviour
 
 			for(int i = 0;i < game.cows.Count; i++)
 			{
-				Vector3 spawnLocation = new Vector3(Random.Range(55f, 105f), 0, Random.Range(220f, 265f));
+				Vector3 spawnLocation = new Vector3(Random.Range(58f, 105f), 0, Random.Range(245f, 263f));
+				spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
 				game.cows[i].gameObjectID = CowMaker.SpawnCow(game.cows[i].breed, spawnLocation);
 			}
         }

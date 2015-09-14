@@ -118,8 +118,10 @@ public class UIFarm : GameController
 			playerUI = false;
 			buySuppliesUI = true;
 
-			Vector3 spawnLocation = new Vector3(Random.Range(55f, 105f), 0, Random.Range(220f, 265f));
-			cow = CowMaker.GenerateCow(spawnLocation);
+			// Spawning cows for debug only
+			/*Vector3 spawnLocation = new Vector3(Random.Range(58f, 105f), 0, Random.Range(245f, 263f));
+			spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
+			cow = CowMaker.GenerateCow(spawnLocation);*/
 		}
     }
 

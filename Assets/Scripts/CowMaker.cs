@@ -5,9 +5,9 @@ public class CowMaker : GameController
 {
 	public static int SpawnCow(string cowType, Vector3 spawnLocation)
 	{	
-		int count = 0;
+		//int count = 0;
 		
-		do
+		/*do
 		{
 			if (count++ > 1000)
 			{
@@ -16,8 +16,9 @@ public class CowMaker : GameController
 			
 			spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
 			
-		}while (Physics.CheckSphere(spawnLocation +  new Vector3(0,3.5f,0), 3));
+		}while (Physics.CheckSphere(spawnLocation +  new Vector3(0,3.5f,0), 3));*/
 
+		spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
 		GameObject cowGameObject = Instantiate(Resources.Load(cowType) as GameObject);
 		cowGameObject.transform.position = spawnLocation;
 		return cowGameObject.GetInstanceID();

@@ -107,7 +107,26 @@ public class CowController : MonoBehaviour
     {
         anim.Play("walk");
 
-        GetComponent<AudioSource>().PlayOneShot(cowSound, 0.9f);
+		int playSound = Random.Range (1, 5);
+
+		switch(playSound)
+		{
+			case 1:
+				StartCoroutine(CowMoo(Random.Range(12, 60)));
+			break;
+			case 2:
+				StartCoroutine(CowMoo(Random.Range(16, 60)));
+			break;
+			case 3:
+				StartCoroutine(CowMoo(Random.Range(20, 60)));
+			break;
+			case 4:
+				StartCoroutine(CowMoo(Random.Range(24, 60)));
+			break;
+			case 5:
+				StartCoroutine(CowMoo(Random.Range(28, 60)));
+			break;
+		}
 
         targetDestination = new Vector3(transform.position.x + Random.Range(-10, 10), 0f, transform.position.z + Random.Range(-10, 10));
         targetDestination.y = Terrain.activeTerrain.SampleHeight(targetDestination);
@@ -179,8 +198,6 @@ public class CowController : MonoBehaviour
 		userInterface.cow = GameController.game.cows.Find(cow => cow.gameObjectID == this.gameObject.GetInstanceID());
 		userInterface.cowGameObject = this.gameObject;
 
-		//Debug.Log ("Cow Name: " + userInterface.cow.name);
-
 		if(userInterface.cowGameObject == null)
 			Debug.Log ("User Interface is null!");
 
@@ -204,4 +221,11 @@ public class CowController : MonoBehaviour
                 break;
         }
     }
+
+	IEnumerator CowMoo(float seconds)
+	{
+		yield return new WaitForSeconds(seconds);
+
+		GetComponent<AudioSource>().PlayOneShot(cowSound, Random.Range(0.4f, 0.7f));
+	}
 }
