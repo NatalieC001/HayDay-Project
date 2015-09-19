@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to finish!
+public class UIMart : GameController
 {
 	public bool cowMenuUI = true;
 	public bool cowBuyBidUI;
@@ -27,7 +27,6 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
 	public GUIStyle labelWeight;
 	public GUIStyle labelLoading;
 	public GUIStyle labelSelect;
-
 	public GUIStyle customTextStyle;
 
 	public Image healthBar;
@@ -60,7 +59,6 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
 	GameObject scrollCowList;
 
 	public GameObject AudioObject;
-
 	public AudioClip buttonSound;
 
 	Rect windowRect;
@@ -80,23 +78,94 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
     void OnGUI()
     {
 		GUI.color = foregroundColor;
-		
+
+		print ("Screen W : " + Screen.width);
+
 		if(cowMenuUI)
 		{
-			windowRect = new Rect(Screen.width * .7f, Screen.height - 550f, 350, 450);
+			if(Screen.width < 900)
+				windowRect = new Rect(Screen.width * .54f, Screen.height - 475f, 350, 450);
+
+			if(Screen.width > 900)
+				windowRect = new Rect(Screen.width * .57f, Screen.height - 490f, 350, 450);
+
+			if(Screen.width > 1000)
+				windowRect = new Rect(Screen.width * .6f, Screen.height - 505f, 350, 450);
+
+			if(Screen.width > 1100)
+				windowRect = new Rect(Screen.width * .64f, Screen.height - 520f, 350, 450);
+
+			if(Screen.width > 1200)
+				windowRect = new Rect(Screen.width * .67f, Screen.height - 535f, 350, 450);
+
+			if(Screen.width > 1300)
+				windowRect = new Rect(Screen.width * .7f, Screen.height - 550f, 350, 450);
+
+			if(Screen.width > 1400)
+				windowRect = new Rect(Screen.width * .74f, Screen.height - 565f, 350, 450);
+
+			if(Screen.width > 1500)
+				windowRect = new Rect(Screen.width * .77f, Screen.height - 580f, 350, 450);
+
 			windowRect = GUI.Window(0, windowRect, Menu, "Menu");
 		}
 		else if(cowBuyBidUI)
 		{
-			windowRect = new Rect(Screen.width * .7f, Screen.height - 600f, 350, 500);
+			if(Screen.width < 900)
+				windowRect = new Rect(Screen.width * .54f, Screen.height - 525f, 350, 500);
+
+			if(Screen.width > 900)
+				windowRect = new Rect(Screen.width * .57f, Screen.height - 540f, 350, 500);
+			
+			if(Screen.width > 1000)
+				windowRect = new Rect(Screen.width * .6f, Screen.height - 555f, 350, 500);
+			
+			if(Screen.width > 1100)
+				windowRect = new Rect(Screen.width * .64f, Screen.height - 570f, 350, 500);
+			
+			if(Screen.width > 1200)
+				windowRect = new Rect(Screen.width * .67f, Screen.height - 585f, 350, 500);
+			
+			if(Screen.width > 1300)
+				windowRect = new Rect(Screen.width * .7f, Screen.height - 600f, 350, 500);
+
+			if(Screen.width > 1400)
+				windowRect = new Rect(Screen.width * .74f, Screen.height - 615f, 350, 500);
+
+			if(Screen.width > 1500)
+				windowRect = new Rect(Screen.width * .77f, Screen.height - 630f, 350, 500);
+
 			windowRect = GUI.Window(0, windowRect, CowBuyBid, "Buying");
 		}
 		else if(cowSellBidUI)
 		{
-			windowRect = new Rect(Screen.width * .7f, Screen.height - 600f, 350, 500);
+			if(Screen.width < 900)
+				windowRect = new Rect(Screen.width * .54f, Screen.height - 525f, 350, 500);
+
+			if(Screen.width > 900)
+				windowRect = new Rect(Screen.width * .57f, Screen.height - 540f, 350, 500);
+			
+			if(Screen.width > 1000)
+				windowRect = new Rect(Screen.width * .6f, Screen.height - 555f, 350, 500);
+			
+			if(Screen.width > 1100)
+				windowRect = new Rect(Screen.width * .64f, Screen.height - 570f, 350, 500);
+			
+			if(Screen.width > 1200)
+				windowRect = new Rect(Screen.width * .67f, Screen.height - 585f, 350, 500);
+			
+			if(Screen.width > 1300)
+				windowRect = new Rect(Screen.width * .7f, Screen.height - 600f, 350, 500);
+
+			if(Screen.width > 1400)
+				windowRect = new Rect(Screen.width * .74f, Screen.height - 615f, 350, 500);
+
+			if(Screen.width > 1500)
+				windowRect = new Rect(Screen.width * .77f, Screen.height - 630f, 350, 500);
+
 			windowRect = GUI.Window(0, windowRect, CowSellBid, "Selling");
 		}
-
+		
 		if(timerStart)
 		{
 			if(!timerChecked)
@@ -106,7 +175,7 @@ public class UIMart : GameController 	// Fix this stuff, finish me! - Menu to fi
 		}
 	}
 
-	void Menu(int windowID)		// Fix this stuff, finish me!
+	void Menu(int windowID)
 	{
 		GUI.contentColor = backgroundColor;
 		
