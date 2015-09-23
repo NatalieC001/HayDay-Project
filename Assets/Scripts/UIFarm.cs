@@ -53,12 +53,17 @@ public class UIFarm : GameController
 
 	Rect windowRect;
 	bool isLoading = false;
-
+    CameraController cameraControl;
+    VCAnalogJoystickBase joyStick;
+    public Cow cow;
     void Start()
     {
 		bars = GetComponentsInChildren<Image>();
 		healthBar = bars[0];
 		happinessBar = bars[1];
+        cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+        joyStick = GameObject.FindGameObjectWithTag("JoyStick").GetComponent<VCAnalogJoystickBase>();
+      
     }
 
     void OnGUI()
@@ -118,10 +123,8 @@ public class UIFarm : GameController
 			playerUI = false;
 			buySuppliesUI = true;
 
-			// Spawning cows for debug only
-			/*Vector3 spawnLocation = new Vector3(Random.Range(58f, 105f), 0, Random.Range(245f, 263f));
-			spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
-			cow = CowMaker.GenerateCow(spawnLocation);*/
+			cow = CowMaker.GenerateCow();
+            CowMaker.SpawnCow(cow, new Vector2(55f, 105f), new Vector2(220f, 265f));
 		}
     }
 
@@ -204,7 +207,8 @@ public class UIFarm : GameController
 		if (GUI.Button(new Rect(535, 30, 50, 50), "", buttonX))
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			CameraController.ResetCamera(GameObject.Find("Main Camera").transform.position);
+            joyStick.gameObject.SetActive(true);
+            cameraControl.FollowPlayer();
 			playerUI = true;
 			cowUI = false;
 			Movement.freeRoam = true;

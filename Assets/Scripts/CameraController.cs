@@ -3,86 +3,96 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
-    public static Vector3 position;
+    public float speed = 10;
 
-    public static bool closeUpView;
-    public static GameObject player;
+    float startTime;
+    float journeyLength;
 
-    public GameObject currentFocus;
 
-    public static Vector3 difVec;
-	public static Vector3 startingFocus;
-	public static Vector3 startingPositon;
+    public GameObject player;
+    Vector3 difVec;
 
-	public float speed = 10;
 
-	public static float startTime;
-	public static float journeyLength;
-   
-	void Start ()
-	{
-        player = GameObject.Find("Player");
-        transform.LookAt(player.transform.position);
-        difVec = transform.position - player.transform.position;
-	}
+    Vector3 startingAngle;
+    Vector3 endingAngle;
 
-    public void lookAt(GameObject target)
+    Vector3 startPositon;
+    Vector3 endPosition;
+
+    public bool watchPlayer;
+    public bool followPlayer;
+    bool transitioning;
+
+
+
+    void Start()
     {
-        currentFocus = target;
+        player = GameObject.Find("Player");
+
+        difVec = transform.position - player.transform.position;
+        startPositon = transform.position;
+    }
+    public void MoveToLookAt(Vector3 positon, Vector3 target)
+    {
         startTime = Time.time;
+        journeyLength = Vector3.Distance(transform.position, positon);
 
-        startingPositon = transform.position;
-        startingFocus = player.transform.position;
-        
-        journeyLength = Vector3.Distance(startingPositon, player.transform.position - player.transform.forward * 4 + new Vector3(0f, 5f, 0f));   
+        startPositon = transform.position;
+        startingAngle = transform.forward;
 
-        closeUpView = true;
+        endPosition = positon;
+        endingAngle = target - positon;
+        transitioning = true;
+        watchPlayer = false;
+        followPlayer = false;
     }
 
-    public static void ResetCamera(Vector3 transCameraPos)
+    public void WatchPlayer()
     {
-        startTime = Time.time;
-		journeyLength = Vector3.Distance(transCameraPos, player.transform.position + difVec);
+        MoveToLookAt(startPositon, player.transform.position);
 
-		startingPositon = transCameraPos;
-        closeUpView = false;
+        watchPlayer = true;
+    }
+
+    public void FollowPlayer()
+    {
+        MoveToLookAt(startPositon, player.transform.position);
+        followPlayer = true;
     }
 
     void LateUpdate()
     {
-        if(!closeUpView && Vector3.Distance(transform.position, player.transform.position + difVec) < 1)
-		{          
-            transform.position = player.transform.position + difVec;
-		}
-        else if (closeUpView)
-		{
-            if (currentFocus != null)
-            {
-                float distCovered = (Time.time - startTime) * speed;
-                float fracComplete = distCovered / journeyLength;
-
-                if (fracComplete < 1)
-                {
-                    transform.position = Vector3.Lerp(startingPositon, player.transform.position - player.transform.forward * 4 + new Vector3(0f, 5f, 0f), fracComplete);
-                    transform.LookAt(Vector3.Slerp(startingFocus, currentFocus.transform.position, fracComplete));
-                }
-                else
-                {
-                    startingFocus = currentFocus.transform.position;
-                }  
-            }  
-            else
-            {
-                ResetCamera(transform.position);
-            }
-		}
-        else
+        if (transitioning)
         {
             float distCovered = (Time.time - startTime) * speed;
-            float fracJourney = distCovered / journeyLength;
+            float fracComplete = distCovered / journeyLength;
 
-            transform.position = Vector3.Lerp(startingPositon, player.transform.position + difVec, fracJourney);
-            transform.LookAt(Vector3.Slerp(startingFocus, player.transform.position, fracJourney));
+            if (fracComplete <= 1)
+            {
+                transform.position = Vector3.Lerp(startPositon, endPosition, fracComplete);
+                transform.forward = Vector3.Slerp(startingAngle, endingAngle, fracComplete);
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(startPositon, endPosition, 1);
+                transform.forward = Vector3.Slerp(startingAngle, endingAngle, 1);
+                transitioning = false;
+            }
+
         }
-	}
+        else if (watchPlayer)
+        {
+
+            transform.LookAt(player.transform.position);
+
+
+        }
+        else if (followPlayer)
+        {
+
+
+            transform.position = player.transform.position + difVec;
+        }
+
+    }
 }

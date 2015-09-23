@@ -118,6 +118,8 @@ public class VCAnalogJoystickGuiTexture : VCAnalogJoystickBase
 		
 		_visible = visible;
 	}
+
+
 	
 #if UNITY_EDITOR
 	protected override Vector2 GetDebugTouchOrigin()

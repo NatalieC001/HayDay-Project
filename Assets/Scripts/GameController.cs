@@ -8,33 +8,22 @@ public class GameController : MonoBehaviour
 {
     public static GameController game;
 	public static string playerName = "Joe";
-	public Player player;
+	public Farmer player;
     public Farm farm;
     public List<Cow> cows;
 
-	public Cow cow;
 	public GameObject cowGameObject;
 
 	public static bool loadPlayer = false;
-	public static bool newGame = false;
 
     void Start()
     {
         game = this;
-
-		game.player.name = playerName;
-		game.player.cash = 50000;
-		game.player.grain = 0;
-		game.player.hay = 0;
-		game.player.pellet = 0;
-
-		if(newGame)
-		{
-			Vector3 spawnLocation = new Vector3(Random.Range(58f, 105f), 0, Random.Range(245f, 263f));
-			spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
-			cow = CowMaker.GenerateCow(spawnLocation);
-			newGame = false;
-		}
+        game.player.name = playerName;
+        game.player.cash = 50000;
+        game.player.grain = 0;
+        game.player.hay = 0;
+        game.player.pellet = 0;
 
 		if(loadPlayer)
 		{
@@ -99,7 +88,7 @@ public class GameController : MonoBehaviour
             if (File.Exists(Application.persistentDataPath + "/player.dat"))
             {
                 file = File.Open(Application.persistentDataPath + "/player.dat", FileMode.Open);
-                player = (Player)bf.Deserialize(file);
+                player = (Farmer)bf.Deserialize(file);
                 file.Close();
             }
             //load cow data
@@ -121,11 +110,9 @@ public class GameController : MonoBehaviour
 			game.cows = cows;
 			game.farm = farm;
 
-			for(int i = 0;i < game.cows.Count; i++)
+            foreach (Cow cow in game.cows)
 			{
-				Vector3 spawnLocation = new Vector3(Random.Range(58f, 105f), 0, Random.Range(245f, 263f));
-				spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
-				game.cows[i].gameObjectID = CowMaker.SpawnCow(game.cows[i].breed, spawnLocation);
+                CowMaker.SpawnCow(cow, new Vector2(55f, 105f), new Vector2(220f, 265f));
 			}
         }
         catch (UnityException e)
@@ -135,7 +122,7 @@ public class GameController : MonoBehaviour
     }
 
     [System.Serializable]
-    public class Player
+    public class Farmer
     {
         public string name;
         public double cash;
@@ -145,53 +132,53 @@ public class GameController : MonoBehaviour
     }
 
     [System.Serializable]
-    public class Cow
+    public class Cow 
     {
-        public string name { get; set; }
-        public int gameObjectID { get; set; }
+        [System.NonSerialized]
+        public CowController cowController;
+        public string name { get; set; }    
         public bool ownedByPlayer { get; set; }
         public int age { get; set; }
         public string breed { get; set; }
         public int happiness { get; set; }
         public int health { get; set; }
-		public bool pregnant { get; set; }
+        public bool pregnant { get; set; }
         public bool gender { get; set; }
         public int weight { get; set; }
-		public int estimatedValue { get; set; }
+        public int estimatedValue { get; set; }
 
-		public Cow(string name, int age, string breed, int happiness, int health, bool pregnant, bool gender, int weight)
+
+        public Cow(string name, int age, string breed, int happiness, int health, bool pregnant, bool gender, int weight)
         {
             this.name = name;
             this.age = age;
             this.breed = breed;
             this.happiness = happiness;
             this.health = health;
-			this.pregnant = pregnant;
-			this.gender = gender;
+            this.pregnant = pregnant;
+            this.gender = gender;
             this.weight = weight;
         }
-		
+
         public void Buy()
         {
-            if (game.player.cash >= 10000)
-            {
-                print("You bought " + name + "!");
-                ownedByPlayer = true;
-				game.player.cash -= 10000;
-            }
+
+            ownedByPlayer = true;
+
         }
-		
+
         public void Sell()
         {
             if (ownedByPlayer)
             {
-                print("You Sold " + name + " :(");
                 ownedByPlayer = false;
-				game.player.cash += 10000;
             }
         }
+
+
     }
 
+  
 	IEnumerator WaitFor(int level) 
 	{
 		yield return new WaitForSeconds(1.0f);

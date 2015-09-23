@@ -1,67 +1,57 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CowController : MonoBehaviour
+[System.Serializable]
+public class CowController : GameController
 {
-    GameObject player;
+    public Cow cow;
+	new GameObject playerGO;
     Animation anim;
     CameraController cameraControl;
     UIFarm userInterface;
     Vector3 targetDestination;
     Movement movement;
+    VCAnalogJoystickBase joyStick;
 
 	bool idleRunning;
     bool inMart = false;
 
-	public float speed = 3;
-	public float rotationSpeed = 10;
+	public float speed = 6;
+	public float rotationSpeed = 5;
 	public string state;
 	public AudioClip cowSound;
 
     void Start()
     {
         anim = GetComponent<Animation>();
+        userInterface = GameObject.FindGameObjectWithTag("UI").GetComponent<UIFarm>();
+		cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+        joyStick = GameObject.FindGameObjectWithTag("JoyStick").GetComponent<VCAnalogJoystickBase>();
 
         if (!(Application.loadedLevelName.Equals("Mart")))
         {
             state = "wander";
-            player = GameObject.Find("Player");
-            movement = player.GetComponent<Movement>();
+            playerGO = GameObject.Find("Player");
+            movement = playerGO.GetComponent<Movement>();
         }
         else
         {
-			state = "enter";
+            state = "wander";
             inMart = true;
         }
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
+        print(state);
         switch (state)
         {
             case "moving":
-                MoveTo(targetDestination);
+                Moving();
             break;
-			case "enter":
-				// Cow will spawn somewhere off screen, then
-				// Move cow towards center of the ring
-				Vector3 bidArea = new Vector3(105f, 0f, 131f);
-				MoveTo(bidArea);
-				StartCoroutine(WaitFor(5f, 0));
-				// Add function here to start bidding, when bidding starts let the cow wander around the ring
-				// When bidding is finished change state to "exitCow"
-			break;
             case "wander":
                 Wander();
             break;
-			case "exit":
-				// Bidding has ended, moving cow from the bidding area
-				// If player has bought this cow, add it to a list to bring back to farm
-				// De-spawn cow after moving cow out of sight
-				Vector3 exitArea = new Vector3(102f, 0f, 159f);
-				MoveTo(exitArea);
-			break;
             case "idle":
                 if (!idleRunning)
                     StartCoroutine(Idle(Random.Range(5, 40)));
@@ -74,15 +64,11 @@ public class CowController : MonoBehaviour
                 anim.Play("idle3");
             break;
             case "following":
-                Follow(player.transform.position);
+                Follow(playerGO.transform.position);
 			break;
+            
 		}
-
-		if(UIMart.biddingOver)
-		{
-			state = "exit";
-			UIMart.biddingOver = false;
-		}
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
     }
 
     IEnumerator Idle(int seconds)
@@ -90,8 +76,11 @@ public class CowController : MonoBehaviour
         idleRunning = true;
         anim.Play("idle2");
         yield return new WaitForSeconds(seconds);
-        state = "wander";
-        idleRunning = false;
+        if (state == "idle")
+        {
+            state = "wander";
+            idleRunning = false;
+        }
     }
 
     IEnumerator IdleOnly(int seconds)
@@ -107,26 +96,7 @@ public class CowController : MonoBehaviour
     {
         anim.Play("walk");
 
-		int playSound = Random.Range (1, 5);
-
-		switch(playSound)
-		{
-			case 1:
-				StartCoroutine(CowMoo(Random.Range(12, 60)));
-			break;
-			case 2:
-				StartCoroutine(CowMoo(Random.Range(16, 60)));
-			break;
-			case 3:
-				StartCoroutine(CowMoo(Random.Range(20, 60)));
-			break;
-			case 4:
-				StartCoroutine(CowMoo(Random.Range(24, 60)));
-			break;
-			case 5:
-				StartCoroutine(CowMoo(Random.Range(28, 60)));
-			break;
-		}
+        GetComponent<AudioSource>().PlayOneShot(cowSound, 0.9f);
 
         targetDestination = new Vector3(transform.position.x + Random.Range(-10, 10), 0f, transform.position.z + Random.Range(-10, 10));
         targetDestination.y = Terrain.activeTerrain.SampleHeight(targetDestination);
@@ -134,19 +104,32 @@ public class CowController : MonoBehaviour
         state = "moving";
     }
 
-    public void MoveTo(Vector3 targetDestinationInput)
+    public void MoveTo(Vector3 newDestination)
     {
-        if (Vector3.Distance(transform.position, targetDestinationInput) < 2)
+        targetDestination = newDestination;
+        state = "moving";
+        idleRunning = false;
+    }
+
+    public void Moving()
+    {
+        if (Vector3.Distance(transform.position, targetDestination) < 1)
         {
             state = "idle";
         }
-        else if (targetDestinationInput != Vector3.zero)
+        else if (targetDestination != Vector3.zero)
         {
+
+            if (!Physics.Raycast(transform.position, (transform.position - targetDestination).normalized, 3))
+            {
+                transform.position += transform.forward * speed * Time.deltaTime;
+            }
+
             anim.Play("walk");
             Quaternion lookRotation;
             Vector3 direction;
 
-            direction = (targetDestinationInput - transform.position).normalized;
+            direction = (targetDestination - transform.position).normalized;
             lookRotation = Quaternion.LookRotation(direction);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
@@ -154,7 +137,7 @@ public class CowController : MonoBehaviour
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
             yVec.y += 1;
 
-            if (!Physics.Raycast(transform.position, transform.forward, 2))
+            if (!Physics.Raycast(transform.position, transform.forward, 3))
             {
                 transform.position += transform.forward * speed * Time.deltaTime;
             }
@@ -165,38 +148,75 @@ public class CowController : MonoBehaviour
         }
     }
 
+
+    Vector3 findPath(Vector3 position,Vector3 targetDestination, int count){
+
+        if (!Physics.Raycast(position, targetDestination, 3))
+        {
+            return targetDestination;
+        }
+        else if (count>5)
+        {
+            targetDestination.y /= 2;
+            targetDestination.x /= 2;
+
+            findPath(position, targetDestination, count);
+            print("New heading" + targetDestination);
+        }
+
+        return Vector3.zero;
+    }
+
     public void Follow(Vector3 goToPosition)
     {
         anim.Play("walk");
         Vector3 targetPosition = goToPosition;
 
-        targetPosition += player.transform.forward * 7;
+        targetPosition += playerGO.transform.forward * 7;
         targetPosition.y = transform.position.y;
         transform.LookAt(targetPosition);
         transform.position += transform.forward * 4 * Time.deltaTime;
 
         if (Vector3.Distance(transform.position, targetPosition) < 1)
         {
-            transform.LookAt(player.transform);
+            transform.LookAt(playerGO.transform);
             state = "lookingAtPlayer";
         }
     }
 
+    public Vector3 ReturnPosition()
+    {
+        return this.gameObject.transform.position;
+    }
+
     void OnMouseDown()
     {
+
+        Vector3 position;
+        Vector3 target;
+
+        joyStick.gameObject.SetActive(false);
 		if (inMart)
 			return;
 
         state = "following";
 
         movement.lookAt(this.gameObject);
-		userInterface = GameObject.FindGameObjectWithTag("UI").GetComponent<UIFarm>();
-		cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
-		cameraControl.lookAt(this.gameObject);
+   
+        position =  playerGO.transform.position - transform.position;
+        position = position.normalized * 6;
+        target = position;
+        position += playerGO.transform.position;
+        target = playerGO.transform.position - target;
+        position.y = transform.position.y + 6;
+ 
+        findPath(transform.position, (transform.position - playerGO.transform.position).normalized, 0);
 
-		//Finds the cow with the same instance Id as the parent gameobject
-		userInterface.cow = GameController.game.cows.Find(cow => cow.gameObjectID == this.gameObject.GetInstanceID());
+        cameraControl.MoveToLookAt(position, target);
+
+        userInterface.cow = cow;
 		userInterface.cowGameObject = this.gameObject;
+
 
 		if(userInterface.cowGameObject == null)
 			Debug.Log ("User Interface is null!");
@@ -221,11 +241,4 @@ public class CowController : MonoBehaviour
                 break;
         }
     }
-
-	IEnumerator CowMoo(float seconds)
-	{
-		yield return new WaitForSeconds(seconds);
-
-		GetComponent<AudioSource>().PlayOneShot(cowSound, Random.Range(0.4f, 0.7f));
-	}
 }

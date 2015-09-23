@@ -14,6 +14,21 @@ public class CreateScrollList : GameController
 
 	void Start () 
 	{
+        game = this;
+        if (!loadPlayer)
+        {
+            game.player.name = playerName;
+            game.player.cash = 50000;
+            game.player.grain = 0;
+            game.player.hay = 0;
+            game.player.pellet = 0;
+        }
+        else
+        {
+            Load();
+            loadPlayer = false;
+        }
+
 		PopulateList();
 	}
 
