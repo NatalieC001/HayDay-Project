@@ -8,17 +8,15 @@ public class Movement : MonoBehaviour
     public float rotationDamping = 20f;
     public float Speed = 0.1f;
     public int gravity = 20;
+	public GameObject currentFocus;
+	public AudioClip moveSound;
+	public static bool freeRoam;
 
     float moveSpeed;
     CharacterController controller;
     Animator animator;
-
-    public GameObject currentFocus;
-	public AudioClip moveSound;
-
 	AudioSource audioSource;
-
-    public static bool freeRoam;
+	string currScene;
 
     void Start()
     {
@@ -26,12 +24,21 @@ public class Movement : MonoBehaviour
         controller = (CharacterController)GetComponent(typeof(CharacterController));
         animator = GetComponent<Animator>();
 		audioSource = GetComponent<AudioSource>();
+		currScene = Application.loadedLevelName;
     }
 
     public float UpdateMovement()
     {
+		Vector3 inputVec = new Vector3();
+
         VCAnalogJoystickBase joy = VCAnalogJoystickBase.GetInstance("stick");
-        Vector3 inputVec = new Vector3(joy.AxisY, 0, -joy.AxisX);
+
+		if(currScene.Equals("Farm"))
+        	inputVec = new Vector3(joy.AxisY, 0, -joy.AxisX);
+
+		if(currScene.Equals("Mart"))
+			inputVec = new Vector3(joy.AxisX, 0, joy.AxisY);
+
         inputVec *= Speed;
 
 		if((inputVec.z != 0 || inputVec.x != 0))

@@ -46,24 +46,49 @@ public class UIFarm : GameController
 	public Color foregroundColor = new Color(0.2f, 0.3f, 0.4f, 0.5f);
 
 	public Image[] bars = new Image[2];
-
 	public GameObject AudioObject;
-
 	public AudioClip buttonSound;
+	public Cow cow;
 
 	Rect windowRect;
 	bool isLoading = false;
     CameraController cameraControl;
     VCAnalogJoystickBase joyStick;
-    public Cow cow;
+
+	Vector2 farmTopLeft = new Vector2(80.2f, 245.1f);
+	Vector2 farmBottomRight = new Vector2(141.2f, 214.2f);
+	
     void Start()
     {
+		if (!init) {
+			game = this;
+			print ("init");
+			game.player.name = playerName;
+			game.player.cash = 50000;
+			game.player.grain = 0;
+			game.player.hay = 0;
+			game.player.pellet = 0;
+			init = true;
+		}
+
 		bars = GetComponentsInChildren<Image>();
 		healthBar = bars[0];
 		happinessBar = bars[1];
         cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         joyStick = GameObject.FindGameObjectWithTag("JoyStick").GetComponent<VCAnalogJoystickBase>();
-      
+
+		if(newGame)
+		{
+			Cow cow = CowMaker.GenerateCow();
+			CowMaker.SpawnCow(cow,farmTopLeft, farmBottomRight);
+			game.cows.Add(cow);
+			newGame = false;
+		}
+		else 
+		{
+			foreach (Cow cow in game.cows)
+				CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight);	
+		}
     }
 
     void OnGUI()
@@ -122,9 +147,6 @@ public class UIFarm : GameController
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 			playerUI = false;
 			buySuppliesUI = true;
-
-			cow = CowMaker.GenerateCow();
-            CowMaker.SpawnCow(cow, new Vector2(55f, 105f), new Vector2(220f, 265f));
 		}
     }
 
@@ -207,13 +229,25 @@ public class UIFarm : GameController
 		if (GUI.Button(new Rect(535, 30, 50, 50), "", buttonX))
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-            joyStick.gameObject.SetActive(true);
+       
             cameraControl.FollowPlayer();
-			playerUI = true;
 			cowUI = false;
-			Movement.freeRoam = true;
+			StartCoroutine(waitForCamera());
+			SetHealth(0);
+			SetHappiness(0);
 		}
     }
+
+    IEnumerator waitForCamera()
+	{
+		while(cameraControl.transitioning)
+		{
+			yield return new WaitForSeconds(0.2f);
+		}
+		joyStick.gameObject.SetActive(true);
+		Movement.freeRoam = true;
+	}
+
 
 	void CowMoreInfo(int windowID)
 	{
@@ -341,27 +375,21 @@ public class UIFarm : GameController
 
 
 		if(!isLoading)
-			if (GUI.Button(new Rect(30, 31, 130, 48), "", buttonMart))
+			if (GUI.Button(new Rect(50, 32, 270, 50), "", buttonMainMenu))
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-				isLoading = true;
-				StartCoroutine(WaitFor(4));
-			}
-
-		if(!isLoading)
-			if (GUI.Button(new Rect(205, 30, 270, 50), "", buttonMainMenu))
-			{
-				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
+				Save();
 				isLoading = true;
 				StartCoroutine(WaitFor(0));
 			}
-
+		
 		if(!isLoading)
-			if (GUI.Button(new Rect(530, 30, 50, 50), "", buttonX))
+			if (GUI.Button(new Rect(410, 34, 130, 48), "", buttonMart))
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-				sceneTransitionUI = false;
-				playerUI = true;
+				Save();
+				isLoading = true;
+				StartCoroutine(WaitFor(4));
 			}
 	}
 

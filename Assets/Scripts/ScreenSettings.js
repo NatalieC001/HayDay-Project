@@ -1,6 +1,6 @@
 ﻿#pragma strict
 
-function OnPreRender () 
+/*function OnPreRender () 
 {
-    Screen.orientation = ScreenOrientation.LandscapeLeft;
-}
+    //Screen.orientation = ScreenOrientation.LandscapeLeft;
+}*/

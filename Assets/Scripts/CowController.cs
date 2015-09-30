@@ -5,7 +5,7 @@ using System.Collections;
 public class CowController : GameController
 {
     public Cow cow;
-	new GameObject playerGO;
+    GameObject playerGO;
     Animation anim;
     CameraController cameraControl;
     UIFarm userInterface;
@@ -43,7 +43,7 @@ public class CowController : GameController
     
     void Update()
     {
-        print(state);
+ 
         switch (state)
         {
             case "moving":
@@ -92,17 +92,36 @@ public class CowController : GameController
         idleRunning = false;
     }
 
-    public void Wander()
-    {
-        anim.Play("walk");
-
-        GetComponent<AudioSource>().PlayOneShot(cowSound, 0.9f);
-
-        targetDestination = new Vector3(transform.position.x + Random.Range(-10, 10), 0f, transform.position.z + Random.Range(-10, 10));
-        targetDestination.y = Terrain.activeTerrain.SampleHeight(targetDestination);
+	public void Wander()
+	{
+		anim.Play("walk");
 		
-        state = "moving";
-    }
+		int playSound = Random.Range (1, 5);
+		
+		switch(playSound)
+		{
+		case 1:
+			StartCoroutine(CowMoo(Random.Range(12, 60)));
+			break;
+		case 2:
+			StartCoroutine(CowMoo(Random.Range(16, 60)));
+			break;
+		case 3:
+			StartCoroutine(CowMoo(Random.Range(20, 60)));
+			break;
+		case 4:
+			StartCoroutine(CowMoo(Random.Range(24, 60)));
+			break;
+		case 5:
+			StartCoroutine(CowMoo(Random.Range(28, 60)));
+			break;
+		}
+		
+		targetDestination = new Vector3(transform.position.x + Random.Range(-10, 10), 0f, transform.position.z + Random.Range(-10, 10));
+		targetDestination.y = Terrain.activeTerrain.SampleHeight(targetDestination);
+		
+		state = "moving";
+	}
 
     public void MoveTo(Vector3 newDestination)
     {
@@ -119,7 +138,6 @@ public class CowController : GameController
         }
         else if (targetDestination != Vector3.zero)
         {
-
             if (!Physics.Raycast(transform.position, (transform.position - targetDestination).normalized, 3))
             {
                 transform.position += transform.forward * speed * Time.deltaTime;
@@ -148,7 +166,6 @@ public class CowController : GameController
         }
     }
 
-
     Vector3 findPath(Vector3 position,Vector3 targetDestination, int count){
 
         if (!Physics.Raycast(position, targetDestination, 3))
@@ -161,7 +178,7 @@ public class CowController : GameController
             targetDestination.x /= 2;
 
             findPath(position, targetDestination, count);
-            print("New heading" + targetDestination);
+  
         }
 
         return Vector3.zero;
@@ -191,7 +208,6 @@ public class CowController : GameController
 
     void OnMouseDown()
     {
-
         Vector3 position;
         Vector3 target;
 
@@ -211,13 +227,12 @@ public class CowController : GameController
         position.y = transform.position.y + 6;
  
         findPath(transform.position, (transform.position - playerGO.transform.position).normalized, 0);
-
+		//target.y = transform.position.y;
         cameraControl.MoveToLookAt(position, target);
 
         userInterface.cow = cow;
 		userInterface.cowGameObject = this.gameObject;
-
-
+		
 		if(userInterface.cowGameObject == null)
 			Debug.Log ("User Interface is null!");
 
@@ -241,4 +256,11 @@ public class CowController : GameController
                 break;
         }
     }
+
+	IEnumerator CowMoo(float seconds)
+	{
+		yield return new WaitForSeconds(seconds);
+		
+		GetComponent<AudioSource>().PlayOneShot(cowSound, Random.Range(0.3f, 0.5f));
+	}
 }

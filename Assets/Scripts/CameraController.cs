@@ -4,26 +4,20 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 
     public float speed = 10;
+	public bool watchPlayer;
+	public bool followPlayer;
+	public GameObject player;
 
     float startTime;
     float journeyLength;
 
-
-    public GameObject player;
     Vector3 difVec;
-
-
     Vector3 startingAngle;
     Vector3 endingAngle;
-
     Vector3 startPositon;
     Vector3 endPosition;
 
-    public bool watchPlayer;
-    public bool followPlayer;
-    bool transitioning;
-
-
+	public bool transitioning;
 
     void Start()
     {
@@ -32,6 +26,7 @@ public class CameraController : MonoBehaviour {
         difVec = transform.position - player.transform.position;
         startPositon = transform.position;
     }
+
     public void MoveToLookAt(Vector3 positon, Vector3 target)
     {
         startTime = Time.time;
@@ -41,7 +36,8 @@ public class CameraController : MonoBehaviour {
         startingAngle = transform.forward;
 
         endPosition = positon;
-        endingAngle = target - positon;
+        endingAngle = (target - positon).normalized;
+
         transitioning = true;
         watchPlayer = false;
         followPlayer = false;
@@ -50,7 +46,6 @@ public class CameraController : MonoBehaviour {
     public void WatchPlayer()
     {
         MoveToLookAt(startPositon, player.transform.position);
-
         watchPlayer = true;
     }
 
@@ -78,21 +73,14 @@ public class CameraController : MonoBehaviour {
                 transform.forward = Vector3.Slerp(startingAngle, endingAngle, 1);
                 transitioning = false;
             }
-
         }
         else if (watchPlayer)
         {
-
             transform.LookAt(player.transform.position);
-
-
         }
         else if (followPlayer)
         {
-
-
             transform.position = player.transform.position + difVec;
         }
-
     }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -14,20 +14,25 @@ public class GameController : MonoBehaviour
 
 	public GameObject cowGameObject;
 
-	public static bool loadPlayer = false;
-
+	public static bool init;
+	public static bool loadPlayer;
+	public static bool newGame = false;
+	
     void Start()
     {
-        game = this;
-        game.player.name = playerName;
-        game.player.cash = 50000;
-        game.player.grain = 0;
-        game.player.hay = 0;
-        game.player.pellet = 0;
+		if (!init) {
+			game = this;
+			print ("init");
+			game.player.name = playerName;
+			game.player.cash = 50000;
+			game.player.grain = 0;
+			game.player.hay = 0;
+			game.player.pellet = 0;
+			init = true;
+		} 
 
-		if(loadPlayer)
-		{
-			Load();
+		if (loadPlayer) {	
+			Load ();
 			loadPlayer = false;
 		}
     }
@@ -36,11 +41,6 @@ public class GameController : MonoBehaviour
     {
         Save();
     }
-
-	void OnDisable()
-	{
-		Save();
-	}
 
 	void Update()
 	{
@@ -71,6 +71,8 @@ public class GameController : MonoBehaviour
             file = File.Open(Application.persistentDataPath + "/farm.dat", FileMode.OpenOrCreate);
 			bf.Serialize(file, game.farm);
             file.Close();
+
+			print ("Save cows in list: " + game.cows.Count);
         }
         catch (UnityException e)
         {
@@ -108,12 +110,9 @@ public class GameController : MonoBehaviour
 
 			game.player = player;
 			game.cows = cows;
-			game.farm = farm;
+			game.farm = farm;  
 
-            foreach (Cow cow in game.cows)
-			{
-                CowMaker.SpawnCow(cow, new Vector2(55f, 105f), new Vector2(220f, 265f));
-			}
+			print ("Load cows in list: " + game.cows.Count);
         }
         catch (UnityException e)
         {
@@ -146,8 +145,7 @@ public class GameController : MonoBehaviour
         public bool gender { get; set; }
         public int weight { get; set; }
         public int estimatedValue { get; set; }
-
-
+		
         public Cow(string name, int age, string breed, int happiness, int health, bool pregnant, bool gender, int weight)
         {
             this.name = name;
@@ -174,11 +172,8 @@ public class GameController : MonoBehaviour
                 ownedByPlayer = false;
             }
         }
-
-
     }
 
-  
 	IEnumerator WaitFor(int level) 
 	{
 		yield return new WaitForSeconds(1.0f);

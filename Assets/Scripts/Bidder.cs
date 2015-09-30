@@ -3,14 +3,12 @@ using System.Collections;
 
 public class Bidder : GameController
 {
-
     protected float cash;
     protected float interest;
     protected float desiredPrice;
     protected float bidStartTime;
     protected float bidWaitTime;
     protected bool bid;
-
 
     void Start()
     {
@@ -29,7 +27,6 @@ public class Bidder : GameController
 
     public void CondisderBidding(Cow cow, int currentPrice)
     {
-
         if (currentPrice> cash)
         {
             return;
@@ -42,15 +39,12 @@ public class Bidder : GameController
         switch (cow.breed)
         {
             case "Angus":
-              
                 interest = 1f;
                 break;
             case "Brangus":
-            
                 interest = .5f;
                 break;
             case "Charolais":
-              
                 interest = .75f;
                 break;
             case "Hereford":
@@ -58,21 +52,19 @@ public class Bidder : GameController
                 break;
             case "Holstein Friesian":
                 interest = .65f;
-             
                 break;
             case "Shorthorn":
                 interest = .35f;
                 break;
         }
-
-
+		
         bidWaitTime *= interest;
+
         if (desiredPrice < cash)
         {
             print("I want to bid");
             bid = true;            
         }
-
     }
 
     public void stopBidding()
@@ -80,13 +72,11 @@ public class Bidder : GameController
         bid = false;
     }
 
-
     public class MoneyBags : Bidder
     {
         //void Start()
         //{
            // cash = 500000;
        // }
-	
     }
 }

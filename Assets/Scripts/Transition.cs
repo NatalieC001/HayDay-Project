@@ -19,7 +19,13 @@ public class Transition : MonoBehaviour
 	{
 		userInterface.playerUI = false;
 		userInterface.cowUI = false;
-		userInterface.loadSaveUI = false;
 		userInterface.sceneTransitionUI = true;
+	}
+
+	void OnTriggerExit(Collider other)
+	{
+		userInterface.playerUI = false;
+		userInterface.cowUI = false;
+		userInterface.sceneTransitionUI = false;
 	}
 }
