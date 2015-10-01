@@ -54,41 +54,14 @@ public class UIFarm : GameController
 	bool isLoading = false;
     CameraController cameraControl;
     VCAnalogJoystickBase joyStick;
-
-	Vector2 farmTopLeft = new Vector2(80.2f, 245.1f);
-	Vector2 farmBottomRight = new Vector2(141.2f, 214.2f);
 	
     void Start()
     {
-		if (!init) {
-			game = this;
-			print ("init");
-			game.player.name = playerName;
-			game.player.cash = 50000;
-			game.player.grain = 0;
-			game.player.hay = 0;
-			game.player.pellet = 0;
-			init = true;
-		}
-
 		bars = GetComponentsInChildren<Image>();
 		healthBar = bars[0];
 		happinessBar = bars[1];
         cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         joyStick = GameObject.FindGameObjectWithTag("JoyStick").GetComponent<VCAnalogJoystickBase>();
-
-		if(newGame)
-		{
-			Cow cow = CowMaker.GenerateCow();
-			CowMaker.SpawnCow(cow,farmTopLeft, farmBottomRight);
-			game.cows.Add(cow);
-			newGame = false;
-		}
-		else 
-		{
-			foreach (Cow cow in game.cows)
-				CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight);	
-		}
     }
 
     void OnGUI()

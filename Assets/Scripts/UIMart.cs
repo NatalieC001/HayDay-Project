@@ -84,17 +84,6 @@ public class UIMart : GameController
 
     void Start()
     {
-		if (!init) {
-			game = this;
-			print ("init");
-			game.player.name = playerName;
-			game.player.cash = 50000;
-			game.player.grain = 0;
-			game.player.hay = 0;
-			game.player.pellet = 0;
-			init = true;
-		}
-
 		print(" cows count " + game.cows.Count);
 
 		bars = GetComponentsInChildren<Image>();
@@ -149,8 +138,6 @@ public class UIMart : GameController
             print(bid + " bid!");
             currentCowBid = (int)bid;
             lastBidder = bidder;
-            
-               
             endBiddingRound();
             StartNewRound();
         }
@@ -230,31 +217,6 @@ public class UIMart : GameController
 		
 		if(cowMenuUI)
 		{
-			/*if(Screen.width < 900)
-				windowRect = new Rect(Screen.width * .54f, Screen.height - 475f, 350, 450);
-
-			if(Screen.width > 900)
-				windowRect = new Rect(Screen.width * .57f, Screen.height - 490f, 350, 450);
-
-			if(Screen.width > 1000)
-				windowRect = new Rect(Screen.width * .6f, Screen.height - 505f, 350, 450);
-
-			if(Screen.width > 1100)
-				windowRect = new Rect(Screen.width * .64f, Screen.height - 520f, 350, 450);
-
-			if(Screen.width > 1200)
-				windowRect = new Rect(Screen.width * .67f, Screen.height - 535f, 350, 450);
-
-			if(Screen.width > 1300)
-				windowRect = new Rect(Screen.width * .7f, Screen.height - 550f, 350, 450);
-
-			if(Screen.width > 1400)
-				windowRect = new Rect(Screen.width * .74f, Screen.height - 565f, 350, 450);
-
-			if(Screen.width > 1500)
-				windowRect = new Rect(Screen.width * .77f, Screen.height - 580f, 350, 450);*/
-			
-			
 			windowRect = new Rect(Screen.width * .29f, Screen.height - 150f, 620, 100);
 			windowRect = GUI.Window(0, windowRect, Menu, "Menu");
 		}
@@ -331,72 +293,36 @@ public class UIMart : GameController
 		SetHealth(0f);
 		SetHappiness(0f);
 
-		/*if(isLoading)
-			GUI.Label(new Rect(45, 200, 270, 50), "", labelLoading);
-
-		if(!isLoading)
-			if (GUI.Button (new Rect (30, 50, 290, 52), "", buttonMainMenu))
-			{	
-				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-				isLoading = true;
-				StartCoroutine(WaitFor(0));
-			}
-
-		if(!isLoading)
-			if (GUI.Button (new Rect (105, 150, 140, 60), "", buttonBuy))
-			{	
-				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-				cowMenuUI = false;
-				cowBuyBidUI = true;
-			}
-
-		if(!isLoading)
-			if (GUI.Button (new Rect (105, 250, 140, 50), "", buttonSell))
-			{	
-				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-				cowMenuUI = false;
-				cowSellBidUI = true;
-				cowList.SetActive (true);
-			}
-
-		if(!isLoading)
-			if (GUI.Button (new Rect (85, 350, 175, 50), "", buttonFarm))
-			{	
-				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-				isLoading = true;
-				StartCoroutine(WaitFor(3));
-			}*/
-		
 		if(isLoading)
 			GUI.Label(new Rect(200, 32, 270, 50), "", labelLoading);
 		
 		if(!isLoading)
 			if (GUI.Button(new Rect(45, 35, 115, 55), "", buttonBuy))
-		{
-			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			cowMenuUI = false;
-			cowBuyBidUI = true;
-			LookAtRing();
-		}
+			{
+				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
+				cowMenuUI = false;
+				cowBuyBidUI = true;
+				LookAtRing();
+			}
 		
 		if(!isLoading)
 			if (GUI.Button(new Rect(220, 35, 115, 45), "", buttonSell))
-		{
-			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			cowMenuUI = false;
-			cowSellBidUI = true;
-			cowList.SetActive (true);
-			LookAtRing();
-		}
+			{
+				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
+				cowMenuUI = false;
+				cowSellBidUI = true;
+				cowList.SetActive (true);
+				LookAtRing();
+			}
 		
 		if(!isLoading)
 			if (GUI.Button (new Rect (400, 35, 160, 42), "", buttonFarm))
-		{	
-			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			Save();
-			isLoading = true;
-			StartCoroutine(WaitFor(3));
-		}
+			{	
+				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
+				Save();
+				isLoading = true;
+				StartCoroutine(WaitFor(3));
+			}
 	}
 
 	void CowBuyBid(int windowID)

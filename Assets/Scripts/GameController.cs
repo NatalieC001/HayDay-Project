@@ -16,11 +16,17 @@ public class GameController : MonoBehaviour
 
 	public static bool init;
 	public static bool loadPlayer;
-	public static bool newGame = false;
+	public static bool newGame;
+
+	string currScene;
+
+	Vector2 farmTopLeft = new Vector2(80.2f, 245.1f);
+	Vector2 farmBottomRight = new Vector2(141.2f, 214.2f);
 	
     void Start()
     {
-		if (!init) {
+		if (!init) 
+		{
 			game = this;
 			print ("init");
 			game.player.name = playerName;
@@ -29,11 +35,27 @@ public class GameController : MonoBehaviour
 			game.player.hay = 0;
 			game.player.pellet = 0;
 			init = true;
-		} 
+		}
 
-		if (loadPlayer) {	
+		currScene = Application.loadedLevelName;
+
+		if (loadPlayer) 
+		{
 			Load ();
 			loadPlayer = false;
+
+			if(currScene.Equals("Farm"))
+			{
+				foreach (Cow cow in game.cows)
+					CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight);	
+			}
+		}
+		else if(newGame)
+		{
+			Cow cow = CowMaker.GenerateCow();
+			CowMaker.SpawnCow(cow,farmTopLeft, farmBottomRight);
+			game.cows.Add(cow);
+			newGame = false;
 		}
     }
 
@@ -160,9 +182,7 @@ public class GameController : MonoBehaviour
 
         public void Buy()
         {
-
             ownedByPlayer = true;
-
         }
 
         public void Sell()

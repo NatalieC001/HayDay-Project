@@ -22,7 +22,6 @@ public class CameraController : MonoBehaviour {
     void Start()
     {
         player = GameObject.Find("Player");
-
         difVec = transform.position - player.transform.position;
         startPositon = transform.position;
     }

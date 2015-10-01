@@ -74,9 +74,5 @@ public class Bidder : GameController
 
     public class MoneyBags : Bidder
     {
-        //void Start()
-        //{
-           // cash = 500000;
-       // }
     }
 }

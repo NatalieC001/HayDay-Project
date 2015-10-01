@@ -176,9 +176,7 @@ public class CowController : GameController
         {
             targetDestination.y /= 2;
             targetDestination.x /= 2;
-
             findPath(position, targetDestination, count);
-  
         }
 
         return Vector3.zero;
@@ -198,6 +196,7 @@ public class CowController : GameController
         {
             transform.LookAt(playerGO.transform);
             state = "lookingAtPlayer";
+			StartCoroutine(WaitFor(20f, 1));
         }
     }
 
@@ -253,6 +252,7 @@ public class CowController : GameController
                 state = "idle";
                 break;
             case 1:
+				state = "wander";
                 break;
         }
     }

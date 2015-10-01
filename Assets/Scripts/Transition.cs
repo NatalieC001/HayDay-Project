@@ -17,15 +17,21 @@ public class Transition : MonoBehaviour
 
 	void OnTriggerEnter(Collider other) 
 	{
-		userInterface.playerUI = false;
-		userInterface.cowUI = false;
-		userInterface.sceneTransitionUI = true;
+		if (other.gameObject.name.Equals ("Player"))
+		{
+			userInterface.playerUI = false;
+			userInterface.cowUI = false;
+			userInterface.sceneTransitionUI = true;
+		}
 	}
 
 	void OnTriggerExit(Collider other)
 	{
-		userInterface.playerUI = false;
-		userInterface.cowUI = false;
-		userInterface.sceneTransitionUI = false;
+		if (other.gameObject.name.Equals ("Player"))
+		{
+			userInterface.playerUI = false;
+			userInterface.cowUI = false;
+			userInterface.sceneTransitionUI = false;
+		}
 	}
 }

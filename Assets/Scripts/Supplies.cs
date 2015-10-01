@@ -17,17 +17,23 @@ public class Supplies : MonoBehaviour
 
 	void OnTriggerEnter(Collider other) 
 	{
-		userInterface.playerUI = true;
-		userInterface.cowUI = false;
-		userInterface.sceneTransitionUI = false;
-		userInterface.buySuppliesUI = false;
+		if (other.gameObject.name.Equals ("Player"))
+		{
+			userInterface.playerUI = true;
+			userInterface.cowUI = false;
+			userInterface.sceneTransitionUI = false;
+			userInterface.buySuppliesUI = false;
+		}
 	}
 
 	void OnTriggerExit(Collider other)
 	{
-		userInterface.playerUI = false;
-		userInterface.cowUI = false;
-		userInterface.sceneTransitionUI = false;
-		userInterface.buySuppliesUI = false;
+		if (other.gameObject.name.Equals ("Player"))
+		{
+			userInterface.playerUI = false;
+			userInterface.cowUI = false;
+			userInterface.sceneTransitionUI = false;
+			userInterface.buySuppliesUI = false;
+		}
 	}
 }

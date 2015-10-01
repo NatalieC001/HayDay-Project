@@ -32,6 +32,7 @@ public class PlayerNameMenu : MonoBehaviour
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				GameController.playerName = playerName;
 				GameController.newGame = true;
+				GameController.init = false;
 				StartCoroutine(WaitFor(3));	// Load farm scene
 				backgroundTexture = backgroundLoading;
 			}
