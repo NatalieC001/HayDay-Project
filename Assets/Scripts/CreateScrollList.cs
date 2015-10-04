@@ -10,14 +10,29 @@ public class CreateScrollList : GameController
 	public Transform contentPanel;
 	public Sprite icon;
 
+    public static List<GameObject> cowButtons = new List<GameObject>();
+
 	public static int cowIndex = 0;
+	public static CreateScrollList access;
 
 	void Start () 
 	{
+        if (!init)
+        {
+            game = this;
+            game.player.name = playerName;
+            game.player.cash = 50000;
+            game.player.grain = 0;
+            game.player.hay = 0;
+            game.player.pellet = 0;
+            init = true;
+        }
+
+		access = this;
 		PopulateList();
 	}
 
-	void PopulateList()
+	public void PopulateList()
 	{
 		int count = 0;
 
@@ -30,6 +45,7 @@ public class CreateScrollList : GameController
 			genButton.name = "" + count;
 			genButton.imageIcon.sprite = icon;
 			genButton.transform.SetParent(contentPanel);
+            cowButtons.Add(newButton);
 		}
 	}
 
@@ -38,5 +54,18 @@ public class CreateScrollList : GameController
 		UIMart.cowSelected = true;
 		UIMart.cowIndex = (int.Parse(buttonName) - 1);
 		UIMart.cowList.SetActive (false);
+	}
+
+    public static void RemoveCowButton(int index)
+    {
+        Destroy(cowButtons[index]);
+        cowButtons.RemoveAt(index);
+    }
+
+	public static void RemoveAllButtons()
+	{
+		for(int i = 0; i < cowButtons.Count; i++)
+			Destroy(cowButtons[i]);
+		cowButtons.Clear();
 	}
 }

@@ -18,10 +18,6 @@ public class MainMenu : MonoBehaviour
 	bool isLoading = false;
 	Texture backgroundTemp;
 
-	void Start()
-	{
-	}
-
 	void OnGUI()
 	{
 		GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroundTexture);
@@ -30,13 +26,16 @@ public class MainMenu : MonoBehaviour
 			GUI.Label (new Rect (Screen.width * .23f, Screen.height * (buttonPadding - .225f), Screen.width * .58f, Screen.height * .16f), "", labelGameTitle);
 
 		if(!isLoading)
+		{
 			if (GUI.Button (new Rect (Screen.width * .28f, Screen.height * (buttonPadding * 0.8f), Screen.width * .45f, Screen.height * .15f), "", buttonNewStyle)) 
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				StartCoroutine(WaitFor(2));	// Load player name scene
 			}
+		}
 
 		if(!isLoading)
+		{
 			if (GUI.Button (new Rect (Screen.width * .28f, Screen.height * (buttonPadding * 1.64f), Screen.width * .45f, Screen.height * .15f), "", buttonLoadStyle)) 
 			{	
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
@@ -60,20 +59,25 @@ public class MainMenu : MonoBehaviour
 					backgroundTexture = backgroundNoGame;
 				}
 			}
+		}
 
 		if(!isLoading)
+		{
 			if (GUI.Button (new Rect (Screen.width * .37f, Screen.height * (buttonPadding * 2.49f), Screen.width * .25f, Screen.height * .16f), "", buttonHelpStyle)) 
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				StartCoroutine(WaitFor(1));	// Load a help menu, info on game
 			}
+		}
 
 		if(!isLoading)
+		{
 			if (GUI.Button (new Rect (Screen.width * .37f, Screen.height * (buttonPadding * 3.28f), Screen.width * .25f, Screen.height * .14f), "", buttonExitStyle)) 
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				StartCoroutine(WaitFor(10));	// Exit game
 			}
+		}
 	}
 
 	void Update() 

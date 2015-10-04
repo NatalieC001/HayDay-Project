@@ -13,10 +13,6 @@ public class Help : MonoBehaviour
 
 	bool isLoading = false;
 
-	void Start()
-	{
-	}
-
 	void OnGUI()
 	{
 		GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroundTexture);
@@ -28,11 +24,13 @@ public class Help : MonoBehaviour
 			GUI.Label (new Rect (Screen.width * .23f, Screen.height * (buttonPadding - .225f), Screen.width * .58f, Screen.height * .16f), "", labelGameTitle);
 
 		if(!isLoading)
+		{
 			if (GUI.Button (new Rect (Screen.width * .035f, Screen.height * .79f, Screen.width * .240f, Screen.height * .145f), "", buttonBackStyle)) 
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				StartCoroutine(WaitFor(0));	// Exit game
 			}
+		}
 	}
 
 	void Update() 

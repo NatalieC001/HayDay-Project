@@ -29,7 +29,7 @@ public class UIFarm : GameController
 	public GUIStyle labelAge;
 	public GUIStyle labelBreed;
 	public GUIStyle labelHappiness;
-	public GUIStyle labelHealth;
+	public GUIStyle labelHealth; 
 	public GUIStyle labelPregnant;
 	public GUIStyle labelGender;
 	public GUIStyle labelWeight;
@@ -54,14 +54,49 @@ public class UIFarm : GameController
 	bool isLoading = false;
     CameraController cameraControl;
     VCAnalogJoystickBase joyStick;
+
+	Vector2 farmTopLeft = new Vector2(102f, 261f);
+	Vector2 farmBottomRight = new Vector2(57.2f, 242.2f);
 	
     void Start()
     {
+		if (!init) 
+		{
+			game = this;
+			game.player.name = playerName;
+			game.player.cash = 50000;
+			game.player.grain = 0;
+			game.player.hay = 0;
+			game.player.pellet = 0;
+			init = true;
+		}
+
 		bars = GetComponentsInChildren<Image>();
 		healthBar = bars[0];
 		happinessBar = bars[1];
         cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         joyStick = GameObject.FindGameObjectWithTag("JoyStick").GetComponent<VCAnalogJoystickBase>();
+
+		if(newGame)
+		{
+			for(int i = 0;i < 10; i++)
+			{
+				Cow cow = CowMaker.GenerateCow();
+				CowMaker.SpawnCow(cow,farmTopLeft, farmBottomRight);
+				game.cows.Add(cow);
+			}
+
+			newGame = false;
+		}
+		else 
+		{
+			if(GameController.loadPlayer)
+			{
+				Load();
+				foreach (Cow cow in game.cows)
+					CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight);
+			}
+		}
     }
 
     void OnGUI()
@@ -220,8 +255,7 @@ public class UIFarm : GameController
 		joyStick.gameObject.SetActive(true);
 		Movement.freeRoam = true;
 	}
-
-
+	
 	void CowMoreInfo(int windowID)
 	{
 		GUI.contentColor = backgroundColor;
@@ -346,17 +380,19 @@ public class UIFarm : GameController
 		if(isLoading)
 			GUI.Label(new Rect(200, 32, 270, 50), "", labelLoading);
 
-
-		if(!isLoading)
-			if (GUI.Button(new Rect(50, 32, 270, 50), "", buttonMainMenu))
+		if (!isLoading) 
+		{
+			if (GUI.Button (new Rect (50, 32, 270, 50), "", buttonMainMenu)) 
 			{
-				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-				Save();
+				GetComponent<AudioSource> ().PlayOneShot (buttonSound, 0.7f);
+				Save ();
 				isLoading = true;
-				StartCoroutine(WaitFor(0));
+				StartCoroutine (WaitFor (0));
 			}
+		}
 		
 		if(!isLoading)
+		{
 			if (GUI.Button(new Rect(410, 34, 130, 48), "", buttonMart))
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
@@ -364,6 +400,7 @@ public class UIFarm : GameController
 				isLoading = true;
 				StartCoroutine(WaitFor(4));
 			}
+		}
 	}
 
 	void LoadSaveInfo(int windowID)

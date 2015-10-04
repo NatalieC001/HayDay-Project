@@ -12,7 +12,7 @@ public class Bidder : GameController
 
     void Start()
     {
-        cash = 50000;
+        cash = 20000;
     }
 
     void FixedUpdate()
@@ -27,10 +27,8 @@ public class Bidder : GameController
 
     public void CondisderBidding(Cow cow, int currentPrice)
     {
-        if (currentPrice> cash)
-        {
+        if (currentPrice > cash)
             return;
-        }
 
         bidStartTime = Time.time;
         desiredPrice = currentPrice + Random.Range(50, 500);
@@ -62,8 +60,7 @@ public class Bidder : GameController
 
         if (desiredPrice < cash)
         {
-            print("I want to bid");
-            bid = true;            
+            bid = true;
         }
     }
 

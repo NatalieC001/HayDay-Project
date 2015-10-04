@@ -11,7 +11,7 @@ public class CowMaker : GameController
         {
             if (count++ > 100)
             {
-                print("Failed to spawn cow");
+                print("Failed to spawn cow!");
                 return 0;
             }
 
@@ -19,7 +19,7 @@ public class CowMaker : GameController
 
             spawnLocation.y =  Terrain.activeTerrain.SampleHeight(spawnLocation) + 1;
 
-        } while (Physics.CheckSphere(spawnLocation + new Vector3(0, 3.5f, 0), 3));
+        } while (Physics.CheckSphere(spawnLocation + new Vector3(0, 3.5f, 0), 1));
 		
         GameObject cowGameObject = Instantiate(Resources.Load(cow.breed) as GameObject);
         cowGameObject.transform.position = spawnLocation;

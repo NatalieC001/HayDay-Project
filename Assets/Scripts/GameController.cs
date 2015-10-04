@@ -18,8 +18,6 @@ public class GameController : MonoBehaviour
 	public static bool loadPlayer;
 	public static bool newGame;
 
-	string currScene;
-
 	Vector2 farmTopLeft = new Vector2(80.2f, 245.1f);
 	Vector2 farmBottomRight = new Vector2(141.2f, 214.2f);
 	
@@ -28,34 +26,12 @@ public class GameController : MonoBehaviour
 		if (!init) 
 		{
 			game = this;
-			print ("init");
 			game.player.name = playerName;
 			game.player.cash = 50000;
 			game.player.grain = 0;
 			game.player.hay = 0;
 			game.player.pellet = 0;
 			init = true;
-		}
-
-		currScene = Application.loadedLevelName;
-
-		if (loadPlayer) 
-		{
-			Load ();
-			loadPlayer = false;
-
-			if(currScene.Equals("Farm"))
-			{
-				foreach (Cow cow in game.cows)
-					CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight);	
-			}
-		}
-		else if(newGame)
-		{
-			Cow cow = CowMaker.GenerateCow();
-			CowMaker.SpawnCow(cow,farmTopLeft, farmBottomRight);
-			game.cows.Add(cow);
-			newGame = false;
 		}
     }
 
@@ -93,8 +69,6 @@ public class GameController : MonoBehaviour
             file = File.Open(Application.persistentDataPath + "/farm.dat", FileMode.OpenOrCreate);
 			bf.Serialize(file, game.farm);
             file.Close();
-
-			print ("Save cows in list: " + game.cows.Count);
         }
         catch (UnityException e)
         {
@@ -133,8 +107,6 @@ public class GameController : MonoBehaviour
 			game.player = player;
 			game.cows = cows;
 			game.farm = farm;  
-
-			print ("Load cows in list: " + game.cows.Count);
         }
         catch (UnityException e)
         {
