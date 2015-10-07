@@ -17,40 +17,37 @@ public class CowController : GameController
     bool idleRunning;
     bool inMart = false;
 
-    public float speed = 3;
+    public float speed = 6;
     public float rotationSpeed = 50f;
     public string state;
     public AudioClip cowSound;
 
+
+    float width;
+    float heigth; 
     void Start()
     {
+        width = this.gameObject.GetComponent<Collider>().bounds.size.x;
+        heigth = this.gameObject.GetComponent<Collider>().bounds.size.x;
         anim = GetComponent<Animation>();
         userInterface = GameObject.FindGameObjectWithTag("UI").GetComponent<UIFarm>();
         cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         joyStick = GameObject.FindGameObjectWithTag("JoyStick").GetComponent<VCAnalogJoystickBase>();
 
-        if (!(Application.loadedLevelName.Equals("Mart")))
-        {
-            state = "wander";
-            playerGO = GameObject.Find("Player");
-            movement = playerGO.GetComponent<Movement>();
-        }
-        else
-        {
-            //state = "waiting";
-            inMart = true;
-        }
 
-        //Vector3 dest = new Vector3(7.543411f, 4.19f, 47.59f);
-        //MoveTo(dest);
+        playerGO = GameObject.Find("Player");
+        movement = playerGO.GetComponent<Movement>();
+
     }
 
     void Update()
     {
+
         switch (state)
         {
-            case "waiting":               
-                 break;         
+            case "waiting":
+                anim.Play("idle2");
+                break;
             case "moving":
                 Moving();
                 break;
@@ -71,6 +68,8 @@ public class CowController : GameController
             case "following":
                 Follow(playerGO.transform.position);
                 break;
+
+
         }
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
     }
@@ -79,46 +78,24 @@ public class CowController : GameController
     {
         idleRunning = true;
         anim.Play("idle2");
-
         yield return new WaitForSeconds(seconds);
-
-        if (state == "idle" || state == "idle2")
+        if (state == "idle")
         {
             state = "wander";
             idleRunning = false;
         }
     }
 
+
     public void Wait()
     {
         state = "waiting";
-        anim.Play("idle2");
     }
-
     public void Wander()
     {
         anim.Play("walk");
 
-		int playSound = Random.Range (1, 5);
-		
-		switch(playSound)
-		{
-			case 1:
-				StartCoroutine(CowMoo(Random.Range(12, 60)));
-				break;
-			case 2:
-				StartCoroutine(CowMoo(Random.Range(16, 60)));
-				break;
-			case 3:
-				StartCoroutine(CowMoo(Random.Range(20, 60)));
-				break;
-			case 4:
-				StartCoroutine(CowMoo(Random.Range(24, 60)));
-				break;
-			case 5:
-				StartCoroutine(CowMoo(Random.Range(28, 60)));
-				break;
-		}
+        GetComponent<AudioSource>().PlayOneShot(cowSound, 0.9f);
 
         finalDest = new Vector3(transform.position.x + Random.Range(-10, 10), 0f, transform.position.z + Random.Range(-10, 10));
         finalDest.y = Terrain.activeTerrain.SampleHeight(targetDest);
@@ -134,26 +111,42 @@ public class CowController : GameController
         idleRunning = false;
     }
 
-    Vector3 lastDirection;
-    Vector3 oldAngle = Vector3.zero;
 
+
+
+    Vector3 lastDirection;
+
+    Vector3 oldAngle = Vector3.zero;
     Vector3 findPath(Vector3 position, Vector3 direction)
     {
         int angle = (int)(Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg);
         float[] distArray = new float[360];
 
-        RaycastHit hit;
+        RaycastHit hit;   
         Collider rBL;
         Collider rBR;
+
         Physics.Raycast(position, direction, out hit);
-
-        rBL = hit.collider;
-
-        rBR = hit.collider;
-
         float lastDistLeft = hit.distance;
         float lastDistRight = hit.distance;
+
+        Vector3 closestDirection = direction;
+        float smalestDist = Vector3.Distance(hit.point, finalDest);
+
+
+        Vector3 leftSide = transform.position;
+        Vector3 rightSide = transform.position;
+
+        leftSide.z += width / 2;
+        rightSide.z -= width / 2;
+
+        rBL = hit.collider;
+        rBR = hit.collider;
+      
+  
         direction.y = 0;
+
+   
 
         for (int i = 0; i < 180; i++)
         {
@@ -162,69 +155,96 @@ public class CowController : GameController
 
             if (oldAngle == Vector3.zero || Vector3.Distance(oldAngle, direction) > .8)
             {
-                Physics.Raycast(position, direction, out hit);
+                Physics.Raycast(rightSide, direction, out hit);
 
+               // Physics.SphereCast(transform.position, heigth/2 ,direction, out hit);
+                              
                 if (hit.collider != rBL)
                 {
-                    if (hit.distance > lastDistLeft + 5)
-                    {
-                        direction.x = Mathf.Cos((angle + i + 5) * Mathf.Deg2Rad);
+                    if (hit.distance > lastDistLeft + width)
+                    {                          
+                        direction.x = Mathf.Cos((angle + i +5) * Mathf.Deg2Rad);
                         direction.z = Mathf.Sin((angle + i + 5) * Mathf.Deg2Rad);
-                        lastDistLeft += 6;
+                        lastDistLeft += width*2;
+                 
                         oldAngle = -direction;
                         return direction * lastDistLeft;
                     }
                     rBL = hit.collider;
                 }
-
+                          
                 lastDistLeft = hit.distance;
+            }
+
+            if(Vector3.Distance(hit.point,finalDest) < smalestDist)
+            {
+                smalestDist = Vector3.Distance(hit.point, finalDest);
+                closestDirection = direction;
             }
 
             direction.x = Mathf.Cos((angle - i) * Mathf.Deg2Rad);
             direction.y = 0;
             direction.z = Mathf.Sin((angle - i) * Mathf.Deg2Rad);
 
+
             if (oldAngle == Vector3.zero || Vector3.Distance(oldAngle, direction) > .8)
             {
-                Physics.Raycast(position, direction, out hit);
+              // Physics.SphereCast(transform.position, heigth / 2, direction, out hit);
+               Physics.Raycast(leftSide, direction, out hit);
 
                 if (hit.collider != rBR)
                 {
-                    if (hit.distance > lastDistRight + 5)
-                    {
+                    if (hit.distance > lastDistRight + width)
+                    {                    
                         direction.x = Mathf.Cos((angle - i - 5) * Mathf.Deg2Rad);
-                        direction.z = Mathf.Sin((angle - i - 5) * Mathf.Deg2Rad);
-
+                        direction.z = Mathf.Sin((angle - i -5) * Mathf.Deg2Rad);
                         oldAngle = -direction;
-
-                        lastDistRight += 6;
+                        lastDistRight += width * 2;
                         return direction * lastDistRight;
                     }
                     rBR = hit.collider;
                 }
+                
                 lastDistRight = hit.distance;
             }
+
+            if (Vector3.Distance(hit.point, finalDest) < smalestDist)
+            {
+                smalestDist = Vector3.Distance(hit.point, finalDest);
+                closestDirection = direction;
+            }
+
         }
-        return Vector3.zero;
+        return closestDirection * (smalestDist -2);
     }
+
 
     public void Moving()
     {
-		if (inMart)
-		{
-	        if (Physics.Raycast(transform.position, (finalDest - transform.position).normalized, Vector3.Distance(transform.position, finalDest)) || Physics.Raycast(transform.position, transform.forward, 1))
-	        {
-	            targetDest = findPath(transform.position, (finalDest - transform.position).normalized);
-	        }
-		}
 
-		if (finalDest != Vector3.zero)
+        if (Vector3.Distance(transform.position, finalDest) < 2)
+        {
+            state = "idle";
+            return;
+        }
+
+        if (Vector3.Distance(transform.position, targetDest) < 2)
+        {
+            targetDest = finalDest;
+        }
+
+        if (Physics.Raycast(transform.position, (targetDest - transform.position).normalized, Vector3.Distance(transform.position, targetDest)) || Physics.Raycast(transform.position, transform.forward, 2))
+        {
+            targetDest = transform.position + findPath(transform.position, (finalDest - transform.position).normalized);
+        }
+
+        if (targetDest != Vector3.zero)
         {
             anim.Play("walk");
             Quaternion lookRotation;
             Vector3 direction;
 
-			direction = (finalDest - transform.position).normalized;
+            direction = (targetDest - transform.position).normalized;
 
             lookRotation = Quaternion.LookRotation(direction);
 
@@ -234,30 +254,10 @@ public class CowController : GameController
             yVec.y += 1;
 
             transform.position += transform.forward * speed * Time.deltaTime;
+        }
 
-			if (!inMart)
-			{
-				if (!Physics.Raycast(transform.position, transform.forward, 2))
-				{
-					transform.position += transform.forward * speed * Time.deltaTime;
-				}
-				else
-				{
-					state = "idle";
-					anim.Play("idle2");
-				}
-			}
-		}
-
-		if (inMart)
-		{
-			if (Vector3.Distance(transform.position, finalDest) < 1)
-	        {
-	            state = "idle";
-				anim.Play("idle2");
-	        }
-		}
     }
+
 
     public void Follow(Vector3 goToPosition)
     {
@@ -273,7 +273,6 @@ public class CowController : GameController
         {
             transform.LookAt(playerGO.transform);
             state = "lookingAtPlayer";
-			StartCoroutine(WaitFor(20f, 1));
         }
     }
 
@@ -307,7 +306,8 @@ public class CowController : GameController
 
         userInterface.cow = cow;
         userInterface.cowGameObject = this.gameObject;
-		
+
+
         if (userInterface.cowGameObject == null)
             Debug.Log("User Interface is null!");
 
@@ -328,15 +328,7 @@ public class CowController : GameController
                 state = "idle";
                 break;
             case 1:
-				state = "wander";
                 break;
         }
     }
-
-	IEnumerator CowMoo(float seconds)
-	{
-		yield return new WaitForSeconds(seconds);
-		
-		GetComponent<AudioSource>().PlayOneShot(cowSound, Random.Range(0.4f, 0.7f));
-	}
 }

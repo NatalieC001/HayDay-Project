@@ -75,8 +75,8 @@ public class UIMart : GameController
 
 	static Vector2 martTopRight = new Vector2(101f, 243f);
 	static Vector2 martBottomLeft = new Vector2(57f, 261f);
-	
-    Vector3 bidArea = new Vector3(104f, 0f, 150f);
+
+    Vector3 bidArea = new Vector3(109f, 0f, 137f);
 
 	private float scrollListPaddingY;
 	private float healthHappinessPaddingY;
@@ -113,13 +113,21 @@ public class UIMart : GameController
 			bidderList.Add (newBidder); 
 		}
 
-		Vector2 cowPos = new Vector2(105f, 149.582f);
+        Vector2 bottomLeft = new Vector2(128f, 116.82f);
+        Vector2 topRight = new Vector2(95.14f, 116.82f);
         cowsInMart = new List<Cow>();
-
-        for (int i = 0; i < 100; i++)
+        Vector3 forward = new Vector3(0,0,1);
+        for (int i = 0; i < 5; i++)
         {
 			Cow newCow = CowMaker.GenerateCow();
             cowsInMart.Add(newCow);
+            CowMaker.SpawnCow(newCow, bottomLeft, topRight, forward);
+           
+        }
+
+        foreach(Cow cow in cowsInMart)
+        {
+            cow.cowController.Wait();
         }
     }
 
@@ -151,7 +159,7 @@ public class UIMart : GameController
 
     IEnumerator WaitForCow()
     {      
-        while (Vector3.Distance(biddingCow.cowController.ReturnPosition(), bidArea) > 1)
+        while (Vector3.Distance(biddingCow.cowController.ReturnPosition(), bidArea) > 2)
         {
            yield return new WaitForSeconds(1f);       
         }
@@ -386,6 +394,9 @@ public class UIMart : GameController
 				cowMenuUI = false;
 				cowBuyBidUI = true;
 				LookAtRing();
+                biddingCow = cowsInMart[Random.Range(0, cowsInMart.Count - 1)];
+                biddingCow.cowController.MoveTo(bidArea);
+
 			}
 		}
 		
@@ -462,12 +473,9 @@ public class UIMart : GameController
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 
 				cowInRing = true;
-                
-				Vector2 spawnLocation = new Vector3(120.79f, 149.84f);
-				CowMaker.SpawnCow(cowsInMart[0], spawnLocation, spawnLocation);
-				cowsInMart[0].cowController.MoveTo(bidArea);
 
-				StartBidding(cowsInMart[0]);
+
+                StartBidding(biddingCow);
 			}
 		}
 
@@ -556,7 +564,7 @@ public class UIMart : GameController
                         GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 
                         Vector2 spawnLocation = new Vector3(120.79f, 149.84f);
-                        CowMaker.SpawnCow(game.cows[cowIndex], spawnLocation, spawnLocation);
+                        CowMaker.SpawnCow(game.cows[cowIndex], spawnLocation, spawnLocation, Vector3.zero);
 
                         game.cows[cowIndex].cowController.MoveTo(bidArea);
                         StartBidding(game.cows[cowIndex]);
@@ -596,11 +604,11 @@ public class UIMart : GameController
 		//cowsInMart[0].cowController.transform.position + cowsInMart[0].cowController.transform.forward * 10;
 
 		Vector3 height = new Vector3(0, 2, 0);
-		Vector3 position = new Vector3(96.32f,5, 142); 
-		Vector3 target = new Vector3(104.49f, 0, 149f);
+        Vector3 position = new Vector3(100, 5, 148.5f); 
+
 
 		cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
-		cameraControl.MoveToLookAt(position + height, target + height);
+        cameraControl.MoveToLookAt(position + height, bidArea + height);
 	}
 
 	public void ClearStats()

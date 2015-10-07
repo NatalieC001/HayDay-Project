@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CowMaker : GameController
 {
-    public static int SpawnCow(Cow cow, Vector2 topLeft, Vector2 bottomRight)
+    public static int SpawnCow(Cow cow, Vector2 topLeft, Vector2 bottomRight, Vector3 forward)
     {
         Vector3 spawnLocation;
         int count = 0;
@@ -17,12 +17,18 @@ public class CowMaker : GameController
 
             spawnLocation = new Vector3(Random.Range(topLeft.x, bottomRight.x), 0, Random.Range(topLeft.y, bottomRight.y));
 
-            spawnLocation.y =  Terrain.activeTerrain.SampleHeight(spawnLocation) + 1;
+            spawnLocation.y =  Terrain.activeTerrain.SampleHeight(spawnLocation) + .5f;
 
-        } while (Physics.CheckSphere(spawnLocation + new Vector3(0, 3.5f, 0), 1));
+        } while (Physics.CheckSphere(spawnLocation + new Vector3(0, 3.5f, 0), 2));
 		
         GameObject cowGameObject = Instantiate(Resources.Load(cow.breed) as GameObject);
+
+        if (forward != Vector3.zero)
+        {
+            cowGameObject.transform.forward = forward;
+        }
         cowGameObject.transform.position = spawnLocation;
+
         CowController cowController = cowGameObject.GetComponent<CowController>();
 
         cow.cowController = cowController;

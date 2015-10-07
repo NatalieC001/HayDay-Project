@@ -82,7 +82,7 @@ public class UIFarm : GameController
 			for(int i = 0;i < 10; i++)
 			{
 				Cow cow = CowMaker.GenerateCow();
-				CowMaker.SpawnCow(cow,farmTopLeft, farmBottomRight);
+				CowMaker.SpawnCow(cow,farmTopLeft, farmBottomRight,Vector3.zero);
 				game.cows.Add(cow);
 			}
 
@@ -94,7 +94,7 @@ public class UIFarm : GameController
 			{
 				Load();
 				foreach (Cow cow in game.cows)
-					CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight);
+                    CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight, Vector3.zero);
 			}
 		}
     }
