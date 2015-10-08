@@ -210,6 +210,7 @@ public class UIMart : GameController
         cowBuyBidUI = false;
 		cowSelected = false;
         Destroy(biddingCow.cowController.gameObject);
+        biddingCow = null;
 		ClearStats();
 		cameraControl.WatchPlayer();
     }
@@ -393,9 +394,7 @@ public class UIMart : GameController
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				cowMenuUI = false;
 				cowBuyBidUI = true;
-				LookAtRing();
-                biddingCow = cowsInMart[Random.Range(0, cowsInMart.Count - 1)];
-                biddingCow.cowController.MoveTo(bidArea);
+				
 
 			}
 		}
@@ -471,10 +470,6 @@ public class UIMart : GameController
 			if (GUI.Button (new Rect (70, 445, 170, 35), "", buttonStartBid))
 			{	
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-
-				cowInRing = true;
-
-
                 StartBidding(biddingCow);
 			}
 		}
@@ -561,15 +556,18 @@ public class UIMart : GameController
                 {
                     if (game.cows.Count != 0)
                     {
-                        GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
+                        if (!cowInRing)
+                        {
+                            GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
+                            CowMaker.SpawnCow(game.cows[cowIndex], bidArea, bidArea, Vector3.zero);
+                            LookAtRing();
+                            biddingCow = cowsInMart[Random.Range(0, cowsInMart.Count - 1)];
+                            biddingCow.cowController.MoveTo(bidArea);
 
-                        Vector2 spawnLocation = new Vector3(120.79f, 149.84f);
-                        CowMaker.SpawnCow(game.cows[cowIndex], spawnLocation, spawnLocation, Vector3.zero);
+                            StartBidding(game.cows[cowIndex]);
 
-                        game.cows[cowIndex].cowController.MoveTo(bidArea);
-                        StartBidding(game.cows[cowIndex]);
-
-                        CreateScrollList.RemoveCowButton(cowIndex);
+                            CreateScrollList.RemoveCowButton(cowIndex);
+                        }
                     }
                 }
 			}

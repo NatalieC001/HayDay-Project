@@ -37,7 +37,7 @@ public class Movement : MonoBehaviour
         	inputVec = new Vector3(joy.AxisY, 0, -joy.AxisX);
 
 		if(currScene.Equals("Mart"))
-			inputVec = new Vector3(joy.AxisX, 0, joy.AxisY);
+			inputVec = new Vector3(-joy.AxisX, 0, -joy.AxisY);
 
         inputVec *= Speed;
 

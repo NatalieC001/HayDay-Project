@@ -19,13 +19,24 @@ public class CameraController : MonoBehaviour {
 
 	public bool transitioning;
 
+
+    float playerY = 0;
     void Start()
     {
         player = GameObject.Find("Player");
         difVec = transform.position - player.transform.position;
         startPositon = transform.position;
+        StartCoroutine(average());
     }
-
+    IEnumerator average()
+    {
+        for(int i = 0; i < 10; i++)
+        {       
+            playerY += player.transform.position.y;
+            yield return new WaitForSeconds(.01f);
+        }
+        playerY = playerY / 10; 
+    }
     public void MoveToLookAt(Vector3 positon, Vector3 target)
     {
         startTime = Time.time;
@@ -44,13 +55,17 @@ public class CameraController : MonoBehaviour {
 
     public void WatchPlayer()
     {
-        MoveToLookAt(startPositon, player.transform.position);
+        Vector3 playerLoc =  player.transform.position;
+        playerLoc.y = playerY;
+        MoveToLookAt(startPositon, playerLoc);
         watchPlayer = true;
     }
 
     public void FollowPlayer()
     {
-        MoveToLookAt(startPositon, player.transform.position);
+        Vector3 playerLoc = player.transform.position;
+        playerLoc.y = playerY;
+        MoveToLookAt(startPositon, playerLoc);
         followPlayer = true;
     }
 
