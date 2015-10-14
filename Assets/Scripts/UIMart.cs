@@ -53,21 +53,21 @@ public class UIMart : GameController
 	public static List<Cow> cowsInMart;
 	public static GameObject cowList;
 
-	static Cow biddingCow;
+	public static Cow biddingCow;
 
-	Cow defaultCow;
-	GameObject scrollCowList;
-	CameraController cameraControl;
+	private Cow defaultCow;
+	private GameObject scrollCowList;
+	private CameraController cameraControl;
     
-	string cowGender = "Male";
-	string cowPregnant = "No";
-	bool timerStart = false;
-	bool timerChecked = true;
-	bool cowInRing = false;
-	float doesAIBid;
+	private string cowGender = "Male";
+	private string cowPregnant = "No";
+	private bool timerStart = false;
+	private bool timerChecked = true;
+	private bool cowInRing = false;
+	private float doesAIBid;
 
-	Rect windowRect;
-	bool isLoading = false;
+	private Rect windowRect;
+	private bool isLoading = false;
 
     static bool bidding;
     static float timeRemaining;
@@ -76,11 +76,10 @@ public class UIMart : GameController
     static Vector2 martTopRight = new Vector2(103.26f, 149.26f);
     static Vector2 martBottomLeft = new Vector2(116.28f, 158.68f);
 
-    Vector3 bidArea = new Vector3(109f, 0f, 137f);
+	private Vector3 bidArea = new Vector3(109f, 0f, 137f);
 
 	private float scrollListPaddingY;
 	private float healthHappinessPaddingY;
-
 	#endregion
 
     void Start()
@@ -117,12 +116,12 @@ public class UIMart : GameController
         Vector2 topRight = new Vector2(95.14f, 116.82f);
         cowsInMart = new List<Cow>();
         Vector3 forward = new Vector3(0,0,1);
+
         for (int i = 0; i < 5; i++)
         {
 			Cow newCow = CowMaker.GenerateCow();
             cowsInMart.Add(newCow);
             CowMaker.SpawnCow(newCow, bottomLeft, topRight, forward);
-           
         }
 
         foreach(Cow cow in cowsInMart)

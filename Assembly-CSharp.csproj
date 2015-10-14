@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\CowMaker.cs" />
      <Compile Include="Assets\Scripts\CreateScrollList.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\GlobalVars.cs" />
      <Compile Include="Assets\Scripts\Help.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />

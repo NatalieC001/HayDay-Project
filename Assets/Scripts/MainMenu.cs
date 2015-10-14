@@ -15,8 +15,8 @@ public class MainMenu : MonoBehaviour
 	public float buttonPadding;
 	public AudioClip buttonSound;
 
-	bool isLoading = false;
-	Texture backgroundTemp;
+	private bool isLoading = false;
+	private Texture backgroundTemp;
 
 	void OnGUI()
 	{

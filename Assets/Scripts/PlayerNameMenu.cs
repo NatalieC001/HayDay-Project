@@ -12,7 +12,7 @@ public class PlayerNameMenu : MonoBehaviour
 	public AudioClip buttonSound;
 	public string playerName = "Joe";
 
-	bool isLoading = false;
+	private bool isLoading = false;
 
 	void OnGUI()
 	{
@@ -26,7 +26,8 @@ public class PlayerNameMenu : MonoBehaviour
 		}
 
 		if(!isLoading)
-			if (GUI.Button (new Rect (Screen.width * .7f, Screen.height * .8f, Screen.width * .255f, Screen.height * .160f), "", buttonPlayStyle))
+		{
+			if (GUI.Button (new Rect (Screen.width * .725f, Screen.height * .81f, Screen.width * .24f, Screen.height * .16f), "", buttonPlayStyle))
 			{
 				isLoading = true;
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
@@ -35,13 +36,16 @@ public class PlayerNameMenu : MonoBehaviour
 				StartCoroutine(WaitFor(3));	// Load farm scene
 				backgroundTexture = backgroundLoading;
 			}
+		}
 
 		if(!isLoading)
-			if (GUI.Button (new Rect (Screen.width * .035f, Screen.height * .79f, Screen.width * .240f, Screen.height * .145f), "", buttonBackStyle))
+		{
+			if (GUI.Button (new Rect (Screen.width * .035f, Screen.height * .82f, Screen.width * .240f, Screen.height * .13f), "", buttonBackStyle))
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 				StartCoroutine(WaitFor(0));	// Back to main menu
 			}
+		}
 	}
 
 	void Update() 

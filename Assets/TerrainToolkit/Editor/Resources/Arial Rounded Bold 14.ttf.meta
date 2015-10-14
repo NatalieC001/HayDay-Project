@@ -9,6 +9,7 @@ TrueTypeFontImporter:
   includeFontData: 1
   use2xBehaviour: 1
   fontNames: []
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   userData: 

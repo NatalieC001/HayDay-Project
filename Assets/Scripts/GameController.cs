@@ -44,6 +44,7 @@ public class GameController : MonoBehaviour
 	{
 		if(Input.GetKeyDown (KeyCode.Escape)) 
 		{
+			Save();
 			StartCoroutine(WaitFor(0));
 		}
 	}

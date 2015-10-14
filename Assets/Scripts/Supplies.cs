@@ -3,26 +3,19 @@ using System.Collections;
 
 public class Supplies : MonoBehaviour
 {
-	UIFarm userInterface;
-
 	void FixedUpdate () 
 	{
 		transform.Rotate (0, 2, 0);
-	}
-
-	void Start()
-	{
-		userInterface = GameObject.FindGameObjectWithTag("UI").GetComponent<UIFarm>();
 	}
 
 	void OnTriggerEnter(Collider other) 
 	{
 		if (other.gameObject.name.Equals ("Player"))
 		{
-			userInterface.playerUI = true;
-			userInterface.cowUI = false;
-			userInterface.sceneTransitionUI = false;
-			userInterface.buySuppliesUI = false;
+			GlobalVars.playerUI = true;
+			GlobalVars.cowUI = false;
+			GlobalVars.sceneTransitionUI = false;
+			GlobalVars.buySuppliesUI = false;
 		}
 	}
 
@@ -30,10 +23,10 @@ public class Supplies : MonoBehaviour
 	{
 		if (other.gameObject.name.Equals ("Player"))
 		{
-			userInterface.playerUI = false;
-			userInterface.cowUI = false;
-			userInterface.sceneTransitionUI = false;
-			userInterface.buySuppliesUI = false;
+			GlobalVars.playerUI = false;
+			GlobalVars.cowUI = false;
+			GlobalVars.sceneTransitionUI = false;
+			GlobalVars.buySuppliesUI = false;
 		}
 	}
 }

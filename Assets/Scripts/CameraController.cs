@@ -19,8 +19,8 @@ public class CameraController : MonoBehaviour {
 
 	public bool transitioning;
 
-
     float playerY = 0;
+
     void Start()
     {
         player = GameObject.Find("Player");
@@ -28,6 +28,7 @@ public class CameraController : MonoBehaviour {
         startPositon = transform.position;
         StartCoroutine(average());
     }
+
     IEnumerator average()
     {
         for(int i = 0; i < 10; i++)
@@ -37,6 +38,7 @@ public class CameraController : MonoBehaviour {
         }
         playerY = playerY / 10; 
     }
+
     public void MoveToLookAt(Vector3 positon, Vector3 target)
     {
         startTime = Time.time;

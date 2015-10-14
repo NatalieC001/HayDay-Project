@@ -4,14 +4,7 @@ using System.Collections;
 
 public class UIFarm : GameController 
 {
-	public bool playerUI = true;
-	public bool buySuppliesUI;
-	public bool cowUI;
-	public bool cowMoreInfoUI;
-	public bool cowFeedUI;
-	public bool loadSaveUI;
-	public bool sceneTransitionUI;
-
+	#region variables
 	public GUIStyle buttonBuy;
 	public GUIStyle buttonSell;
 	public GUIStyle buttonInfo;
@@ -36,8 +29,8 @@ public class UIFarm : GameController
 	public GUIStyle labelLoading;
 	public GUIStyle customTextStyle;
 
-	string cowGender = "Male";
-	string cowPregnant = "No";
+	private string cowGender = "Male";
+	private string cowPregnant = "No";
 	
 	public Image healthBar;
 	public Image happinessBar;
@@ -50,13 +43,14 @@ public class UIFarm : GameController
 	public AudioClip buttonSound;
 	public Cow cow;
 
-	Rect windowRect;
-	bool isLoading = false;
-    CameraController cameraControl;
-    VCAnalogJoystickBase joyStick;
+	private Rect windowRect;
+	private bool isLoading = false;
+	private CameraController cameraControl;
+	private VCAnalogJoystickBase joyStick;
 
-	Vector2 farmTopLeft = new Vector2(102f, 261f);
-	Vector2 farmBottomRight = new Vector2(57.2f, 242.2f);
+	private Vector2 farmTopLeft = new Vector2(102f, 261f);
+	private Vector2 farmBottomRight = new Vector2(57.2f, 242.2f);
+	#endregion
 	
     void Start()
     {
@@ -77,11 +71,11 @@ public class UIFarm : GameController
         cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         joyStick = GameObject.FindGameObjectWithTag("JoyStick").GetComponent<VCAnalogJoystickBase>();
 
-		if(newGame)
+		/*if(newGame)
 		{
 			for(int i = 0;i < 10; i++)
 			{
-				Cow cow = CowMaker.GenerateCow();
+				cow = CowMaker.GenerateCow();
 				CowMaker.SpawnCow(cow,farmTopLeft, farmBottomRight,Vector3.zero);
 				game.cows.Add(cow);
 			}
@@ -96,44 +90,48 @@ public class UIFarm : GameController
 				foreach (Cow cow in game.cows)
                     CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight, Vector3.zero);
 			}
-		}
+		}*/
+
+		cow = CowMaker.GenerateCow();
+		CowMaker.SpawnCow(cow,farmTopLeft, farmBottomRight,Vector3.zero);
+		game.cows.Add(cow);
     }
 
     void OnGUI()
     {
 		GUI.color = foregroundColor;
 
-        if (playerUI)
+		if (GlobalVars.playerUI)
         {
 			windowRect = new Rect(Screen.width * .29f, Screen.height - 150f, 620, 100);
 			windowRect = GUI.Window(0, windowRect, PlayerInfo, "Farm");
 		}
-		else if(buySuppliesUI)
+		else if(GlobalVars.buySuppliesUI)
 		{
 			windowRect = new Rect(Screen.width * .29f, Screen.height - 300f, 620, 250);
 			windowRect = GUI.Window(0, windowRect, BuyPlayerSupplies, "Buy Supplies");
 		}
-		else if (cowUI && cowGameObject != null )
+		else if (GlobalVars.cowUI && cowGameObject != null )
         {
 			windowRect = new Rect(Screen.width * .29f, Screen.height - 150f, 620, 100);
 			windowRect = GUI.Window(0, windowRect, CowInfo, cow.name);
 		}
-		else if (cowMoreInfoUI && cowGameObject != null )
+		else if (GlobalVars.cowMoreInfoUI && cowGameObject != null )
 		{
 			windowRect = new Rect(Screen.width * .4f, Screen.height - 420f, 355, 365);
 			windowRect = GUI.Window(0, windowRect, CowMoreInfo, cow.name);
 		}
-		else if (cowFeedUI && cowGameObject != null )
+		else if (GlobalVars.cowFeedUI && cowGameObject != null )
 		{
 			windowRect = new Rect(Screen.width * .32f, Screen.height - 350f, 555, 295);
 			windowRect = GUI.Window(0, windowRect, CowFeed, cow.name);
 		}
-		else if (loadSaveUI)
+		else if (GlobalVars.loadSaveUI)
 		{
 			windowRect = new Rect(Screen.width * .29f, Screen.height - 150f, 620, 100);
 			windowRect = GUI.Window(0, windowRect, LoadSaveInfo, "Load / Save");
 		}
-		else if(sceneTransitionUI)
+		else if(GlobalVars.sceneTransitionUI)
 		{
 			windowRect = new Rect(Screen.width * .29f, Screen.height - 150f, 620, 100);
 			windowRect = GUI.Window(0, windowRect, SceneTransition, "Select");
@@ -153,8 +151,8 @@ public class UIFarm : GameController
 		if (GUI.Button(new Rect(260, 33, 180, 53), "", buttonSupplies))
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			playerUI = false;
-			buySuppliesUI = true;
+			GlobalVars.playerUI = false;
+			GlobalVars.buySuppliesUI = true;
 		}
     }
 
@@ -209,8 +207,8 @@ public class UIFarm : GameController
 		if (GUI.Button(new Rect(535, 180, 50, 50), "", buttonX))
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			playerUI = true;
-			buySuppliesUI = false;
+			GlobalVars.playerUI = true;
+			GlobalVars.buySuppliesUI = false;
 		}
 	}
 
@@ -230,8 +228,8 @@ public class UIFarm : GameController
 		if (GUI.Button(new Rect(40, 30, 90, 50), "", buttonInfo))
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			cowUI = false;
-			cowMoreInfoUI = true;
+			GlobalVars.cowUI = false;
+			GlobalVars.cowMoreInfoUI = true;
 		}
 
 		if (GUI.Button(new Rect(535, 30, 50, 50), "", buttonX))
@@ -239,7 +237,8 @@ public class UIFarm : GameController
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
        
             cameraControl.FollowPlayer();
-			cowUI = false;
+			GlobalVars.cowUI = false;
+			GlobalVars.cowSelected = false;
 			StartCoroutine(waitForCamera());
 			SetHealth(0);
 			SetHappiness(0);
@@ -296,15 +295,15 @@ public class UIFarm : GameController
 		if (GUI.Button(new Rect(38, 300, 80, 40), "", buttonFeed))
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			cowMoreInfoUI = false;
-			cowFeedUI = true;
+			GlobalVars.cowMoreInfoUI = false;
+			GlobalVars.cowFeedUI = true;
 		}
 
 		if (GUI.Button(new Rect(285, 292, 50, 50), "", buttonX))
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			cowMoreInfoUI = false;
-			cowUI = true;
+			GlobalVars.cowMoreInfoUI = false;
+			GlobalVars.cowUI = true;
 		}
 	}
 
@@ -365,8 +364,8 @@ public class UIFarm : GameController
 		if (GUI.Button(new Rect(475, 230, 50, 50), "", buttonX))
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-			cowMoreInfoUI = true;
-			cowFeedUI = false;
+			GlobalVars.cowMoreInfoUI = true;
+			GlobalVars.cowFeedUI = false;
 		}
 	}
 
@@ -500,6 +499,7 @@ public class UIFarm : GameController
 		else 
 		{
 			Application.LoadLevel (level);
+			GlobalVars.sceneTransitionUI = false;
 		}
 	}
 }

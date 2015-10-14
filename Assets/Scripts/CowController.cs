@@ -4,27 +4,32 @@ using System.Collections;
 [System.Serializable]
 public class CowController : GameController
 {
-    public Cow cow;
-    GameObject playerGO;
-    Animation anim;
-    CameraController cameraControl;
-    UIFarm userInterface;
-    public Vector3 targetDest;
-    public Vector3 finalDest;
-    Movement movement;
-    VCAnalogJoystickBase joyStick;
+    
+    private GameObject playerGO;
+	private Animation anim;
+	private CameraController cameraControl;
+	private UIFarm userInterface;
+	private Movement movement;
+	private VCAnalogJoystickBase joyStick;
 
-    bool idleRunning;
-    bool inMart = false;
+	private float width;
+	private float heigth;
+
+	private bool cowSelected;
+
+	private bool idleRunning;
+	private bool inMart = false;
+
+	public Vector3 targetDest;
+	public Vector3 finalDest;
 
     public float speed = 6;
     public float rotationSpeed = 50f;
     public string state;
     public AudioClip cowSound;
 
+	public Cow cow;
 
-    float width;
-    float heigth; 
     void Start()
     {
         width = this.gameObject.GetComponent<Collider>().bounds.size.x;
@@ -33,16 +38,12 @@ public class CowController : GameController
         userInterface = GameObject.FindGameObjectWithTag("UI").GetComponent<UIFarm>();
         cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         joyStick = GameObject.FindGameObjectWithTag("JoyStick").GetComponent<VCAnalogJoystickBase>();
-
-
         playerGO = GameObject.Find("Player");
         movement = playerGO.GetComponent<Movement>();
-
     }
 
     void Update()
     {
-
         switch (state)
         {
             case "waiting":
@@ -68,8 +69,9 @@ public class CowController : GameController
             case "following":
                 Follow(playerGO.transform.position);
                 break;
-
-
+			case "":
+				state = "idle";
+			break;
         }
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
     }
@@ -86,16 +88,35 @@ public class CowController : GameController
         }
     }
 
-
     public void Wait()
     {
         state = "waiting";
     }
+
     public void Wander()
     {
         anim.Play("walk");
 
-        GetComponent<AudioSource>().PlayOneShot(cowSound, 0.9f);
+		int playSound = Random.Range (1, 5);
+		
+		switch(playSound)
+		{
+			case 1:
+				StartCoroutine(CowMoo(Random.Range(12, 60)));
+				break;
+			case 2:
+				StartCoroutine(CowMoo(Random.Range(16, 60)));
+				break;
+			case 3:
+				StartCoroutine(CowMoo(Random.Range(20, 60)));
+				break;
+			case 4:
+				StartCoroutine(CowMoo(Random.Range(24, 60)));
+				break;
+			case 5:
+				StartCoroutine(CowMoo(Random.Range(28, 60)));
+				break;
+		}
 
         finalDest = new Vector3(transform.position.x + Random.Range(-10, 10), 0f, transform.position.z + Random.Range(-10, 10));
         finalDest.y = Terrain.activeTerrain.SampleHeight(targetDest);
@@ -111,12 +132,9 @@ public class CowController : GameController
         idleRunning = false;
     }
 
-
-
-
     Vector3 lastDirection;
-
     Vector3 oldAngle = Vector3.zero;
+
     Vector3 findPath(Vector3 position, Vector3 direction)
     {
         int angle = (int)(Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg);
@@ -143,11 +161,8 @@ public class CowController : GameController
         rBL = hit.collider;
         rBR = hit.collider;
       
-  
         direction.y = 0;
-
-   
-
+		
         for (int i = 0; i < 180; i++)
         {
             direction.x = Mathf.Cos((angle + i) * Mathf.Deg2Rad);
@@ -186,7 +201,6 @@ public class CowController : GameController
             direction.y = 0;
             direction.z = Mathf.Sin((angle - i) * Mathf.Deg2Rad);
 
-
             if (oldAngle == Vector3.zero || Vector3.Distance(oldAngle, direction) > .8)
             {
               // Physics.SphereCast(transform.position, heigth / 2, direction, out hit);
@@ -218,11 +232,9 @@ public class CowController : GameController
         return closestDirection * (smalestDist -2);
     }
 
-
     public void Moving()
     {
-
-        if (Vector3.Distance(transform.position, finalDest) < 2)
+        if (Vector3.Distance(transform.position, finalDest) < 6)
         {
             state = "idle";
             return;
@@ -237,8 +249,8 @@ public class CowController : GameController
         {
             targetDest = transform.position + findPath(transform.position, (finalDest - transform.position).normalized);
         }
-
-        if (targetDest != Vector3.zero)
+		
+		if (targetDest != Vector3.zero)
         {
             anim.Play("walk");
             Quaternion lookRotation;
@@ -255,9 +267,7 @@ public class CowController : GameController
 
             transform.position += transform.forward * speed * Time.deltaTime;
         }
-
     }
-
 
     public void Follow(Vector3 goToPosition)
     {
@@ -273,6 +283,7 @@ public class CowController : GameController
         {
             transform.LookAt(playerGO.transform);
             state = "lookingAtPlayer";
+			StartCoroutine(WaitFor(20f, 1));
         }
     }
 
@@ -283,11 +294,13 @@ public class CowController : GameController
 
     void OnMouseDown()
     {
-        if (inMart)
+		if (inMart || GlobalVars.cowSelected)
             return;
 
         Vector3 position;
         Vector3 target;
+
+		GlobalVars.cowSelected = true;
 
         joyStick.gameObject.SetActive(false);
         state = "following";
@@ -314,8 +327,8 @@ public class CowController : GameController
         if (userInterface.cow == null)
             Debug.Log("Cow is null!");
 
-        userInterface.cowUI = true;
-        userInterface.playerUI = false;
+		GlobalVars.cowUI = true;
+		GlobalVars.playerUI = false;
     }
 
     IEnumerator WaitFor(float seconds, int option)
@@ -328,7 +341,15 @@ public class CowController : GameController
                 state = "idle";
                 break;
             case 1:
+				state = "wander";
                 break;
         }
     }
+
+	IEnumerator CowMoo(float seconds)
+	{
+		yield return new WaitForSeconds(seconds);
+		
+		GetComponent<AudioSource>().PlayOneShot(cowSound, Random.Range(0.4f, 0.7f));
+	}
 }

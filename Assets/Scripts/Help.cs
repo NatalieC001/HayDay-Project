@@ -11,7 +11,7 @@ public class Help : MonoBehaviour
 	public float buttonPadding;
 	public AudioClip buttonSound;
 
-	bool isLoading = false;
+	private bool isLoading = false;
 
 	void OnGUI()
 	{

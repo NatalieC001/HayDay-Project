@@ -12,11 +12,11 @@ public class Movement : MonoBehaviour
 	public AudioClip moveSound;
 	public static bool freeRoam;
 
-    float moveSpeed;
-    CharacterController controller;
-    Animator animator;
-	AudioSource audioSource;
-	string currScene;
+    private float moveSpeed;
+	private CharacterController controller;
+	private Animator animator;
+	private AudioSource audioSource;
+	private string currScene;
 
     void Start()
     {
