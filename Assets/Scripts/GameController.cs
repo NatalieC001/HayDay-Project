@@ -6,32 +6,47 @@ using System.IO;
 
 public class GameController : MonoBehaviour
 {
-    public static GameController game;
-	public static string playerName = "Joe";
 	public Farmer player;
     public Farm farm;
     public List<Cow> cows;
 
 	public GameObject cowGameObject;
 
-	public static bool init;
-	public static bool loadPlayer;
-	public static bool newGame;
-
-	Vector2 farmTopLeft = new Vector2(80.2f, 245.1f);
-	Vector2 farmBottomRight = new Vector2(141.2f, 214.2f);
+	private Vector2 farmTopLeft = new Vector2(102f, 261f);
+	private Vector2 farmBottomRight = new Vector2(57.2f, 242.2f);
 	
     void Start()
     {
-		if (!init) 
+		if (!GlobalVars.init) 
 		{
-			game = this;
-			game.player.name = playerName;
-			game.player.cash = 50000;
-			game.player.grain = 0;
-			game.player.hay = 0;
-			game.player.pellet = 0;
-			init = true;
+			GlobalVars.game = this;
+			GlobalVars.game.player.name = GlobalVars.playerName;
+			GlobalVars.game.player.cash = 50000;
+			GlobalVars.game.player.grain = 0;
+			GlobalVars.game.player.hay = 0;
+			GlobalVars.game.player.pellet = 0;
+			GlobalVars.init = true;
+		}
+
+		if(GlobalVars.newGame)
+		{
+			for(int i = 0;i < 3; i++)
+			{
+				Cow cow = CowMaker.GenerateCow();
+				CowMaker.SpawnCow(cow,farmTopLeft, farmBottomRight,Vector3.zero);
+				GlobalVars.game.cows.Add(cow);
+			}
+			
+			GlobalVars.newGame = false;
+		}
+		else 
+		{
+			if(GlobalVars.loadPlayer)
+			{
+				Load();
+				foreach (Cow cow in GlobalVars.game.cows)
+					CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight, Vector3.zero);
+			}
 		}
     }
 
@@ -58,17 +73,17 @@ public class GameController : MonoBehaviour
 
             //save player data
             file = File.Open(Application.persistentDataPath + "/player.dat", FileMode.OpenOrCreate);
-            bf.Serialize(file, game.player);
+            bf.Serialize(file, GlobalVars.game.player);
             file.Close();
 
             //save cow data
             file = File.Open(Application.persistentDataPath + "/cows.dat", FileMode.OpenOrCreate);
-			bf.Serialize(file, game.cows);
+			bf.Serialize(file, GlobalVars.game.cows);
             file.Close();
 
             //save farm data
             file = File.Open(Application.persistentDataPath + "/farm.dat", FileMode.OpenOrCreate);
-			bf.Serialize(file, game.farm);
+			bf.Serialize(file, GlobalVars.game.farm);
             file.Close();
         }
         catch (UnityException e)
@@ -105,9 +120,9 @@ public class GameController : MonoBehaviour
                 file.Close();
             }
 
-			game.player = player;
-			game.cows = cows;
-			game.farm = farm;  
+			GlobalVars.game.player = player;
+			GlobalVars.game.cows = cows;
+			GlobalVars.game.farm = farm;  
         }
         catch (UnityException e)
         {

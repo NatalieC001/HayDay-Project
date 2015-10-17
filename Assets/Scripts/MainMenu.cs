@@ -39,7 +39,7 @@ public class MainMenu : MonoBehaviour
 			if (GUI.Button (new Rect (Screen.width * .28f, Screen.height * (buttonPadding * 1.64f), Screen.width * .45f, Screen.height * .15f), "", buttonLoadStyle)) 
 			{	
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-				GameController.loadPlayer = true;
+				GlobalVars.loadPlayer = true;
 
 				bool fileTest1 = File.Exists(Application.persistentDataPath + "/player.dat");
 				bool fileTest2 = File.Exists(Application.persistentDataPath + "/cows.dat");

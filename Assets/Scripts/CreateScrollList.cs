@@ -10,25 +10,20 @@ public class CreateScrollList : GameController
 	public Transform contentPanel;
 	public Sprite icon;
 
-    public static List<GameObject> cowButtons = new List<GameObject>();
-
-	public static int cowIndex = 0;
-	public static CreateScrollList access;
-
 	void Start () 
 	{
-        if (!init)
+		if (!GlobalVars.init)
         {
-            game = this;
-            game.player.name = playerName;
-            game.player.cash = 50000;
-            game.player.grain = 0;
-            game.player.hay = 0;
-            game.player.pellet = 0;
-            init = true;
+            GlobalVars.game = this;
+			GlobalVars.game.player.name = GlobalVars.playerName;
+            GlobalVars.game.player.cash = 50000;
+            GlobalVars.game.player.grain = 0;
+            GlobalVars.game.player.hay = 0;
+            GlobalVars.game.player.pellet = 0;
+			GlobalVars.init = true;
         }
 
-		access = this;
+		GlobalVars.access = this;
 		PopulateList();
 	}
 
@@ -36,7 +31,7 @@ public class CreateScrollList : GameController
 	{
 		int count = 0;
 
-		foreach(var cow in game.cows)
+		foreach(var cow in GlobalVars.game.cows)
 		{
 			++count;
 			GameObject newButton = Instantiate (cowButton) as GameObject;
@@ -45,7 +40,7 @@ public class CreateScrollList : GameController
 			genButton.name = "" + count;
 			genButton.imageIcon.sprite = icon;
 			genButton.transform.SetParent(contentPanel);
-            cowButtons.Add(newButton);
+			GlobalVars.cowButtons.Add(newButton);
 		}
 	}
 
@@ -58,14 +53,14 @@ public class CreateScrollList : GameController
 
     public static void RemoveCowButton(int index)
     {
-        Destroy(cowButtons[index]);
-        cowButtons.RemoveAt(index);
+		Destroy(GlobalVars.cowButtons[index]);
+		GlobalVars.cowButtons.RemoveAt(index);
     }
 
 	public static void RemoveAllButtons()
 	{
-		for(int i = 0; i < cowButtons.Count; i++)
-			Destroy(cowButtons[i]);
-		cowButtons.Clear();
+		for(int i = 0; i < GlobalVars.cowButtons.Count; i++)
+			Destroy(GlobalVars.cowButtons[i]);
+		GlobalVars.cowButtons.Clear();
 	}
 }

@@ -28,6 +28,8 @@ public class UIMart : GameController
 	public GUIStyle labelWeight;
 	public GUIStyle labelLoading;
 	public GUIStyle labelSelect;
+	public GUIStyle labelBidWon;
+	public GUIStyle labelBidLost;
 	public GUIStyle customTextStyle;
 
 	public Image healthBar;
@@ -41,12 +43,12 @@ public class UIMart : GameController
 	public GameObject AudioObject;
 	public AudioClip buttonSound;
     public static int startingPrice;
-	public static int currentCowBid = 0;
-	public static int currentTimer = 0;
-	public static bool playerBidLast = false;
-	public static bool biddingOver = false;
-	public static bool cowSelected = false;
-	public static int cowIndex = 0;
+	public static int currentCowBid;
+	public static int currentTimer;
+	public static bool playerBidLast;
+	public static bool biddingOver;
+	public static bool cowSelected;
+	public static int cowIndex;
 	public static Bidder lastBidder;
 	public static UIMart uiMart;
 	public static List<Bidder> bidderList;
@@ -61,13 +63,13 @@ public class UIMart : GameController
     
 	private string cowGender = "Male";
 	private string cowPregnant = "No";
-	private bool timerStart = false;
+	private bool timerStart;
 	private bool timerChecked = true;
-	private bool cowInRing = false;
+	private bool cowInRing;
 	private float doesAIBid;
 
 	private Rect windowRect;
-	private bool isLoading = false;
+	private bool isLoading;
 
     static bool bidding;
     static float timeRemaining;
@@ -80,24 +82,28 @@ public class UIMart : GameController
 
 	private float scrollListPaddingY;
 	private float healthHappinessPaddingY;
+
+	private int biddingCowIndex;
+	private bool bidResult;
+	private GUIStyle biddingResult;
 	#endregion
 
     void Start()
     {
-		if (!init) 
+		if (!GlobalVars.init) 
 		{
-			game = this;
-			game.player.name = playerName;
-			game.player.cash = 50000;
-			game.player.grain = 0;
-			game.player.hay = 0;
-			game.player.pellet = 0;
-			init = true;
+			GlobalVars.game = this;
+			GlobalVars.game.player.name = GlobalVars.playerName;
+			GlobalVars.game.player.cash = 50000;
+			GlobalVars.game.player.grain = 0;
+			GlobalVars.game.player.hay = 0;
+			GlobalVars.game.player.pellet = 0;
+			GlobalVars.init = true;
 		}
 
 		bars = GetComponentsInChildren<Image>();
 		healthBar = bars[0];
-		happinessBar = bars[1];      
+		happinessBar = bars[1];
         defaultCow = new Cow("", 0, "", 0, 0, false, false, 0);
         biddingCow = defaultCow;
 		cowList = GameObject.Find ("CowSelectList");
@@ -117,31 +123,39 @@ public class UIMart : GameController
         cowsInMart = new List<Cow>();
         Vector3 forward = new Vector3(0,0,1);
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 8; i++)
         {
 			Cow newCow = CowMaker.GenerateCow();
-            cowsInMart.Add(newCow);
-            CowMaker.SpawnCow(newCow, bottomLeft, topRight, forward);
+            if(CowMaker.SpawnCow(newCow, bottomLeft, topRight, forward) == 1)
+				cowsInMart.Add(newCow);
+
         }
 
         foreach(Cow cow in cowsInMart)
         {
-            cow.cowController.Wait();
+			try
+			{
+            	cow.cowController.Wait();
+			}
+			catch(System.Exception error)
+			{
+				print ("Error: " + error);
+			}
         }
     }
 
     void FixedUpdate()
-    {
+	{
         if (bidding)
             currentTimer = (int)(timeRemaining - (Time.time - timeOfLastBid));
 
         if (bidding && Time.time > timeOfLastBid + timeRemaining)
-             StopBidding();       
+        	StopBidding();
     }
 
     public static void bid(Bidder bidder,float bid)
     {
-        if (bid > currentCowBid)
+        if (bid >= currentCowBid)
         {
             if(bidder != null)
             { 
@@ -158,11 +172,12 @@ public class UIMart : GameController
 
     IEnumerator WaitForCow()
     {      
-        while (Vector3.Distance(biddingCow.cowController.ReturnPosition(), bidArea) > 2)
+		// Error here! - Cow Controller null
+		while (Vector3.Distance(biddingCow.cowController.ReturnPosition(), bidArea) > 2)
         {
            yield return new WaitForSeconds(1f);       
         }
-
+		
         timeOfLastBid = Time.time;
         StartNewRound();
         bidding = true;
@@ -183,22 +198,35 @@ public class UIMart : GameController
         timeRemaining = 10;
 
 		// When selling, checks if bidding cow in players list
-        if(game.cows.Contains(biddingCow) && startingPrice != currentCowBid)
+        if(GlobalVars.game.cows.Contains(biddingCow) && startingPrice != currentCowBid)
         {
-            game.player.cash += currentCowBid;
-            game.cows.Remove(biddingCow);      
+            GlobalVars.game.player.cash += currentCowBid;
+            GlobalVars.game.cows.Remove(biddingCow);      
         }
 		else
 		{
-			// Add to players cows list
-			game.cows.Add(cowsInMart[0]);
-			// Removing from cow generated list
-			cowsInMart.RemoveAt(0);
+			// Add to players cows list & Removing from cow generated list
+			if(playerBidLast)
+			{
+				GlobalVars.game.player.cash -= currentCowBid;
+				GlobalVars.game.cows.Add(biddingCow);
+				cowsInMart.Remove(biddingCow);
+				biddingResult = labelBidWon;
+				bidResult = true;
+				StartCoroutine(WaitForSec(3));
+			}
+			else
+			{
+				cowsInMart.Remove(biddingCow);
+				biddingResult = labelBidLost;
+				bidResult = true;
+				StartCoroutine(WaitForSec(3));
+			}
 		}
 
         if(playerBidLast)
         {
-            print(game.player.name + " has bought " + biddingCow.name);
+            print(GlobalVars.game.player.name + " has bought " + biddingCow.name);
         }
         else
 		{
@@ -221,7 +249,7 @@ public class UIMart : GameController
 
         foreach (Bidder bidder in bidderList)
             if (bidder != lastBidder)
-                bidder.CondisderBidding(cowsInMart[0], currentCowBid);
+				bidder.CondisderBidding(biddingCow, currentCowBid);
     }
 
     public static void endBiddingRound()
@@ -237,7 +265,7 @@ public class UIMart : GameController
         int price = 0;
         try
         {
-            price= (cow.weight + (cow.health + cow.happiness) / cow.age) * 10;
+            price = (cow.weight + (cow.health + cow.happiness) / cow.age) * 10;
         }
         catch(System.DivideByZeroException)
         {
@@ -385,7 +413,7 @@ public class UIMart : GameController
 		}
 	}
 
-	void Menu(int windowID)		// Fix this stuff, finish me!
+	void Menu(int windowID)
 	{
 		GUI.contentColor = backgroundColor;
 		
@@ -394,39 +422,50 @@ public class UIMart : GameController
 		
 		if(isLoading)
 			GUI.Label(new Rect(200, 32, 270, 50), "", labelLoading);
+
+		if(bidResult)
+			GUI.Label(new Rect(190, 32, 270, 50), "", biddingResult);
 		
 		if(!isLoading)
 		{
-			if (GUI.Button(new Rect(45, 35, 115, 55), "", buttonBuy))
+			if(!bidResult)
 			{
-				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-				cowMenuUI = false;
-				cowBuyBidUI = true;
-				
-
+				if (GUI.Button(new Rect(45, 35, 115, 55), "", buttonBuy))
+				{
+					GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
+					cowMenuUI = false;
+					cowBuyBidUI = true;
+					LookAtRing();
+				}
 			}
 		}
 		
 		if (!isLoading) 
 		{
-			if (GUI.Button (new Rect (220, 35, 115, 45), "", buttonSell)) 
+			if(!bidResult)
 			{
-				GetComponent<AudioSource> ().PlayOneShot (buttonSound, 0.7f);
-				cowMenuUI = false;
-				cowSellBidUI = true;
-				cowList.SetActive (true);
-				LookAtRing ();
+				if (GUI.Button (new Rect (220, 35, 115, 45), "", buttonSell)) 
+				{
+					GetComponent<AudioSource> ().PlayOneShot (buttonSound, 0.7f);
+					cowMenuUI = false;
+					cowSellBidUI = true;
+					cowList.SetActive (true);
+					LookAtRing ();
+				}
 			}
 		}
 		
 		if (!isLoading) 
 		{
-			if (GUI.Button (new Rect (400, 35, 160, 42), "", buttonFarm)) 
-			{	
-				GetComponent<AudioSource> ().PlayOneShot (buttonSound, 0.7f);
-				Save ();
-				isLoading = true;
-				StartCoroutine (WaitFor (3));
+			if(!bidResult)
+			{
+				if (GUI.Button (new Rect (400, 35, 160, 42), "", buttonFarm)) 
+				{	
+					GetComponent<AudioSource> ().PlayOneShot (buttonSound, 0.7f);
+					Save ();
+					isLoading = true;
+					StartCoroutine (WaitFor (3));
+				}
 			}
 		}
 	}
@@ -455,8 +494,8 @@ public class UIMart : GameController
 			cowPregnant = "No";
 		}
 
-		GUI.Label(new Rect(110, 20, 150, 30), game.player.name, customTextStyle);
-		GUI.Label(new Rect(90, 50, 150, 30), "Cash: € " + game.player.cash, customTextStyle);
+		GUI.Label(new Rect(110, 20, 150, 30), GlobalVars.game.player.name, customTextStyle);
+		GUI.Label(new Rect(90, 50, 150, 30), "Cash: € " + GlobalVars.game.player.cash, customTextStyle);
 		GUI.Label(new Rect(110, 90, 150, 30), "Going: " + currentTimer, customTextStyle);
 		GUI.Label(new Rect(25, 135, 80, 25), "", labelAge);
 		GUI.Label(new Rect(132, 132, 150, 30), "" + biddingCow.age, customTextStyle);
@@ -477,18 +516,20 @@ public class UIMart : GameController
 		{
 			if (GUI.Button (new Rect (70, 445, 170, 35), "", buttonStartBid))
 			{	
-				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-
-                biddingCow = cowsInMart[Random.Range(0, cowsInMart.Count - 1)];
-                biddingCow.cowController.MoveTo(bidArea);
-                LookAtRing();
-                StartBidding();
+				if(cowsInMart.Count != 0)
+				{
+					GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
+					cowIndex = Random.Range(0, cowsInMart.Count - 1);
+					biddingCow = cowsInMart[cowIndex];
+	                biddingCow.cowController.MoveTo(bidArea);
+	                StartBidding();
+				}
 			}
 		}
 
 		if(!playerBidLast && cowInRing)
 		{
-			if(game.player.cash >= currentCowBid)
+			if(GlobalVars.game.player.cash >= currentCowBid)
 			{
 				if(GUI.Button (new Rect (125, 445, 80, 40), "", buttonBid))
 				{
@@ -511,7 +552,7 @@ public class UIMart : GameController
 		}
     }
 
-	void CowSellBid(int windowID)
+	void CowSellBid(int windowID)	// Bug with selling, camera
 	{
 		GUI.contentColor = backgroundColor;
 
@@ -522,35 +563,35 @@ public class UIMart : GameController
 
 		scrollCowList.transform.position = new Vector2 (windowRect.center.x, scrollListPaddingY);
 
-		if(cowSelected && game.cows.Count != 0)
+		if(cowSelected && GlobalVars.game.cows.Count != 0)
 		{
-			SetHealth(game.cows[cowIndex].health / 100f);
-			SetHappiness(game.cows[cowIndex].happiness / 10f);
+			SetHealth(GlobalVars.game.cows[cowIndex].health / 100f);
+			SetHappiness(GlobalVars.game.cows[cowIndex].happiness / 10f);
 			
 			healthBar.transform.position = new Vector2 (windowRect.center.x + 64, healthHappinessPaddingY + 35);
 			happinessBar.transform.position = new Vector2 (windowRect.center.x + 64, healthHappinessPaddingY);
 			
-			if (!game.cows[cowIndex].gender == true)
+			if (!GlobalVars.game.cows[cowIndex].gender == true)
 			{
 				cowGender = "Female";
 				
-				if(game.cows[cowIndex].pregnant == true)
+				if(GlobalVars.game.cows[cowIndex].pregnant == true)
 					cowPregnant = "Yes";
 			}
 			else
 			{
 				cowGender = "Male";
-				game.cows[cowIndex].pregnant = false;
+				GlobalVars.game.cows[cowIndex].pregnant = false;
 				cowPregnant = "No";
 			}
 			
-			GUI.Label(new Rect(110, 20, 150, 30), game.player.name, customTextStyle);
-			GUI.Label(new Rect(90, 50, 150, 30), "Cash: € " + game.player.cash, customTextStyle);
+			GUI.Label(new Rect(110, 20, 150, 30), GlobalVars.game.player.name, customTextStyle);
+			GUI.Label(new Rect(90, 50, 150, 30), "Cash: € " + GlobalVars.game.player.cash, customTextStyle);
 			GUI.Label(new Rect(110, 90, 150, 30), "Going: " + currentTimer, customTextStyle);
 			GUI.Label(new Rect(25, 135, 80, 25), "", labelAge);
-			GUI.Label(new Rect(132, 132, 150, 30), "" + game.cows[cowIndex].age, customTextStyle);
+			GUI.Label(new Rect(132, 132, 150, 30), "" + GlobalVars.game.cows[cowIndex].age, customTextStyle);
 			GUI.Label(new Rect(25, 170, 90, 25), "", labelBreed);
-			GUI.Label(new Rect(132, 170, 150, 30), "" + game.cows[cowIndex].breed, customTextStyle);
+			GUI.Label(new Rect(132, 170, 150, 30), "" + GlobalVars.game.cows[cowIndex].breed, customTextStyle);
 			GUI.Label(new Rect(25, 205, 110, 30), "", labelHappiness);
 			GUI.Label(new Rect(25, 240, 90, 25), "", labelHealth);
 			GUI.Label(new Rect(25, 275, 110, 30), "", labelPregnant);
@@ -558,7 +599,7 @@ public class UIMart : GameController
 			GUI.Label(new Rect(25, 313, 90, 25), "", labelGender);
 			GUI.Label(new Rect(132, 313, 150, 30), "" + cowGender, customTextStyle);
 			GUI.Label(new Rect(25, 350, 90, 30), "", labelWeight);
-			GUI.Label(new Rect(132, 350, 150, 30), "" + game.cows[cowIndex].weight, customTextStyle);
+			GUI.Label(new Rect(132, 350, 150, 30), "" + GlobalVars.game.cows[cowIndex].weight, customTextStyle);
 			
 			GUI.Label(new Rect(65, 400, 150, 30), "Current Bid: € " + currentCowBid, customTextStyle);
 
@@ -566,17 +607,16 @@ public class UIMart : GameController
 			{
                 if (GUI.Button(new Rect(105, 445, 120, 40), "", buttonSell))
                 {
-                    if (game.cows.Count != 0)
+                    if (GlobalVars.game.cows.Count != 0)
                     {
                         if (!cowInRing)
                         {
                             GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-                            biddingCow = game.cows[cowIndex];
+                            biddingCow = GlobalVars.game.cows[cowIndex];
 
                             CowMaker.SpawnCow(biddingCow, new Vector2(bidArea.x, bidArea.z), new Vector2(bidArea.x, bidArea.z), Vector3.zero);
                             LookAtRing();
                            
-              
                             StartBidding();
 
                             CreateScrollList.RemoveCowButton(cowIndex);
@@ -612,12 +652,9 @@ public class UIMart : GameController
 
 	void LookAtRing()
 	{
-		//cowsInMart[0].cowController.transform.position + cowsInMart[0].cowController.transform.forward * 10;
-
 		Vector3 height = new Vector3(0, 2, 0);
         Vector3 position = new Vector3(100, 5, 148.5f); 
-
-
+		
 		cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         cameraControl.MoveToLookAt(position + height, bidArea + height);
 	}
@@ -631,7 +668,7 @@ public class UIMart : GameController
 
 		// Clear all buttons && re-populate list
 		CreateScrollList.RemoveAllButtons();
-		CreateScrollList.access.PopulateList();
+		GlobalVars.access.PopulateList();
 
 		timerStart = false;
 		timerChecked = true;
@@ -673,11 +710,19 @@ public class UIMart : GameController
 		if (level == 10) 
 		{
 			Application.Quit ();	
-		} 
+		}
 		else 
 		{
 			Application.LoadLevel (level);
-			loadPlayer = true;
+			GlobalVars.loadPlayer = true;
 		}
+	}
+
+	IEnumerator WaitForSec(int seconds) 
+	{
+		yield return new WaitForSeconds(seconds);
+
+		bidResult = false;
+		biddingResult = null;
 	}
 }

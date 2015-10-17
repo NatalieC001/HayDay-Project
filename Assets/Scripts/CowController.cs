@@ -4,11 +4,9 @@ using System.Collections;
 [System.Serializable]
 public class CowController : GameController
 {
-    
     private GameObject playerGO;
 	private Animation anim;
 	private CameraController cameraControl;
-	private UIFarm userInterface;
 	private Movement movement;
 	private VCAnalogJoystickBase joyStick;
 
@@ -16,9 +14,8 @@ public class CowController : GameController
 	private float heigth;
 
 	private bool cowSelected;
-
+	private string currScene;
 	private bool idleRunning;
-	private bool inMart = false;
 
 	public Vector3 targetDest;
 	public Vector3 finalDest;
@@ -30,6 +27,8 @@ public class CowController : GameController
 
 	public Cow cow;
 
+	public UIFarm userInterface;
+
     void Start()
     {
         width = this.gameObject.GetComponent<Collider>().bounds.size.x;
@@ -40,6 +39,7 @@ public class CowController : GameController
         joyStick = GameObject.FindGameObjectWithTag("JoyStick").GetComponent<VCAnalogJoystickBase>();
         playerGO = GameObject.Find("Player");
         movement = playerGO.GetComponent<Movement>();
+		currScene = Application.loadedLevelName;
     }
 
     void Update()
@@ -78,19 +78,21 @@ public class CowController : GameController
 
     IEnumerator Idle(int seconds)
     {
-        idleRunning = true;
-        anim.Play("idle2");
-        yield return new WaitForSeconds(seconds);
-        if (state == "idle")
-        {
-            state = "wander";
-            idleRunning = false;
-        }
-    }
-
-    public void Wait()
-    {
-        state = "waiting";
+		idleRunning = true;
+		anim.Play("idle2");
+		
+		yield return new WaitForSeconds(seconds);
+		
+		if (state == "idle" || state == "idle2")
+		{
+			state = "wander";
+			idleRunning = false;
+		}
+	}
+	
+	public void Wait()
+	{
+		state = "waiting";
     }
 
     public void Wander()
@@ -129,7 +131,6 @@ public class CowController : GameController
         finalDest = Destination;
         targetDest = Destination;
         state = "moving";
-        idleRunning = false;
     }
 
     Vector3 lastDirection;
@@ -151,7 +152,6 @@ public class CowController : GameController
         Vector3 closestDirection = direction;
         float smalestDist = Vector3.Distance(hit.point, finalDest);
 
-
         Vector3 leftSide = transform.position;
         Vector3 rightSide = transform.position;
 
@@ -170,9 +170,7 @@ public class CowController : GameController
 
             if (oldAngle == Vector3.zero || Vector3.Distance(oldAngle, direction) > .8)
             {
-                Physics.Raycast(rightSide, direction, out hit);
-
-               // Physics.SphereCast(transform.position, heigth/2 ,direction, out hit);
+            	Physics.Raycast(rightSide, direction, out hit);
                               
                 if (hit.collider != rBL)
                 {
@@ -203,8 +201,7 @@ public class CowController : GameController
 
             if (oldAngle == Vector3.zero || Vector3.Distance(oldAngle, direction) > .8)
             {
-              // Physics.SphereCast(transform.position, heigth / 2, direction, out hit);
-               Physics.Raycast(leftSide, direction, out hit);
+            	Physics.Raycast(leftSide, direction, out hit);
 
                 if (hit.collider != rBR)
                 {
@@ -227,46 +224,82 @@ public class CowController : GameController
                 smalestDist = Vector3.Distance(hit.point, finalDest);
                 closestDirection = direction;
             }
-
         }
         return closestDirection * (smalestDist -2);
     }
 
     public void Moving()
     {
-        if (Vector3.Distance(transform.position, finalDest) < 6)
-        {
-            state = "idle";
-            return;
-        }
+		if(currScene.Equals("Farm"))
+		{
+			idleRunning = false;
 
-        if (Vector3.Distance(transform.position, targetDest) < 2)
-        {
-            targetDest = finalDest;
-        }
+	        if (Vector3.Distance(transform.position, targetDest) < 2)
+	        {
+	            targetDest = finalDest;
+				state = "idle";
+	        }
 
-        if (Physics.Raycast(transform.position, (targetDest - transform.position).normalized, Vector3.Distance(transform.position, targetDest)) || Physics.Raycast(transform.position, transform.forward, 2))
-        {
-            targetDest = transform.position + findPath(transform.position, (finalDest - transform.position).normalized);
-        }
-		
-		if (targetDest != Vector3.zero)
-        {
-            anim.Play("walk");
-            Quaternion lookRotation;
-            Vector3 direction;
+	        if (Physics.Raycast(transform.position, (targetDest - transform.position).normalized, Vector3.Distance(transform.position, targetDest)) || Physics.Raycast(transform.position, transform.forward, 2))
+	        {
+	            targetDest = transform.position + findPath(transform.position, (finalDest - transform.position).normalized);
+	        }
+			
+			if (targetDest != Vector3.zero)
+	        {
+	            anim.Play("walk");
+	            Quaternion lookRotation;
+	            Vector3 direction;
 
-            direction = (targetDest - transform.position).normalized;
+	            direction = (targetDest - transform.position).normalized;
 
-            lookRotation = Quaternion.LookRotation(direction);
+	            lookRotation = Quaternion.LookRotation(direction);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-            Vector3 yVec = Vector3.zero;
-            Vector3 fwd = transform.TransformDirection(Vector3.forward);
-            yVec.y += 1;
+	            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+	            Vector3 yVec = Vector3.zero;
+	            Vector3 fwd = transform.TransformDirection(Vector3.forward);
+	            yVec.y += 1;
 
-            transform.position += transform.forward * speed * Time.deltaTime;
-        }
+	            transform.position += transform.forward * speed * Time.deltaTime;
+	        }
+		}
+		else if(currScene.Equals("Mart"))
+		{
+			if (Vector3.Distance(transform.position, finalDest) < 2)
+			{
+				state = "idle";
+				Wait ();
+				return;
+			}
+
+			if (Vector3.Distance(transform.position, targetDest) < 2)
+			{
+				targetDest = finalDest;
+			}
+			
+			if (Physics.Raycast(transform.position, (targetDest - transform.position).normalized, Vector3.Distance(transform.position, targetDest)) || Physics.Raycast(transform.position, transform.forward, 2))
+			{
+				targetDest = transform.position + findPath(transform.position, (finalDest - transform.position).normalized);
+			}
+			
+			if (targetDest != Vector3.zero)
+			{
+				anim.Play("walk");
+				Quaternion lookRotation;
+				Vector3 direction;
+				
+				direction = (targetDest - transform.position).normalized;
+				
+				lookRotation = Quaternion.LookRotation(direction);
+				
+				transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+				Vector3 yVec = Vector3.zero;
+				Vector3 fwd = transform.TransformDirection(Vector3.forward);
+				yVec.y += 1;
+				
+				transform.position += transform.forward * speed * Time.deltaTime;
+			}
+		}
     }
 
     public void Follow(Vector3 goToPosition)
@@ -294,39 +327,38 @@ public class CowController : GameController
 
     void OnMouseDown()
     {
-		if (inMart || GlobalVars.cowSelected)
-            return;
-
-        Vector3 position;
-        Vector3 target;
-
+		if (!currScene.Equals("Farm") || GlobalVars.cowSelected)
+			return;
+		
+		Vector3 position;
+		Vector3 target;
+		
 		GlobalVars.cowSelected = true;
+		
+		joyStick.gameObject.SetActive(false);
+		state = "following";
+		
+		movement.lookAt(this.gameObject);
+		
+		position = playerGO.transform.position - transform.position;
+		position = position.normalized * 6;
+		target = position;
+		position += playerGO.transform.position;
+		target = playerGO.transform.position - target;
+		target.y = transform.position.y;
+		position.y = transform.position.y + 6;
+		
+		cameraControl.MoveToLookAt(position, target);
+		
+		userInterface.cow = cow;
+		userInterface.cowGameObject = this.gameObject;
 
-        joyStick.gameObject.SetActive(false);
-        state = "following";
-
-        movement.lookAt(this.gameObject);
-
-        position = playerGO.transform.position - transform.position;
-        position = position.normalized * 6;
-        target = position;
-        position += playerGO.transform.position;
-        target = playerGO.transform.position - target;
-        target.y = transform.position.y;
-        position.y = transform.position.y + 6;
-
-        cameraControl.MoveToLookAt(position, target);
-
-        userInterface.cow = cow;
-        userInterface.cowGameObject = this.gameObject;
-
-
-        if (userInterface.cowGameObject == null)
-            Debug.Log("User Interface is null!");
-
-        if (userInterface.cow == null)
-            Debug.Log("Cow is null!");
-
+		if (userInterface.cowGameObject == null)
+			Debug.Log("User Interface is null!");
+		
+		if (userInterface.cow == null)
+			Debug.Log("Cow is null!");
+		
 		GlobalVars.cowUI = true;
 		GlobalVars.playerUI = false;
     }

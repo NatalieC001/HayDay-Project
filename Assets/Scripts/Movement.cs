@@ -41,17 +41,20 @@ public class Movement : MonoBehaviour
 
         inputVec *= Speed;
 
-		if((inputVec.z != 0 || inputVec.x != 0))
+		if(currScene.Equals("Farm"))
 		{
-			if(!audioSource.isPlaying)
+			if((inputVec.z != 0 || inputVec.x != 0))
 			{
-				audioSource.clip = moveSound;
-				audioSource.Play();
+				if(!audioSource.isPlaying)
+				{
+					audioSource.clip = moveSound;
+					audioSource.Play();
+				}
 			}
-		}
-		else
-		{
-			GetComponent<AudioSource>().Stop();
+			else
+			{
+				GetComponent<AudioSource>().Stop();
+			}
 		}
 
         controller.Move((inputVec + Vector3.up * -gravity + new Vector3(0, 0, 0)) * Time.deltaTime);

@@ -47,22 +47,22 @@ public class UIFarm : GameController
 	private bool isLoading = false;
 	private CameraController cameraControl;
 	private VCAnalogJoystickBase joyStick;
-
-	private Vector2 farmTopLeft = new Vector2(102f, 261f);
-	private Vector2 farmBottomRight = new Vector2(57.2f, 242.2f);
 	#endregion
 	
     void Start()
     {
-		if (!init) 
+		if(GlobalVars.sceneTransitionUI)
+			GlobalVars.sceneTransitionUI = false;
+
+		if (!GlobalVars.init) 
 		{
-			game = this;
-			game.player.name = playerName;
-			game.player.cash = 50000;
-			game.player.grain = 0;
-			game.player.hay = 0;
-			game.player.pellet = 0;
-			init = true;
+			GlobalVars.game = this;
+			GlobalVars.game.player.name = GlobalVars.playerName;
+			GlobalVars.game.player.cash = 50000;
+			GlobalVars.game.player.grain = 0;
+			GlobalVars.game.player.hay = 0;
+			GlobalVars.game.player.pellet = 0;
+			GlobalVars.init = true;
 		}
 
 		bars = GetComponentsInChildren<Image>();
@@ -70,31 +70,6 @@ public class UIFarm : GameController
 		happinessBar = bars[1];
         cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         joyStick = GameObject.FindGameObjectWithTag("JoyStick").GetComponent<VCAnalogJoystickBase>();
-
-		/*if(newGame)
-		{
-			for(int i = 0;i < 10; i++)
-			{
-				cow = CowMaker.GenerateCow();
-				CowMaker.SpawnCow(cow,farmTopLeft, farmBottomRight,Vector3.zero);
-				game.cows.Add(cow);
-			}
-
-			newGame = false;
-		}
-		else 
-		{
-			if(GameController.loadPlayer)
-			{
-				Load();
-				foreach (Cow cow in game.cows)
-                    CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight, Vector3.zero);
-			}
-		}*/
-
-		cow = CowMaker.GenerateCow();
-		CowMaker.SpawnCow(cow,farmTopLeft, farmBottomRight,Vector3.zero);
-		game.cows.Add(cow);
     }
 
     void OnGUI()
@@ -142,8 +117,8 @@ public class UIFarm : GameController
     {
 		GUI.contentColor = backgroundColor;
 
-		GUI.Label(new Rect(20, 25, 150, 30), game.player.name, customTextStyle);
-        GUI.Label(new Rect(20, 60, 150, 30), "Cash: € " + game.player.cash, customTextStyle);
+		GUI.Label(new Rect(20, 25, 150, 30), GlobalVars.game.player.name, customTextStyle);
+        GUI.Label(new Rect(20, 60, 150, 30), "Cash: € " + GlobalVars.game.player.cash, customTextStyle);
 
 		SetHealth(0);
 		SetHappiness(0);
@@ -166,43 +141,43 @@ public class UIFarm : GameController
 		GUI.Label(new Rect(85, 30, 150, 30), "Grain", customTextStyle);
 		GUI.Label(new Rect(245, 30, 150, 30), "Hay", customTextStyle);
 		GUI.Label(new Rect(380, 30, 150, 30), "Pellets", customTextStyle);
-		GUI.Label(new Rect(85, 70, 150, 30), "€1000", customTextStyle);
-		GUI.Label(new Rect(230, 70, 150, 30), "€1500", customTextStyle);
-		GUI.Label(new Rect(385, 70, 150, 30), "€2500", customTextStyle);
+		GUI.Label(new Rect(85, 70, 150, 30), "€500", customTextStyle);
+		GUI.Label(new Rect(240, 70, 150, 30), "€800", customTextStyle);
+		GUI.Label(new Rect(385, 70, 150, 30), "€1250", customTextStyle);
 
 		if (GUI.Button(new Rect(80, 105, 75, 75), "", buttonGrain))	// Add to player class / inventory
 		{
-			if(game.player.cash >= 1000)
+			if(GlobalVars.game.player.cash >= 500)
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-				game.player.grain++;
-				game.player.cash = game.player.cash - 1000;
+				GlobalVars.game.player.grain++;
+				GlobalVars.game.player.cash = GlobalVars.game.player.cash - 500;
 			}
 		}
 
 		if (GUI.Button(new Rect(230, 105, 75, 75), "", buttonHay))		// Add to player class / inventory
 		{
-			if(game.player.cash >= 1500)
+			if(GlobalVars.game.player.cash >= 800)
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-				game.player.hay++;
-				game.player.cash = game.player.cash - 1500;
+				GlobalVars.game.player.hay++;
+				GlobalVars.game.player.cash = GlobalVars.game.player.cash - 800;
 			}
 		}
 
 		if (GUI.Button(new Rect(380, 105, 75, 75), "", buttonPellets))	// Add to player class / inventory
 		{
-			if(game.player.cash >= 2500)
+			if(GlobalVars.game.player.cash >= 1250)
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-				game.player.pellet++;
-				game.player.cash = game.player.cash - 2500;
+				GlobalVars.game.player.pellet++;
+				GlobalVars.game.player.cash = GlobalVars.game.player.cash - 1250;
 			}
 		}
 
-		GUI.Label(new Rect(110, 190, 150, 30), "" + game.player.grain, customTextStyle);
-		GUI.Label(new Rect(260, 190, 150, 30), "" + game.player.hay, customTextStyle);
-		GUI.Label(new Rect(410, 190, 150, 30), "" + game.player.pellet, customTextStyle);
+		GUI.Label(new Rect(110, 190, 150, 30), "" + GlobalVars.game.player.grain, customTextStyle);
+		GUI.Label(new Rect(260, 190, 150, 30), "" + GlobalVars.game.player.hay, customTextStyle);
+		GUI.Label(new Rect(410, 190, 150, 30), "" + GlobalVars.game.player.pellet, customTextStyle);
 
 		if (GUI.Button(new Rect(535, 180, 50, 50), "", buttonX))
 		{
@@ -328,9 +303,9 @@ public class UIFarm : GameController
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 
-			if(game.player.grain >= 1)
+			if(GlobalVars.game.player.grain >= 1)
 			{
-				game.player.grain--;
+				GlobalVars.game.player.grain--;
 				FeedCow(1);
 			}
 		}
@@ -339,9 +314,9 @@ public class UIFarm : GameController
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 
-			if(game.player.hay >= 1)
+			if(GlobalVars.game.player.hay >= 1)
 			{
-				game.player.hay--;
+				GlobalVars.game.player.hay--;
 				FeedCow(2);
 			}
 		}
@@ -350,16 +325,16 @@ public class UIFarm : GameController
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 
-			if(game.player.pellet >= 1)
+			if(GlobalVars.game.player.pellet >= 1)
 			{
-				game.player.pellet--;
+				GlobalVars.game.player.pellet--;
 				FeedCow(3);
 			}
 		}
 		
-		GUI.Label(new Rect(110, 160, 150, 30), "" + game.player.grain, customTextStyle);
-		GUI.Label(new Rect(260, 160, 150, 30), "" + game.player.hay, customTextStyle);
-		GUI.Label(new Rect(410, 160, 150, 30), "" + game.player.pellet, customTextStyle);
+		GUI.Label(new Rect(110, 160, 150, 30), "" + GlobalVars.game.player.grain, customTextStyle);
+		GUI.Label(new Rect(260, 160, 150, 30), "" + GlobalVars.game.player.hay, customTextStyle);
+		GUI.Label(new Rect(410, 160, 150, 30), "" + GlobalVars.game.player.pellet, customTextStyle);
 		
 		if (GUI.Button(new Rect(475, 230, 50, 50), "", buttonX))
 		{
@@ -442,15 +417,15 @@ public class UIFarm : GameController
 		}
 		else if(foodType == 2)
 		{
-			feedAmount = Random.Range(1, 4);
+			feedAmount = Random.Range(1, 3);
 		}
 		else if(foodType == 3)
 		{
-			feedAmount = Random.Range(1, 6);
+			feedAmount = Random.Range(2, 6);
 		}
 		else
 		{
-			feedAmount = Random.Range(1, 6);
+			feedAmount = Random.Range(2, 6);
 		}
 		
 		switch(feedAmount)
@@ -499,7 +474,6 @@ public class UIFarm : GameController
 		else 
 		{
 			Application.LoadLevel (level);
-			GlobalVars.sceneTransitionUI = false;
 		}
 	}
 }
