@@ -615,8 +615,6 @@ public class UIMart : GameController
                             biddingCow = GlobalVars.game.cows[cowIndex];
 
                             CowMaker.SpawnCow(biddingCow, new Vector2(bidArea.x, bidArea.z), new Vector2(bidArea.x, bidArea.z), Vector3.zero);
-                            LookAtRing();
-                           
                             StartBidding();
 
                             CreateScrollList.RemoveCowButton(cowIndex);
@@ -644,7 +642,7 @@ public class UIMart : GameController
 					cowSellBidUI = false;
 					cowMenuUI = true;
 					cowList.SetActive(false);
-					cameraControl.WatchPlayer();
+				//	cameraControl.WatchPlayer();
 				}
 			}
 		}

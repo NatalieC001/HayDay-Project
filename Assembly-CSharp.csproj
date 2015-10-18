@@ -119,7 +119,7 @@
      <None Include="Assets\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset3.shader" />
      <None Include="Assets\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\FisheyeShader.shader" />
      <None Include="Assets\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Apply.shader" />
-     <None Include="Assets\Navigation Resources\Buttons\Note.txt" />
+     <None Include="Assets\Cartoon Town and Farm\Navigation Resources\Buttons\Note.txt" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
      <None Include="Assets\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\frag_ao.cginc" />
      <None Include="Assets\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\DepthOfField34.shader" />

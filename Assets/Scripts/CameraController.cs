@@ -59,6 +59,7 @@ public class CameraController : MonoBehaviour {
     {
         Vector3 playerLoc =  player.transform.position;
         playerLoc.y = playerY;
+
         MoveToLookAt(startPositon, playerLoc);
         watchPlayer = true;
     }
@@ -73,6 +74,7 @@ public class CameraController : MonoBehaviour {
 
     void LateUpdate()
     {
+    
         if (transitioning)
         {
             float distCovered = (Time.time - startTime) * speed;
