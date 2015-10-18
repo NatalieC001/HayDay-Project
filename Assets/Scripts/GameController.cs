@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
 
 	private Vector2 farmTopLeft = new Vector2(102f, 261f);
 	private Vector2 farmBottomRight = new Vector2(57.2f, 242.2f);
-	
+
     void Start()
     {
 		if (!GlobalVars.init) 
@@ -33,8 +33,11 @@ public class GameController : MonoBehaviour
 			for(int i = 0;i < 3; i++)
 			{
 				Cow cow = CowMaker.GenerateCow();
-				CowMaker.SpawnCow(cow,farmTopLeft, farmBottomRight,Vector3.zero);
-				GlobalVars.game.cows.Add(cow);
+				if(CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight,Vector3.zero) == 1)
+				{
+					GlobalVars.game.cows.Add(cow);
+					cow.cowController.inMart = false;
+				}
 			}
 			
 			GlobalVars.newGame = false;
@@ -45,7 +48,10 @@ public class GameController : MonoBehaviour
 			{
 				Load();
 				foreach (Cow cow in GlobalVars.game.cows)
-					CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight, Vector3.zero);
+				{
+					if(CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight,Vector3.zero) == 1)
+						cow.cowController.inMart = false;
+				}
 			}
 		}
     }

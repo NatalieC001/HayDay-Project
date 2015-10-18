@@ -123,7 +123,7 @@ public class UIMart : GameController
         cowsInMart = new List<Cow>();
         Vector3 forward = new Vector3(0,0,1);
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 5; i++)
         {
 			Cow newCow = CowMaker.GenerateCow();
             if(CowMaker.SpawnCow(newCow, bottomLeft, topRight, forward) == 1)
@@ -136,6 +136,7 @@ public class UIMart : GameController
 			try
 			{
             	cow.cowController.Wait();
+				cow.cowController.inMart = true;
 			}
 			catch(System.Exception error)
 			{
@@ -172,7 +173,6 @@ public class UIMart : GameController
 
     IEnumerator WaitForCow()
     {      
-		// Error here! - Cow Controller null
 		while (Vector3.Distance(biddingCow.cowController.ReturnPosition(), bidArea) > 2)
         {
            yield return new WaitForSeconds(1f);       

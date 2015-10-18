@@ -16,7 +16,9 @@ public class Movement : MonoBehaviour
 	private CharacterController controller;
 	private Animator animator;
 	private AudioSource audioSource;
-	private string currScene;
+	private bool inMart;
+
+	private VCAnalogJoystickBase joy;
 
     void Start()
     {
@@ -24,24 +26,24 @@ public class Movement : MonoBehaviour
         controller = (CharacterController)GetComponent(typeof(CharacterController));
         animator = GetComponent<Animator>();
 		audioSource = GetComponent<AudioSource>();
-		currScene = Application.loadedLevelName;
+		inMart = Application.loadedLevelName.Equals("Mart");
     }
 
     public float UpdateMovement()
     {
 		Vector3 inputVec = new Vector3();
 
-        VCAnalogJoystickBase joy = VCAnalogJoystickBase.GetInstance("stick");
+        joy = VCAnalogJoystickBase.GetInstance("stick");
 
-		if(currScene.Equals("Farm"))
+		if(!inMart)
         	inputVec = new Vector3(joy.AxisY, 0, -joy.AxisX);
 
-		if(currScene.Equals("Mart"))
+		if(inMart)
 			inputVec = new Vector3(-joy.AxisX, 0, -joy.AxisY);
 
         inputVec *= Speed;
 
-		if(currScene.Equals("Farm"))
+		if(!inMart)
 		{
 			if((inputVec.z != 0 || inputVec.x != 0))
 			{

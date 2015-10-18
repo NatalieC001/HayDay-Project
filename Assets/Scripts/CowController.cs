@@ -14,7 +14,7 @@ public class CowController : GameController
 	private float heigth;
 
 	private bool cowSelected;
-	private string currScene;
+
 	private bool idleRunning;
 
 	public Vector3 targetDest;
@@ -26,6 +26,7 @@ public class CowController : GameController
     public AudioClip cowSound;
 
 	public Cow cow;
+	public bool inMart;
 
 	public UIFarm userInterface;
 
@@ -34,12 +35,11 @@ public class CowController : GameController
         width = this.gameObject.GetComponent<Collider>().bounds.size.x;
         heigth = this.gameObject.GetComponent<Collider>().bounds.size.x;
         anim = GetComponent<Animation>();
-        userInterface = GameObject.FindGameObjectWithTag("UI").GetComponent<UIFarm>();
+		userInterface = GameObject.Find("UserInterface").GetComponent<UIFarm>();
+		joyStick = GameObject.Find("VCAnalogJoystick").GetComponent<VCAnalogJoystickBase>();
         cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
-        joyStick = GameObject.FindGameObjectWithTag("JoyStick").GetComponent<VCAnalogJoystickBase>();
         playerGO = GameObject.Find("Player");
         movement = playerGO.GetComponent<Movement>();
-		currScene = Application.loadedLevelName;
     }
 
     void Update()
@@ -56,9 +56,10 @@ public class CowController : GameController
                 Wander();
                 break;
             case "idle":
-                if (!idleRunning)
-                    StartCoroutine(Idle(Random.Range(5, 40)));
-                break;
+				if(!inMart)
+	                if (!idleRunning)
+	                    StartCoroutine(Idle(Random.Range(5, 40)));
+	                break;
             case "lookingAtPlayer":
                 if (movement.currentFocus != this.gameObject)
                 {
@@ -70,7 +71,8 @@ public class CowController : GameController
                 Follow(playerGO.transform.position);
                 break;
 			case "":
-				state = "idle";
+				if(!inMart)
+					state = "idle";
 			break;
         }
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
@@ -230,7 +232,7 @@ public class CowController : GameController
 
     public void Moving()
     {
-		if(currScene.Equals("Farm"))
+		if(!inMart)
 		{
 			idleRunning = false;
 
@@ -263,11 +265,10 @@ public class CowController : GameController
 	            transform.position += transform.forward * speed * Time.deltaTime;
 	        }
 		}
-		else if(currScene.Equals("Mart"))
+		else
 		{
 			if (Vector3.Distance(transform.position, finalDest) < 2)
 			{
-				state = "idle";
 				Wait ();
 				return;
 			}
@@ -327,13 +328,11 @@ public class CowController : GameController
 
     void OnMouseDown()
     {
-		if (!currScene.Equals("Farm") || GlobalVars.cowSelected)
+		if (inMart || GlobalVars.cowSelected)
 			return;
 		
 		Vector3 position;
 		Vector3 target;
-		
-		GlobalVars.cowSelected = true;
 		
 		joyStick.gameObject.SetActive(false);
 		state = "following";
@@ -360,7 +359,7 @@ public class CowController : GameController
 			Debug.Log("Cow is null!");
 		
 		GlobalVars.cowUI = true;
-		GlobalVars.playerUI = false;
+		GlobalVars.cowSelected = true;
     }
 
     IEnumerator WaitFor(float seconds, int option)

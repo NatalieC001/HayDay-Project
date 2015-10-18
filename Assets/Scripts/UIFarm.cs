@@ -68,8 +68,10 @@ public class UIFarm : GameController
 		bars = GetComponentsInChildren<Image>();
 		healthBar = bars[0];
 		happinessBar = bars[1];
-        cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
-        joyStick = GameObject.FindGameObjectWithTag("JoyStick").GetComponent<VCAnalogJoystickBase>();
+
+		// Problem could be here
+        cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();	
+		joyStick = GameObject.Find("VCAnalogJoystick").GetComponent<VCAnalogJoystickBase>();
     }
 
     void OnGUI()

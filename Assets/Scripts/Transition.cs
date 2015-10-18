@@ -12,8 +12,6 @@ public class Transition : MonoBehaviour
 	{
 		if (other.gameObject.name.Equals ("Player"))
 		{
-			GlobalVars.playerUI = false;
-			GlobalVars.cowUI = false;
 			GlobalVars.sceneTransitionUI = true;
 		}
 	}
@@ -22,8 +20,6 @@ public class Transition : MonoBehaviour
 	{
 		if (other.gameObject.name.Equals ("Player"))
 		{
-			GlobalVars.playerUI = false;
-			GlobalVars.cowUI = false;
 			GlobalVars.sceneTransitionUI = false;
 		}
 	}

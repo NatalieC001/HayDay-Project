@@ -13,9 +13,6 @@ public class Supplies : MonoBehaviour
 		if (other.gameObject.name.Equals ("Player"))
 		{
 			GlobalVars.playerUI = true;
-			GlobalVars.cowUI = false;
-			GlobalVars.sceneTransitionUI = false;
-			GlobalVars.buySuppliesUI = false;
 		}
 	}
 
@@ -24,9 +21,6 @@ public class Supplies : MonoBehaviour
 		if (other.gameObject.name.Equals ("Player"))
 		{
 			GlobalVars.playerUI = false;
-			GlobalVars.cowUI = false;
-			GlobalVars.sceneTransitionUI = false;
-			GlobalVars.buySuppliesUI = false;
 		}
 	}
 }
