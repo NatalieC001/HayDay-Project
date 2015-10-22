@@ -79,6 +79,7 @@ public class UIMart : GameController
     static Vector2 martBottomLeft = new Vector2(116.28f, 158.68f);
 
 	private Vector3 bidArea = new Vector3(109f, 0f, 137f);
+    private Vector3 cameraPosition;
 
 	private float scrollListPaddingY;
 	private float healthHappinessPaddingY;
@@ -87,7 +88,7 @@ public class UIMart : GameController
 	private bool bidResult;
 	private GUIStyle biddingResult;
 	#endregion
-
+ 
     void Start()
     {
 		if (!GlobalVars.init) 
@@ -101,6 +102,8 @@ public class UIMart : GameController
 			GlobalVars.init = true;
 		}
 
+        cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+        cameraPosition = cameraControl.gameObject.transform.position;
 		bars = GetComponentsInChildren<Image>();
 		healthBar = bars[0];
 		happinessBar = bars[1];
@@ -111,6 +114,7 @@ public class UIMart : GameController
 		cowList.SetActive (false);
         bidderList = new List<Bidder>();
         timeRemaining = 10;
+  
 
         for (int i = 0; i < Random.Range(3, 6); i++) 
 		{
@@ -143,6 +147,7 @@ public class UIMart : GameController
 				print ("Error: " + error);
 			}
         }
+
     }
 
     void FixedUpdate()
@@ -154,25 +159,34 @@ public class UIMart : GameController
         	StopBidding();
     }
 
+
     public static void bid(Bidder bidder,float bid)
     {
+        CameraController cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         if (bid >= currentCowBid)
         {
             if(bidder != null)
             { 
-                playerBidLast = false; 
+                playerBidLast = false;
+                cameraControl.LookAt(bidder.gameObject.transform.position);
             }
               
             currentCowBid = (int)bid;
             lastBidder = bidder;
             
             endBiddingRound();
+       
             StartNewRound();
+            
         }
     }
 
+
     IEnumerator WaitForCow()
-    {      
+    {
+        yield return new WaitForSeconds(1f);    
+        biddingCow.cowController.MoveTo(bidArea);
+
 		while (Vector3.Distance(biddingCow.cowController.ReturnPosition(), bidArea) > 2)
         {
            yield return new WaitForSeconds(1f);       
@@ -188,6 +202,7 @@ public class UIMart : GameController
         cowInRing = true;    
         startingPrice = setCowPrice(biddingCow);
         currentCowBid = startingPrice;
+        cameraControl.WatchTarget(biddingCow.cowController.gameObject);
         StartCoroutine(WaitForCow());   
     }
 
@@ -520,8 +535,7 @@ public class UIMart : GameController
 				{
 					GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 					cowIndex = Random.Range(0, cowsInMart.Count - 1);
-					biddingCow = cowsInMart[cowIndex];
-	                biddingCow.cowController.MoveTo(bidArea);
+					biddingCow = cowsInMart[cowIndex];	           
 	                StartBidding();
 				}
 			}
@@ -629,7 +643,7 @@ public class UIMart : GameController
 			if (GUI.Button(new Rect(295, 450, 35, 35), "", buttonX))
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-
+                cameraControl.WatchPlayer();
 				if(cowSelected)
 				{
 					cowSelected = false;
@@ -642,7 +656,6 @@ public class UIMart : GameController
 					cowSellBidUI = false;
 					cowMenuUI = true;
 					cowList.SetActive(false);
-				//	cameraControl.WatchPlayer();
 				}
 			}
 		}
@@ -651,10 +664,9 @@ public class UIMart : GameController
 	void LookAtRing()
 	{
 		Vector3 height = new Vector3(0, 2, 0);
-        Vector3 position = new Vector3(100, 5, 148.5f); 
-		
-		cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
-        cameraControl.MoveToLookAt(position + height, bidArea + height);
+        Vector3 position = new Vector3(96, 8, 142.31f);
+        cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+        cameraControl.MoveToLookAt(position, bidArea + height);
 	}
 
 	public void ClearStats()

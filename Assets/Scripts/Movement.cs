@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
 	private bool inMart;
 
 	private VCAnalogJoystickBase joy;
-
+    private CameraController cameraController;
     void Start()
     {
         freeRoam = true;
@@ -27,6 +27,7 @@ public class Movement : MonoBehaviour
         animator = GetComponent<Animator>();
 		audioSource = GetComponent<AudioSource>();
 		inMart = Application.loadedLevelName.Equals("Mart");
+        cameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
     }
 
     public float UpdateMovement()
@@ -35,11 +36,17 @@ public class Movement : MonoBehaviour
 
         joy = VCAnalogJoystickBase.GetInstance("stick");
 
-		if(!inMart)
-        	inputVec = new Vector3(joy.AxisY, 0, -joy.AxisX);
 
-		if(inMart)
-			inputVec = new Vector3(-joy.AxisX, 0, -joy.AxisY);
+        //print(cameraController.transform.forward.x);
+
+        //int joyVec = 1;
+        //if(cameraController.transform.forward.x< 0 ) joyVec =-1;
+        //inputVec = new Vector3(joy.AxisY * joyVec, 0, joy.AxisX * -joyVec);
+        if (!inMart)
+            inputVec = new Vector3(joy.AxisY, 0, -joy.AxisX);
+
+        if (inMart)
+            inputVec = new Vector3(-joy.AxisX, 0, -joy.AxisY);
 
         inputVec *= Speed;
 

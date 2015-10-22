@@ -21,7 +21,8 @@ public class Bidder : GameController
         {
             UIMart.bid(this, desiredPrice);  
             Animator animator = GetComponent<Animator>();
-            animator.SetTrigger("Bid");            
+            animator.SetTrigger("Bid");
+            StartCoroutine(SpawnBidSprite(transform.position));
         }
     }
 
@@ -63,7 +64,18 @@ public class Bidder : GameController
             bid = true;
         }
     }
+    private IEnumerator SpawnBidSprite(Vector3 position)
+    {
+        GameObject bidSprite = Instantiate(Resources.Load("Bid!") as GameObject);
+        position.y += 5;
+        bidSprite.transform.position = position;
+ 
 
+        yield return new WaitForSeconds(1f);
+
+        Destroy(bidSprite);
+
+    }
     public void stopBidding()
     {
         bid = false;

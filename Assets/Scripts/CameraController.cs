@@ -4,9 +4,9 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 
     public float speed = 10;
-	public bool watchPlayer;
-	public bool followPlayer;
-	public GameObject player;
+	public bool watchTarget;
+	public bool followTarget;
+	public GameObject target;
 
     float startTime;
     float journeyLength;
@@ -14,6 +14,7 @@ public class CameraController : MonoBehaviour {
     Vector3 difVec;
     Vector3 startingAngle;
     Vector3 endingAngle;
+    Vector3 defaultPosition;
     Vector3 startPositon;
     Vector3 endPosition;
 
@@ -23,9 +24,9 @@ public class CameraController : MonoBehaviour {
 
     void Start()
     {
-        player = GameObject.Find("Player");
-        difVec = transform.position - player.transform.position;
-        startPositon = transform.position;
+        target = GameObject.Find("Player");
+        difVec = transform.position - target.transform.position;
+        defaultPosition = transform.position;
         StartCoroutine(average());
     }
 
@@ -33,48 +34,73 @@ public class CameraController : MonoBehaviour {
     {
         for(int i = 0; i < 10; i++)
         {       
-            playerY += player.transform.position.y;
+            playerY += target.transform.position.y;
             yield return new WaitForSeconds(.01f);
         }
         playerY = playerY / 10; 
     }
 
-    public void MoveToLookAt(Vector3 positon, Vector3 target)
+    public void MoveToLookAt(Vector3 position, Vector3 target)
     {
         startTime = Time.time;
-        journeyLength = Vector3.Distance(transform.position, positon);
+        journeyLength = Vector3.Distance(transform.position, position);
 
         startPositon = transform.position;
         startingAngle = transform.forward;
 
-        endPosition = positon;
-        endingAngle = (target - positon).normalized;
+        endPosition = position;
+        endingAngle = (target - position).normalized;
 
         transitioning = true;
-        watchPlayer = false;
-        followPlayer = false;
+        watchTarget = false;
+        followTarget = false;
+    }
+
+    public void LookAt(Vector3 target)
+    {
+        startTime = Time.time;
+        journeyLength = Vector3.Distance(target -transform.position, transform.forward)/4;
+
+        startPositon = transform.position;
+        startingAngle = transform.forward;
+        endingAngle = (target - transform.position).normalized;
+
+        transitioning = true;
+        watchTarget = false;
+        followTarget = false;
+    }
+
+
+
+    public void WatchTarget(GameObject target)
+    {
+        this.target = target;
+        LookAt(target.transform.position);
+        watchTarget = true;
     }
 
     public void WatchPlayer()
     {
-        Vector3 playerLoc =  player.transform.position;
+        target = GameObject.Find("Player");
+        Vector3 playerLoc = target.transform.position;
         playerLoc.y = playerY;
-
-        MoveToLookAt(startPositon, playerLoc);
-        watchPlayer = true;
+        MoveToLookAt(defaultPosition, playerLoc);
+        watchTarget = true;
     }
+
+
 
     public void FollowPlayer()
     {
-        Vector3 playerLoc = player.transform.position;
+        target = GameObject.Find("Player");
+        Vector3 playerLoc = target.transform.position;
         playerLoc.y = playerY;
-        MoveToLookAt(startPositon, playerLoc);
-        followPlayer = true;
+        MoveToLookAt(playerLoc+difVec, playerLoc);
+        followTarget = true;
     }
 
     void LateUpdate()
-    {
-    
+    {   
         if (transitioning)
         {
             float distCovered = (Time.time - startTime) * speed;
@@ -92,13 +118,13 @@ public class CameraController : MonoBehaviour {
                 transitioning = false;
             }
         }
-        else if (watchPlayer)
+        else if (watchTarget)
         {
-            transform.LookAt(player.transform.position);
+            transform.LookAt(target.transform.position);
         }
-        else if (followPlayer)
+        else if (followTarget)
         {
-            transform.position = player.transform.position + difVec;
+            transform.position = target.transform.position + difVec;
         }
     }
 }
