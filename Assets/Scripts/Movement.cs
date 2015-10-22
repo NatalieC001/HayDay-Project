@@ -26,7 +26,6 @@ public class Movement : MonoBehaviour
         controller = (CharacterController)GetComponent(typeof(CharacterController));
         animator = GetComponent<Animator>();
 		audioSource = GetComponent<AudioSource>();
-		inMart = Application.loadedLevelName.Equals("Mart");
         cameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
     }
 
@@ -37,16 +36,15 @@ public class Movement : MonoBehaviour
         joy = VCAnalogJoystickBase.GetInstance("stick");
 
 
-        //print(cameraController.transform.forward.x);
 
-        //int joyVec = 1;
-        //if(cameraController.transform.forward.x< 0 ) joyVec =-1;
-        //inputVec = new Vector3(joy.AxisY * joyVec, 0, joy.AxisX * -joyVec);
-        if (!inMart)
-            inputVec = new Vector3(joy.AxisY, 0, -joy.AxisX);
+        float cameraX = (cameraController.transform.forward.x + 1) / 2;
+        float cameraZ =  (cameraController.transform.forward.z + 1) / 2;
 
-        if (inMart)
-            inputVec = new Vector3(-joy.AxisX, 0, -joy.AxisY);
+        float remainder = 1 - (cameraX  + cameraZ);
+        cameraX += remainder;
+
+        inputVec = new Vector3(Mathf.Lerp(-joy.AxisY, joy.AxisY, cameraX) + Mathf.Lerp(-joy.AxisX, joy.AxisX, cameraZ), 0,
+            Mathf.Lerp(joy.AxisX, -joy.AxisX, cameraX) + Mathf.Lerp(-joy.AxisY, joy.AxisY, cameraZ));
 
         inputVec *= Speed;
 
