@@ -75,8 +75,8 @@ public class UIMart : GameController
     static float timeRemaining;
 	static float timeOfLastBid;
 
-    static Vector2 martTopRight = new Vector2(103.26f, 149.26f);
-    static Vector2 martBottomLeft = new Vector2(116.28f, 158.68f);
+    static Vector2 martTopRight = new Vector2(110.28f, 142.24f);
+    static Vector2 martBottomLeft = new Vector2(99.56f, 147f);
 
 	private Vector3 bidArea = new Vector3(109f, 0f, 137f);
     private Vector3 cameraPosition;

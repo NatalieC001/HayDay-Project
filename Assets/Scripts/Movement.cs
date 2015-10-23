@@ -35,16 +35,17 @@ public class Movement : MonoBehaviour
 
         joy = VCAnalogJoystickBase.GetInstance("stick");
 
+        float x = cameraController.transform.forward.x;
+        float z = cameraController.transform.forward.z;
 
+        float sum = Mathf.Abs(x) + Mathf.Abs(z);
+        float remainder = 1 - sum;
 
-        float cameraX = (cameraController.transform.forward.x + 1) / 2;
-        float cameraZ =  (cameraController.transform.forward.z + 1) / 2;
-
-        float remainder = 1 - (cameraX  + cameraZ);
-        cameraX += remainder;
+        float cameraX = (x + remainder * (x / sum) + 1) / 2;
+        float cameraZ = (z + remainder * (z / sum) + 1) / 2;
 
         inputVec = new Vector3(Mathf.Lerp(-joy.AxisY, joy.AxisY, cameraX) + Mathf.Lerp(-joy.AxisX, joy.AxisX, cameraZ), 0,
-            Mathf.Lerp(joy.AxisX, -joy.AxisX, cameraX) + Mathf.Lerp(-joy.AxisY, joy.AxisY, cameraZ));
+                               Mathf.Lerp(joy.AxisX, -joy.AxisX, cameraX) + Mathf.Lerp(-joy.AxisY, joy.AxisY, cameraZ));
 
         inputVec *= Speed;
 

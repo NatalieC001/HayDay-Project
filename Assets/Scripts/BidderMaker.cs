@@ -17,7 +17,7 @@ public class BidderMaker : GameController {
 
             spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation);
 
-        } while (Physics.CheckSphere(spawnLocation + new Vector3(0, 3.5f, 0), 3));
+        } while (Physics.CheckSphere(spawnLocation + new Vector3(0,3.5f, 0), 3));
 		
          GameObject bidderGameObject = Instantiate(Resources.Load("Bidder") as GameObject);
          bidderGameObject.transform.position = spawnLocation;
