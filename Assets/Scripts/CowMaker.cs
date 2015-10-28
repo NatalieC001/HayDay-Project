@@ -28,6 +28,7 @@ public class CowMaker : GameController
             cowGameObject.transform.forward = forward;
         }
         cowGameObject.transform.position = spawnLocation;
+        cowGameObject.transform.localScale = new Vector3(Mathf.Pow(cow.weight, .125f), Mathf.Pow(cow.weight, .125f), Mathf.Pow(cow.weight, .125f));
 
         CowController cowController = cowGameObject.GetComponent<CowController>();
 
