@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
 		{
 			GlobalVars.game = this;
 			GlobalVars.game.player.name = GlobalVars.playerName;
-			GlobalVars.game.player.cash = 50000;
+			GlobalVars.game.player.cash = 25000;
 			GlobalVars.game.player.grain = 0;
 			GlobalVars.game.player.hay = 0;
 			GlobalVars.game.player.pellet = 0;
@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
 
 		if(GlobalVars.newGame)
 		{
-			for(int i = 0;i < 3; i++)
+			for(int i = 0;i < 2; i++)
 			{
 				Cow cow = CowMaker.GenerateCow();
 				if(CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight,Vector3.zero) == 1)

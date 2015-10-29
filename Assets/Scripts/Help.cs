@@ -17,8 +17,9 @@ public class Help : MonoBehaviour
 	{
 		GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroundTexture);
 
-		GUI.Label (new Rect (Screen.width * .072f, Screen.height * .25f, Screen.width * .8f, Screen.height * .16f), "1: Buy supplies to feed your cattle to improve their stats, health and happiness!", customTextStyle);
-			GUI.Label (new Rect (Screen.width * .072f, Screen.height * .5f, Screen.width * .8f, Screen.height * .16f), "2: Tap on your cattle to view stats and feed them!", customTextStyle);
+		GUI.Label (new Rect (Screen.width * .072f, Screen.height * .22f, Screen.width * .8f, Screen.height * .16f), "1: Buy supplies to feed your cattle to improve their stats, health and happiness!", customTextStyle);
+		GUI.Label (new Rect (Screen.width * .072f, Screen.height * .45f, Screen.width * .8f, Screen.height * .16f), "2: Tap on your cattle to view stats and feed them!", customTextStyle);
+		GUI.Label (new Rect (Screen.width * .072f, Screen.height * .63f, Screen.width * .8f, Screen.height * .16f), "3: Make some profit at the market place!", customTextStyle);
 
 		if(!isLoading)
 			GUI.Label (new Rect (Screen.width * .23f, Screen.height * (buttonPadding - .225f), Screen.width * .58f, Screen.height * .16f), "", labelGameTitle);

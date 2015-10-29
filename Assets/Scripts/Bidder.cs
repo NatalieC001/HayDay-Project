@@ -70,7 +70,6 @@ public class Bidder : GameController
         position.y += 5;
         bidSprite.transform.position = position;
  
-
         yield return new WaitForSeconds(1f);
 
         Destroy(bidSprite);

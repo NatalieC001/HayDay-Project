@@ -58,7 +58,7 @@ public class UIFarm : GameController
 		{
 			GlobalVars.game = this;
 			GlobalVars.game.player.name = GlobalVars.playerName;
-			GlobalVars.game.player.cash = 50000;
+			GlobalVars.game.player.cash = 25000;
 			GlobalVars.game.player.grain = 0;
 			GlobalVars.game.player.hay = 0;
 			GlobalVars.game.player.pellet = 0;
@@ -267,7 +267,7 @@ public class UIFarm : GameController
 		GUI.Label(new Rect(35, 210, 90, 25), "", labelGender);
 		GUI.Label(new Rect(142, 210, 150, 30), "" + cowGender, customTextStyle);
 		GUI.Label(new Rect(35, 245, 90, 30), "", labelWeight);
-		GUI.Label(new Rect(142, 245, 150, 30), "" + cow.weight, customTextStyle);
+		GUI.Label(new Rect(142, 245, 150, 30), "" + cow.weight + " KG", customTextStyle);
 
 		if (GUI.Button(new Rect(38, 300, 80, 40), "", buttonFeed))
 		{

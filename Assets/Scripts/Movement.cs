@@ -27,6 +27,8 @@ public class Movement : MonoBehaviour
         animator = GetComponent<Animator>();
 		audioSource = GetComponent<AudioSource>();
         cameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+		if (Application.loadedLevelName.Equals ("Mart"))
+			inMart = true;
     }
 
     public float UpdateMovement()

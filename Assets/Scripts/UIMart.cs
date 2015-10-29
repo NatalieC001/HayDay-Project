@@ -95,7 +95,7 @@ public class UIMart : GameController
 		{
 			GlobalVars.game = this;
 			GlobalVars.game.player.name = GlobalVars.playerName;
-			GlobalVars.game.player.cash = 50000;
+			GlobalVars.game.player.cash = 25000;
 			GlobalVars.game.player.grain = 0;
 			GlobalVars.game.player.hay = 0;
 			GlobalVars.game.player.pellet = 0;
@@ -115,7 +115,6 @@ public class UIMart : GameController
         bidderList = new List<Bidder>();
         timeRemaining = 10;
   
-
         for (int i = 0; i < Random.Range(3, 6); i++) 
 		{
 			Bidder newBidder = BidderMaker.SpawnBidder ("", martTopRight, martBottomLeft);
@@ -127,7 +126,7 @@ public class UIMart : GameController
         cowsInMart = new List<Cow>();
         Vector3 forward = new Vector3(0,0,1);
 
-        for (int i = 0; i < 5; i++)
+		for (int i = 0; i < Random.Range(5, 8); i++)
         {
 			Cow newCow = CowMaker.GenerateCow();
             if(CowMaker.SpawnCow(newCow, bottomLeft, topRight, forward) == 1)
@@ -147,7 +146,6 @@ public class UIMart : GameController
 				print ("Error: " + error);
 			}
         }
-
     }
 
     void FixedUpdate()
@@ -158,7 +156,6 @@ public class UIMart : GameController
         if (bidding && Time.time > timeOfLastBid + timeRemaining)
         	StopBidding();
     }
-
 
     public static void bid(Bidder bidder,float bid)
     {
@@ -180,7 +177,6 @@ public class UIMart : GameController
             
         }
     }
-
 
     IEnumerator WaitForCow()
     {
@@ -523,7 +519,7 @@ public class UIMart : GameController
 		GUI.Label(new Rect(25, 313, 90, 25), "", labelGender);
 		GUI.Label(new Rect(132, 313, 150, 30), "" + cowGender, customTextStyle);
 		GUI.Label(new Rect(25, 350, 90, 30), "", labelWeight);
-		GUI.Label(new Rect(132, 350, 150, 30), "" + biddingCow.weight, customTextStyle);
+		GUI.Label(new Rect(132, 350, 150, 30), "" + biddingCow.weight + " KG", customTextStyle);
 
 		GUI.Label(new Rect(65, 400, 150, 30), "Current Bid: € " + currentCowBid, customTextStyle);
 
@@ -548,8 +544,9 @@ public class UIMart : GameController
 				if(GUI.Button (new Rect (125, 445, 80, 40), "", buttonBid))
 				{
 					GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-	                bid(null, currentCowBid += 1000);
+	                bid(null, currentCowBid += 500);
 	                playerBidLast = true;
+					LookAtRing ();
 				}
 			}
 		}
@@ -613,7 +610,7 @@ public class UIMart : GameController
 			GUI.Label(new Rect(25, 313, 90, 25), "", labelGender);
 			GUI.Label(new Rect(132, 313, 150, 30), "" + cowGender, customTextStyle);
 			GUI.Label(new Rect(25, 350, 90, 30), "", labelWeight);
-			GUI.Label(new Rect(132, 350, 150, 30), "" + GlobalVars.game.cows[cowIndex].weight, customTextStyle);
+			GUI.Label(new Rect(132, 350, 150, 30), "" + GlobalVars.game.cows[cowIndex].weight + " KG", customTextStyle);
 			
 			GUI.Label(new Rect(65, 400, 150, 30), "Current Bid: € " + currentCowBid, customTextStyle);
 
@@ -643,7 +640,6 @@ public class UIMart : GameController
 			if (GUI.Button(new Rect(295, 450, 35, 35), "", buttonX))
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-                cameraControl.WatchPlayer();
 				if(cowSelected)
 				{
 					cowSelected = false;
@@ -656,6 +652,7 @@ public class UIMart : GameController
 					cowSellBidUI = false;
 					cowMenuUI = true;
 					cowList.SetActive(false);
+					cameraControl.WatchPlayer();
 				}
 			}
 		}
