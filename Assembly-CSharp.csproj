@@ -6,7 +6,7 @@
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
 	<RootNamespace></RootNamespace>
-	<ProjectGuid>{09C60594-2E7C-2CEB-7A19-69ACC6DEF732}</ProjectGuid>
+	<ProjectGuid>{DDFBC18F-9396-3137-9CFE-DEB2CDB74636}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<AssemblyName>Assembly-CSharp</AssemblyName>
@@ -63,24 +63,26 @@
      <Compile Include="Assets\Cartoon Town and Farm\Tools\Birds Swarm\SwarmCenter.cs" />
      <Compile Include="Assets\Cartoon Town and Farm\Tools\CameraBehaviors.cs" />
      <Compile Include="Assets\Cartoon Town and Farm\Tools\ScrollingUVs.cs" />
-     <Compile Include="Assets\Scripts\BackgroundMusic.cs" />
-     <Compile Include="Assets\Scripts\Bidder.cs" />
-     <Compile Include="Assets\Scripts\BidderMaker.cs" />
-     <Compile Include="Assets\Scripts\CameraController.cs" />
-     <Compile Include="Assets\Scripts\CowButton.cs" />
-     <Compile Include="Assets\Scripts\CowController.cs" />
-     <Compile Include="Assets\Scripts\CowMaker.cs" />
-     <Compile Include="Assets\Scripts\CreateScrollList.cs" />
-     <Compile Include="Assets\Scripts\GameController.cs" />
-     <Compile Include="Assets\Scripts\GlobalVars.cs" />
-     <Compile Include="Assets\Scripts\Help.cs" />
-     <Compile Include="Assets\Scripts\MainMenu.cs" />
-     <Compile Include="Assets\Scripts\Movement.cs" />
-     <Compile Include="Assets\Scripts\PlayerNameMenu.cs" />
-     <Compile Include="Assets\Scripts\Supplies.cs" />
-     <Compile Include="Assets\Scripts\Transition.cs" />
-     <Compile Include="Assets\Scripts\UIFarm.cs" />
-     <Compile Include="Assets\Scripts\UIMart.cs" />
+     <Compile Include="Assets\Scripts\Bidder\Bidder.cs" />
+     <Compile Include="Assets\Scripts\Bidder\BidderMaker.cs" />
+     <Compile Include="Assets\Scripts\Cow\Cow.cs" />
+     <Compile Include="Assets\Scripts\Cow\CowButton.cs" />
+     <Compile Include="Assets\Scripts\Cow\CowController.cs" />
+     <Compile Include="Assets\Scripts\Cow\CowMaker.cs" />
+     <Compile Include="Assets\Scripts\Menus\FarmTransition.cs" />
+     <Compile Include="Assets\Scripts\Menus\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\Menus\MartBuySell.cs" />
+     <Compile Include="Assets\Scripts\Menus\MartTransition.cs" />
+     <Compile Include="Assets\Scripts\Menus\PlayerNameMenu.cs" />
+     <Compile Include="Assets\Scripts\Menus\Supplies.cs" />
+     <Compile Include="Assets\Scripts\Menus\UIFarm.cs" />
+     <Compile Include="Assets\Scripts\Menus\UIMart.cs" />
+     <Compile Include="Assets\Scripts\Misc\BackgroundMusic.cs" />
+     <Compile Include="Assets\Scripts\Misc\CreateScrollList.cs" />
+     <Compile Include="Assets\Scripts\Misc\GameController.cs" />
+     <Compile Include="Assets\Scripts\Player\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Player\Farmer.cs" />
+     <Compile Include="Assets\Scripts\Player\Movement.cs" />
      <Compile Include="Assets\TerrainToolkit\TerrainToolkit.cs" />
      <Compile Include="Assets\VirtualControls\Scripts\Base\VCAnalogJoystickBase.cs" />
      <Compile Include="Assets\VirtualControls\Scripts\Base\VCButtonBase.cs" />
@@ -175,11 +177,17 @@
      <None Include="Assets\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendForBloom.shader" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
@@ -190,7 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{C07E22DB-7F82-A9C7-6238-907B2E034034}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{D8888F6A-ABE1-C49B-1A38-F65A81021668}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
