@@ -28,6 +28,9 @@ namespace HayDay
 		public bool cowSelected;
 		public bool newGame;
 		public bool loadPlayer;
+		public float fxLevel = 0.5f;
+		public float musicLevel = 0.5f;
+		public string gameDifficulty = "Normal";
 		public List<GameObject> cowButtons;
 		public int cowIndex;
 		public CreateScrollList scrollCowList;
@@ -50,6 +53,7 @@ namespace HayDay
 				_instance.gcInitialized = true;
 			}
 
+			AudioListener.volume = fxLevel;
 			DontDestroyOnLoad(gameObject);
 		}
 

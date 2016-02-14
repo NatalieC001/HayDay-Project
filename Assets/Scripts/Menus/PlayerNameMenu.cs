@@ -38,7 +38,7 @@ namespace HayDay
 					GameController._instance.player = new Farmer ("Farmer", 25000, 0, 0, 0);
 					GameController.Instance().player.name = playerName;
 					GameController.Instance().newGame = true;
-					StartCoroutine(WaitFor(2));
+					StartCoroutine(WaitFor(3));
 					backgroundTexture = backgroundLoading;
 				}
 			}
