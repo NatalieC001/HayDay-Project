@@ -17,7 +17,6 @@ namespace HayDay
 				if(Application.loadedLevelName.Equals("Main Menu"))
 				{
 					StartCoroutine(Load("Quit"));
-					Debug.Log ("Quitting!");
 				}
 				else
 				{
@@ -47,12 +46,24 @@ namespace HayDay
 					{
 						bool fileTest1 = File.Exists(Application.persistentDataPath + "/player.dat");
 						bool fileTest2 = File.Exists(Application.persistentDataPath + "/cows.dat");
-						bool fileTest3 = File.Exists(Application.persistentDataPath + "/farm.dat");
 						
-						if (fileTest1 || fileTest2 || fileTest3)
+						if (fileTest1 || fileTest2)
 						{
 							GameController.Instance().loadPlayer = true;
-							Application.LoadLevel(levelName);
+							UIBackground.BackgroundDark(true);
+							UIBackground.LoadingTexture(true);
+							UIBackground.Background(false);
+							UIBackground.Logo(false);
+							UIBackground.LoadingTexture(true);
+							StartCoroutine(DelayLoadScene(1, levelName));
+						}
+						else
+						{
+							StartCoroutine(DelayReset(2));
+							UIBackground.Logo(false);
+							UIBackground.BackgroundDark(true);
+							UIBackground.NogameTexture(true);
+							UIBackground.Background(false);
 						}
 					}
 					else
@@ -60,7 +71,12 @@ namespace HayDay
 						if(newGame)
 						{
 							GameController.Instance().newGame = true;
-							Application.LoadLevel(levelName);
+							UIBackground.BackgroundDark(true);
+							UIBackground.LoadingTexture(true);
+							UIBackground.Background(false);
+							UIBackground.NameLabel(false);
+							UIBackground.InputField(false);
+							StartCoroutine(DelayLoadScene(1, levelName));
 						}
 					}
 				}
@@ -70,6 +86,21 @@ namespace HayDay
 					Application.LoadLevel(levelName);
 				}
 			}
+		}
+
+		private IEnumerator DelayReset(int seconds) 
+		{
+			yield return new WaitForSeconds(seconds);
+			UIBackground.BackgroundDark(false);
+			UIBackground.NogameTexture(false);
+			UIBackground.Logo(true);
+			UIBackground.Background(true);
+		}
+
+		private IEnumerator DelayLoadScene(int seconds, string levelName) 
+		{
+			yield return new WaitForSeconds(seconds);
+			Application.LoadLevel(levelName);
 		}
 	}
 }

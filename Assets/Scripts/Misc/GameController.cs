@@ -62,12 +62,18 @@ namespace HayDay
 	        Save();
 	    }
 
-		void Update()
+		void FixedUpdate()
 		{
-			if(Input.GetKeyDown (KeyCode.Escape)) 
+			string scene = Application.loadedLevelName;
+
+			if (scene.Equals ("Farm") || scene.Equals ("Mart"))
 			{
-				Save();
-				StartCoroutine(WaitFor(0));
+				if(Input.GetKeyDown (KeyCode.Escape)) 
+				{
+					Save();
+					ResetMenus();
+					StartCoroutine(WaitFor(0));
+				}
 			}
 		}
 
@@ -87,6 +93,8 @@ namespace HayDay
 	            file = File.Open(Application.persistentDataPath + "/cows.dat", FileMode.OpenOrCreate);
 				bf.Serialize(file, _instance.cows);
 	            file.Close();
+
+				Debug.Log ("Saving!");
 	        }
 	        catch (UnityException e)
 	        {
@@ -126,7 +134,25 @@ namespace HayDay
 	        }
 	    }
 
-		public bool isMenuOpen()
+		public void ResetMenus()
+		{
+			_instance.globalPlayerUI = false;
+			_instance.farmCowUI = false;
+			_instance.farmCowMoreInfoUI = false;
+			_instance.farmCowFeedUI = false;
+			_instance.farmSceneTransitionUI = false;
+			_instance.martSceneTransitionUI = false;
+			_instance.martCowMenuUI = false;
+			_instance.martCowBuyBidUI = false;
+			_instance.martCowSellBidUI = false;
+			_instance.globalSuppliesUI = false;
+			_instance.loadSaveUI = false;
+			_instance.cowSelected = false;
+			_instance.newGame = false;
+			_instance.loadPlayer = false;
+		}
+
+		public bool IsMenuOpen()
 		{
 			if(_instance.globalPlayerUI || _instance.farmCowUI || _instance.farmCowMoreInfoUI || _instance.farmCowFeedUI || _instance.farmSceneTransitionUI
 			   || _instance.martSceneTransitionUI || _instance.martCowMenuUI || _instance.martCowBuyBidUI || _instance.martCowSellBidUI || _instance.globalSuppliesUI)

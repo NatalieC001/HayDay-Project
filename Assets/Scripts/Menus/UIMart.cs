@@ -656,9 +656,9 @@ namespace HayDay
 				if (GUI.Button (new Rect (50, 32, 270, 50), "", buttonMainMenu)) 
 				{
 					GetComponent<AudioSource> ().PlayOneShot (buttonSound, 0.7f);
-					GameController.Instance().Save ();
+					GameController.Instance().Save();
 					isLoading = true;
-					StartCoroutine (WaitFor (0));
+					StartCoroutine (WaitFor(0));
 				}
 			}
 			
@@ -669,7 +669,7 @@ namespace HayDay
 					GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 					GameController.Instance().Save();
 					isLoading = true;
-					StartCoroutine(WaitFor(2));
+					StartCoroutine(WaitFor(3));
 				}
 			}
 		}
@@ -803,12 +803,12 @@ namespace HayDay
 			}
 			else 
 			{
-				GameController.Instance().martSceneTransitionUI = false;
+				GameController.Instance().ResetMenus();
 				
-				if(level == 2)
+				if(level == 3)
 					GameController.Instance().loadPlayer = true;
 				
-				Application.LoadLevel (level);
+				Application.LoadLevel(level);
 			}
 		}
 	}

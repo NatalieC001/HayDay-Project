@@ -68,6 +68,8 @@ namespace HayDay
 			// If new game, then give player new cows & store them in a list
 			if(GameController.Instance().newGame)
 			{
+				GameController.Instance().cows.Clear();
+
 				for(int i = 0;i < 2; i++)
 				{
 					// Generate cow instance, spawn cow with location variables
@@ -350,9 +352,9 @@ namespace HayDay
 				if (GUI.Button (new Rect (50, 32, 270, 50), "", buttonMainMenu)) 
 				{
 					GetComponent<AudioSource> ().PlayOneShot (buttonSound, 0.7f);
-					GameController.Instance().Save ();
+					GameController.Instance().Save();
 					isLoading = true;
-					StartCoroutine (WaitFor (0));
+					StartCoroutine(WaitFor(0));
 				}
 			}
 			
@@ -363,7 +365,7 @@ namespace HayDay
 					GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
 					GameController.Instance().Save();
 					isLoading = true;
-					StartCoroutine(WaitFor(3));
+					StartCoroutine(WaitFor(4));
 				}
 			}
 		}
@@ -404,50 +406,50 @@ namespace HayDay
 
 			switch(foodType)
 			{
-			case 1:
-				feedAmount = Random.Range(1, 2);
-				break;
-			case 2:
-				feedAmount = Random.Range(1, 3);
-				break;
-			case 3:
-				feedAmount = Random.Range(2, 6);
-				break;
-			default:
-				feedAmount = Random.Range(2, 6);
-				break;
+				case 1:
+					feedAmount = Random.Range(1, 2);
+					break;
+				case 2:
+					feedAmount = Random.Range(1, 3);
+					break;
+				case 3:
+					feedAmount = Random.Range(2, 6);
+					break;
+				default:
+					feedAmount = Random.Range(2, 6);
+					break;
 			}
 			
 			switch(feedAmount)
 			{
-			case 1:
-				cow.happiness = cow.happiness + 1;
-				cow.health = cow.health + 5;
-				break;
-			case 2:
-				cow.happiness = cow.happiness + 1;
-				cow.health = cow.health + 8;
-				break;
-			case 3:
-				cow.happiness = cow.happiness + 2;
-				cow.health = cow.health + 11;
-				break;
-			case 4:
-				cow.happiness = cow.happiness + 3;
-				cow.health = cow.health + 14;
-				break;
-			case 5:
-				cow.happiness = cow.happiness + 4;
-				cow.health = cow.health + 17;
-				break;
-			case 6:
-				cow.happiness = cow.happiness + 4;
-				cow.health = cow.health + 20;
-				break;
-			default:
-				cow.happiness = cow.happiness + 4;
-				cow.health = cow.health + 20;
-				break;
+				case 1:
+					cow.happiness = cow.happiness + 1;
+					cow.health = cow.health + 5;
+					break;
+				case 2:
+					cow.happiness = cow.happiness + 1;
+					cow.health = cow.health + 8;
+					break;
+				case 3:
+					cow.happiness = cow.happiness + 2;
+					cow.health = cow.health + 11;
+					break;
+				case 4:
+					cow.happiness = cow.happiness + 3;
+					cow.health = cow.health + 14;
+					break;
+				case 5:
+					cow.happiness = cow.happiness + 4;
+					cow.health = cow.health + 17;
+					break;
+				case 6:
+					cow.happiness = cow.happiness + 4;
+					cow.health = cow.health + 20;
+					break;
+				default:
+					cow.happiness = cow.happiness + 4;
+					cow.health = cow.health + 20;
+					break;
 			}
 			
 			if(cow.happiness > 10)
@@ -477,7 +479,7 @@ namespace HayDay
 			} 
 			else 
 			{
-				GameController.Instance().farmSceneTransitionUI = false;
+				GameController.Instance().ResetMenus();
 				Application.LoadLevel (level);
 			}
 		}

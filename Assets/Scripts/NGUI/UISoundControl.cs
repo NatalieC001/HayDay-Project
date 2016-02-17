@@ -22,12 +22,24 @@ namespace HayDay
 		{
 			GameController.Instance().fxLevel = gameObject.GetComponent<UISlider>().value;
 			AudioListener.volume = GameController.Instance().fxLevel;
+
+			if(GameController.Instance().fxLevel < 0.05f)
+			{
+				GameController.Instance().fxLevel = 0.05f;
+				gameObject.GetComponent<UISlider>().value = GameController.Instance().fxLevel;
+			}
 		}
 
 		public void MusicLevelChange()
 		{
 			GameController.Instance().musicLevel = gameObject.GetComponent<UISlider>().value;
 			//AudioListener.volume = GameController.Instance().musicLevel;
+
+			if(GameController.Instance().musicLevel < 0.05f)
+			{
+				GameController.Instance().musicLevel = 0.05f;
+				gameObject.GetComponent<UISlider>().value = GameController.Instance().musicLevel;
+			}
 		}
 	}
 }

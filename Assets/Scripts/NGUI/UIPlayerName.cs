@@ -14,19 +14,19 @@ namespace HayDay
 			switch(GameController.Instance().gameDifficulty)
 			{
 				case "Easy":
-					startingMoney = 25000;
+					startingMoney = 35000;
 					grain = 10;
 					hay = 10;
 					pellet = 5;
 				break;
 				case "Normal":
-					startingMoney = 25000;
+					startingMoney = 20000;
 					grain = 5;
 					hay = 5;
 					pellet = 5;
 				break;
 				case "Hard":
-					startingMoney = 25000;
+					startingMoney = 10000;
 					grain = 5;
 					hay = 1;
 					pellet = 0;
@@ -38,6 +38,7 @@ namespace HayDay
 					pellet = 5;
 				break;
 			}
+
 			GameController.Instance().player = new Farmer ("Farmer", startingMoney, grain, hay, pellet);
 		}
 

@@ -344,7 +344,7 @@ namespace HayDay
 
 	    void OnMouseDown()
 	    {
-			if (inMart || GameController.Instance().cowSelected || GameController.Instance().isMenuOpen())
+			if (inMart || GameController.Instance().cowSelected || GameController.Instance().IsMenuOpen())
 				return;
 			
 			Vector3 position;

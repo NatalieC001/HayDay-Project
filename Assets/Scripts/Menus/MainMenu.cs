@@ -55,9 +55,8 @@ namespace HayDay
 
 					bool fileTest1 = File.Exists(Application.persistentDataPath + "/player.dat");
 					bool fileTest2 = File.Exists(Application.persistentDataPath + "/cows.dat");
-					bool fileTest3 = File.Exists(Application.persistentDataPath + "/farm.dat");
 
-					if (fileTest1 || fileTest2 || fileTest3)
+					if (fileTest1 || fileTest2)
 					{
 						StartCoroutine(WaitFor(2));		// Load player farm scene
 						isLoading = true;
