@@ -5,6 +5,11 @@ namespace HayDay
 {
 	public class MartTransition : MonoBehaviour
 	{
+		void FixedUpdate () 
+		{
+			transform.Rotate (0, 2, 0);
+		}
+
 		void OnTriggerEnter(Collider other) 
 		{
 			if (other.gameObject.name.Equals ("Player"))

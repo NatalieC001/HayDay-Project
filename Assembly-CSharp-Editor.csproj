@@ -130,7 +130,6 @@
      <Compile Include="Assets\3rd Party\NGUI\Scripts\Editor\UIWidgetContainerEditor.cs" />
      <Compile Include="Assets\3rd Party\NGUI\Scripts\Editor\UIWidgetInspector.cs" />
      <Compile Include="Assets\3rd Party\NGUI\Scripts\Editor\UIWrapContentEditor.cs" />
-     <Compile Include="Assets\3rd Party\TerrainToolkit\Editor\TerrainToolkitEditor.cs" />
      <None Include="Assets\3rd Party\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
      <None Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\3rd Party\NGUI\ReadMe - 3.9.2.txt" />
@@ -247,7 +246,6 @@
      <None Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAA3Console.shader" />
      <None Include="Assets\3rd Party\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\3rd Party\NGUI\Examples\Resources\Localization.txt" />
-     <None Include="Assets\3rd Party\TerrainToolkit\Read me.txt" />
      <None Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendForBloom.shader" />

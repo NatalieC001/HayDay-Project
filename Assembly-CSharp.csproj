@@ -200,7 +200,6 @@
      <Compile Include="Assets\3rd Party\NGUI\Scripts\UI\UITexture.cs" />
      <Compile Include="Assets\3rd Party\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\3rd Party\NGUI\Scripts\UI\UIViewport.cs" />
-     <Compile Include="Assets\3rd Party\TerrainToolkit\TerrainToolkit.cs" />
      <Compile Include="Assets\3rd Party\VirtualControls\Scripts\Base\VCAnalogJoystickBase.cs" />
      <Compile Include="Assets\3rd Party\VirtualControls\Scripts\Base\VCButtonBase.cs" />
      <Compile Include="Assets\3rd Party\VirtualControls\Scripts\Base\VCDPadBase.cs" />
@@ -234,6 +233,7 @@
      <Compile Include="Assets\Scripts\Misc\CreateScrollList.cs" />
      <Compile Include="Assets\Scripts\Misc\GameController.cs" />
      <Compile Include="Assets\Scripts\Misc\GameDifficulty.cs" />
+     <Compile Include="Assets\Scripts\Misc\SwitchCamera.cs" />
      <Compile Include="Assets\Scripts\NGUI\UIBackground.cs" />
      <Compile Include="Assets\Scripts\NGUI\UILoadScene.cs" />
      <Compile Include="Assets\Scripts\NGUI\UIPlayerName.cs" />
@@ -357,7 +357,6 @@
      <None Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAA3Console.shader" />
      <None Include="Assets\3rd Party\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\3rd Party\NGUI\Examples\Resources\Localization.txt" />
-     <None Include="Assets\3rd Party\TerrainToolkit\Read me.txt" />
      <None Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendForBloom.shader" />

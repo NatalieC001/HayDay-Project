@@ -71,7 +71,6 @@
      <Compile Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\Triangles.js" />
      <Compile Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\Vignetting.js" />
      <Compile Include="Assets\3rd Party\Cartoon Town and Farm\Tools\ShowFps.js" />
-     <Compile Include="Assets\3rd Party\TerrainToolkit\TerrainToolkitEnums.js" />
      <None Include="Assets\3rd Party\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
      <None Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\3rd Party\NGUI\ReadMe - 3.9.2.txt" />
@@ -188,7 +187,6 @@
      <None Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAA3Console.shader" />
      <None Include="Assets\3rd Party\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\3rd Party\NGUI\Examples\Resources\Localization.txt" />
-     <None Include="Assets\3rd Party\TerrainToolkit\Read me.txt" />
      <None Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\3rd Party\Cartoon Town and Farm\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendForBloom.shader" />
