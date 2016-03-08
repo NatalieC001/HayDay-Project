@@ -84,6 +84,8 @@ namespace HayDay
 		// Spawn location for bidders
 		private Vector2 martTopRight = new Vector2(110.28f, 142.24f);
 		private Vector2 martBottomLeft = new Vector2(99.56f, 147f);
+		private Vector2 martTopLeftOutside = new Vector2(197f, 226f);
+		private Vector2 martBottomRightOutside = new Vector2(128f, 252f);
 
 		// Spawn location for cows
 		private Vector2 bottomLeft = new Vector2(128f, 116.82f);
@@ -119,10 +121,18 @@ namespace HayDay
 	        bidderList = new List<Bidder>();
 	        timeRemaining = 10;
 	  
-	        for (int i = 0; i < Random.Range(3, 6); i++) 
+	        for (int i = 0; i < Random.Range(3, 5); i++) 
 			{
 				Bidder newBidder = BidderMaker.SpawnBidder ("", martTopRight, martBottomLeft);
 				bidderList.Add (newBidder); 
+			}
+
+			for (int i = 0; i < Random.Range(15, 20); i++) 
+			{
+				Cow newCow = CowMaker.GenerateCow();
+				CowMaker.SpawnCow(newCow, martTopLeftOutside, martBottomRightOutside, forward);
+				newCow.cowController.Wait("Mart");
+				newCow.cowController.SetCowSceneObject();
 			}
 
 	        cowsInMart = new List<Cow>();
@@ -135,25 +145,13 @@ namespace HayDay
 				{
 					try
 					{
+						newCow.cowController.Wait("Mart");
 						cowsInMart.Add(newCow);
 					}
 					catch(System.Exception error)
 					{
 						Debug.Log("Error: " + error);
 					}
-				}
-	        }
-
-			// Loop through cows in the mart & make them wait
-	        foreach(Cow cow in cowsInMart)
-	        {
-				try
-				{
-	            	cow.cowController.Wait("Mart");
-				}
-				catch(System.Exception error)
-				{
-					print ("Error: " + error);
 				}
 	        }
 	    }
@@ -408,7 +406,7 @@ namespace HayDay
 					GameController.Instance().martCowMenuUI = true;
 					GameController.Instance().martCowBuyBidUI = false;
 					joyStick.gameObject.SetActive(true);
-					cameraControl.WatchPlayer();
+					cameraControl.FollowPlayer();
 				}
 			}
 		}
@@ -501,7 +499,7 @@ namespace HayDay
 						GameController.Instance().martCowSellBidUI = false;
 						cowList.SetActive(false);
 						joyStick.gameObject.SetActive(true);
-						cameraControl.WatchPlayer();
+						cameraControl.FollowPlayer();
 					}
 				}
 			}
@@ -603,7 +601,7 @@ namespace HayDay
 	        Destroy(biddingCow.cowController.gameObject);
 	        biddingCow = null;
 			ClearStats();
-			cameraControl.WatchPlayer();
+			cameraControl.FollowPlayer();
 	    }
 
 		// Starting a new round

@@ -23,6 +23,7 @@ namespace HayDay
 		private float heigth;
 		private string state;
 		private bool inMart;
+		private bool cowGameObject;
 		private bool idleRunning;
 		private bool cowSelected;
 
@@ -116,6 +117,13 @@ namespace HayDay
 			{
 				inMart = false;
 			}
+		}
+
+		// Should only be called only when in the mart scene
+		public void SetCowSceneObject()
+		{
+			// Waiting until cow is called to ring
+			state = "wander";
 		}
 
 	    public void Wander()

@@ -36,8 +36,12 @@ namespace HayDay
 		// Cow default spawn info & location area
 		private string cowGender = "Male";
 		private string cowPregnant = "No";
-		private Vector2 farmTopLeft = new Vector2(102f, 261f);
-		private Vector2 farmBottomRight = new Vector2(57.2f, 242.2f);
+		private Vector2 farmTopLeftPosA = new Vector2(102f, 261f);
+		private Vector2 farmBottomRightPosA = new Vector2(57f, 242f);
+		private Vector2 farmTopLeftPosB = new Vector2(102f, 333f);
+		private Vector2 farmBottomRightPosB = new Vector2(73f, 309f);
+		private Vector2 farmTopLeftPosC = new Vector2(246f, 267f);
+		private Vector2 farmBottomRightPosC = new Vector2(230f, 244f);
 
 		// GUI health & happiness bars
 		private Image[] bars = new Image[2];
@@ -69,13 +73,36 @@ namespace HayDay
 			if(GameController.Instance().newGame)
 			{
 				GameController.Instance().cows.Clear();
+				Vector2 farmTopLeftPos;
+				Vector2 farmBottomRightPos;
 
 				for(int i = 0;i < 2; i++)
 				{
 					// Generate cow instance, spawn cow with location variables
 					Cow cow = CowMaker.GenerateCow();
-					// Adding to list & cow not currently in mart bool set
-					if(CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight,Vector3.zero) == 1)
+					int randomPos = Random.Range(0, 2);
+
+					switch(randomPos)
+					{
+						case 0:
+							farmTopLeftPos = farmTopLeftPosA;
+							farmBottomRightPos = farmTopLeftPosA;
+							break;
+						case 1:
+							farmTopLeftPos = farmTopLeftPosB;
+							farmBottomRightPos = farmTopLeftPosB;
+							break;
+						case 2:
+							farmTopLeftPos = farmTopLeftPosC;
+							farmBottomRightPos = farmTopLeftPosC;
+							break;
+						default:
+							farmTopLeftPos = farmTopLeftPosA;
+							farmBottomRightPos = farmTopLeftPosA;
+							break;
+					}
+
+					if(CowMaker.SpawnCow(cow, farmTopLeftPos, farmBottomRightPos,Vector3.zero) == 1)
 						GameController.Instance().cows.Add(cow);
 				}
 				
@@ -88,10 +115,35 @@ namespace HayDay
 				{
 					// Loading from file & spawning cows by looping through loaded list of cows
 					GameController.Instance().Load();
+					Vector2 farmTopLeftPos;
+					Vector2 farmBottomRightPos;
+
 					foreach (Cow cow in GameController.Instance().cows)
 					{
+						int randomPos = Random.Range(0, 2);
+						
+						switch(randomPos)
+						{
+						case 0:
+							farmTopLeftPos = farmTopLeftPosA;
+							farmBottomRightPos = farmTopLeftPosA;
+							break;
+						case 1:
+							farmTopLeftPos = farmTopLeftPosB;
+							farmBottomRightPos = farmTopLeftPosB;
+							break;
+						case 2:
+							farmTopLeftPos = farmTopLeftPosC;
+							farmBottomRightPos = farmTopLeftPosC;
+							break;
+						default:
+							farmTopLeftPos = farmTopLeftPosA;
+							farmBottomRightPos = farmTopLeftPosA;
+							break;
+						}
+
 						// Using location variables to spawn cows
-						if(CowMaker.SpawnCow(cow, farmTopLeft, farmBottomRight,Vector3.zero) == 1)
+						if(CowMaker.SpawnCow(cow, farmTopLeftPos, farmBottomRightPos,Vector3.zero) == 1)
 							cow.cowController.Wait("Farm");
 					}
 				}
