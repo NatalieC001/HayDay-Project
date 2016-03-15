@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	public class UISoundControl : MonoBehaviour 
 	{

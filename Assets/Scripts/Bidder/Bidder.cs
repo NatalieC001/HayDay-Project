@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	public class Bidder : MonoBehaviour
 	{
@@ -22,7 +22,7 @@ namespace HayDay
 			// Bidding on cow if within desired price range
 	        if (bid && Time.time > bidStartTime + bidWaitTime)
 	        {
-	            UIMart.BidOnCow(this, desiredPrice);  
+	            MartUI.BidOnCow(this, desiredPrice);  
 	            Animator animator = GetComponent<Animator>();
 	            animator.SetTrigger("Bid");
 	            StartCoroutine(SpawnBidSprite(transform.position));

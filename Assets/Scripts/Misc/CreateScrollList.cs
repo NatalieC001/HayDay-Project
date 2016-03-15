@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	public class CreateScrollList : MonoBehaviour
 	{
@@ -39,7 +39,7 @@ namespace HayDay
 		{
 			GameController.Instance().cowSelected = true;
 			GameController.Instance().cowIndex = (int.Parse(buttonName) - 1);
-			UIMart.cowList.SetActive (false);
+			MartBidControl.cowList.SetActive(false);
 		}
 
 	    public static void RemoveCowButton(int index)

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	public class CowButton : MonoBehaviour 
 	{

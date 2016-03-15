@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	public class UIPlayerName : MonoBehaviour 
 	{
@@ -10,6 +10,7 @@ namespace HayDay
 			int grain = 0;
 			int hay = 0;
 			int pellet = 0;
+			int cowsBought = 0;
 
 			switch(GameController.Instance().gameDifficulty)
 			{
@@ -39,7 +40,7 @@ namespace HayDay
 				break;
 			}
 
-			GameController.Instance().player = new Farmer ("Farmer", startingMoney, grain, hay, pellet);
+			GameController.Instance().player = new Farmer ("Farmer", startingMoney, grain, hay, pellet, cowsBought, GameController.Instance().gameDifficulty, GameController.Instance().fxLevel);
 		}
 
 		public void OnChangeName()

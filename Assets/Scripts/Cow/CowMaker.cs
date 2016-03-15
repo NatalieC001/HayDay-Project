@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	public class CowMaker : MonoBehaviour
 	{
-	    public static int SpawnCow(Cow cow, Vector2 topLeft, Vector2 bottomRight, Vector3 forward)
+		public static int SpawnCow(Cow cow, float PosA, float PosB, Vector3 forward)
 	    {
 	        Vector3 spawnLocation;
 	        int count = 0;
@@ -14,22 +14,23 @@ namespace HayDay
 	        {
 	            if (count++ > 100)
 	            {
-	                print("Failed to spawn cow!");
+					print("Failed to Spawn Cow!");
 	                return 0;
 	            }
 
 				// Setting location to spawn & getting the y position from the terrain
-	            spawnLocation = new Vector3(Random.Range(topLeft.x, bottomRight.x), 0, Random.Range(topLeft.y, bottomRight.y));
-	            spawnLocation.y =  Terrain.activeTerrain.SampleHeight(spawnLocation) + .5f;
+				spawnLocation = new Vector3(PosA, 0f, PosB);
+	            spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation) + 0.5f;
 
-	        } while (Physics.CheckSphere(spawnLocation + new Vector3(0, 3.5f, 0), 2));
-			
+			} while (Physics.CheckSphere(spawnLocation + new Vector3(0f, 4f, 0f), 2));
+
 	        GameObject cowGameObject = Instantiate(Resources.Load(cow.breed) as GameObject);
 
 	        if (forward != Vector3.zero)
 	        {
 	            cowGameObject.transform.forward = forward;
 	        }
+
 	        cowGameObject.transform.position = spawnLocation;
 	        cowGameObject.transform.localScale = new Vector3(Mathf.Pow(cow.weight, .125f), Mathf.Pow(cow.weight, .125f), Mathf.Pow(cow.weight, .125f));
 
@@ -50,28 +51,28 @@ namespace HayDay
 			
 			switch(cowGen)
 			{
-			case 1:
-				cowType = "Angus";
-				break;
-			case 2:
-				cowType = "Brangus";
-				break;
-			case 3:
-				cowType = "Charolais";
-				break;
-			case 4:
-				cowType = "Hereford";
-				break;
-			case 5:
-				cowType = "Holstein Friesian";
-				break;
-			case 6:
-				cowType = "Shorthorn";
-				break;
+				case 1:
+					cowType = "Angus";
+					break;
+				case 2:
+					cowType = "Brangus";
+					break;
+				case 3:
+					cowType = "Charolais";
+					break;
+				case 4:
+					cowType = "Hereford";
+					break;
+				case 5:
+					cowType = "Holstein Friesian";
+					break;
+				case 6:
+					cowType = "Shorthorn";
+					break;
 			}
 
 			// Create new instance with random selection, then returning the cow instance
-			Cow cow = new Cow(cowType + " - Breed", Random.Range(1, 15), cowType, Random.Range(1, 10), Random.Range(5, 100), true, true, Random.Range(150, 400));
+			Cow cow = new Cow(cowType + " - Breed", Random.Range(1, 15), cowType, Random.Range(1, 10), Random.Range(5, 100), true, true, Random.Range(150, 400), GameController.GetSceneName());
 			return cow;
 		}
 	}

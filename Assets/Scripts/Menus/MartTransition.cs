@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	public class MartTransition : MonoBehaviour
 	{
-		void FixedUpdate () 
+		void FixedUpdate() 
 		{
-			transform.Rotate (0, 2, 0);
+			transform.Rotate(0, 2, 0);
 		}
 
 		void OnTriggerEnter(Collider other) 
 		{
-			if (other.gameObject.name.Equals ("Player"))
+			if (other.gameObject.name.Equals("Player"))
 			{
 				GameController.Instance().martSceneTransitionUI = true;
 			}
@@ -20,7 +20,7 @@ namespace HayDay
 		
 		void OnTriggerExit(Collider other)
 		{
-			if (other.gameObject.name.Equals ("Player"))
+			if (other.gameObject.name.Equals("Player"))
 			{
 				GameController.Instance().martSceneTransitionUI = false;
 			}

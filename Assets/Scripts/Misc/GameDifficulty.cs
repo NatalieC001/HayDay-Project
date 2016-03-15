@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	public class GameDifficulty : MonoBehaviour 
 	{

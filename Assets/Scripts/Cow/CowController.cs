@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	[System.Serializable]
 	public class CowController : MonoBehaviour
@@ -29,21 +29,25 @@ namespace HayDay
 
 		public AudioClip cowSound;
 		public Cow cow;
-		public UIFarm userInterface;
+		public FarmUI userInterface;
 
 	    void Start()
 	    {
-	        width = this.gameObject.GetComponent<Collider>().bounds.size.x;
-	        heigth = this.gameObject.GetComponent<Collider>().bounds.size.x;
-	        anim = GetComponent<Animation>();
-			userInterface = GameObject.Find("UserInterface").GetComponent<UIFarm>();
-			joyStick = GameObject.Find("VCAnalogJoystick").GetComponent<VCAnalogJoystickBase>();
-	        cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
-	        playerGO = GameObject.Find("Player");
-	        movement = playerGO.GetComponent<Movement>();
+			try
+			{
+				width = this.gameObject.GetComponent<Collider>().bounds.size.x;
+		        heigth = this.gameObject.GetComponent<Collider>().bounds.size.x;
+		        anim = GetComponent<Animation>();
+				InitUIControl();
+				CheckInMart();
+			}
+			catch (UnityException e)
+			{
+				Debug.Log("Error - " + e);
+			}
 	    }
 
-	    void Update()
+	    void FixedUpdate()
 	    {
 	        switch (state)
 	        {
@@ -89,41 +93,31 @@ namespace HayDay
 	        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
 	    }
 
-	    private IEnumerator Idle(int seconds)
-	    {
-			idleRunning = true;
-			anim.Play("idle2");
-			
-			yield return new WaitForSeconds(seconds);
-			
-			if (state == "idle" || state == "idle2")
-			{
-				state = "wander";
-				idleRunning = false;
-			}
+		public void InitUIControl()
+		{
+			if(!GameController.GetSceneName().Equals("Farm"))
+				return;
+
+			userInterface = GameObject.Find("UserInterface").GetComponent<FarmUI>();
+			joyStick = GameObject.Find("VCAnalogJoystick").GetComponent<VCAnalogJoystickBase>();
+			cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+			playerGO = GameObject.Find("Player");
+			movement = playerGO.GetComponent<Movement>();
 		}
 
 		// Should only be called only when in the mart scene
-		public void Wait(string scene)
+		public void Wait()
 		{
 			// Waiting until cow is called to ring
 			state = "waiting";
-
-			if(scene.Equals("Mart"))
-			{
-				inMart = true;
-			}
-			else
-			{
-				inMart = false;
-			}
 		}
 
-		// Should only be called only when in the mart scene
-		public void SetCowSceneObject()
+		public void CheckInMart()
 		{
-			// Waiting until cow is called to ring
-			state = "wander";
+			if (cow.currScene.Equals("Mart"))
+				inMart = true;
+			else
+				inMart = false;
 		}
 
 	    public void Wander()
@@ -135,20 +129,23 @@ namespace HayDay
 			switch(playSound)
 			{
 				case 1:
-					StartCoroutine(CowMoo(Random.Range(12, 60)));
+					//StartCoroutine(CowMoo(Random.Range(12, 60)));
 					break;
 				case 2:
-					StartCoroutine(CowMoo(Random.Range(16, 60)));
+					//StartCoroutine(CowMoo(Random.Range(16, 60)));
 					break;
 				case 3:
-					StartCoroutine(CowMoo(Random.Range(20, 60)));
+					//StartCoroutine(CowMoo(Random.Range(20, 60)));
 					break;
 				case 4:
 					StartCoroutine(CowMoo(Random.Range(24, 60)));
 					break;
 				case 5:
-					StartCoroutine(CowMoo(Random.Range(28, 60)));
+					//StartCoroutine(CowMoo(Random.Range(28, 60)));
 					break;
+				default:
+					//StartCoroutine(CowMoo(Random.Range(12, 60)));
+				break;
 			}
 
 	        finalDest = new Vector3(transform.position.x + Random.Range(-10, 10), 0f, transform.position.z + Random.Range(-10, 10));
@@ -167,7 +164,6 @@ namespace HayDay
 	    private Vector3 FindPath(Vector3 position, Vector3 direction)
 	    {
 	        int angle = (int)(Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg);
-	        float[] distArray = new float[360];
 
 	        RaycastHit hit;   
 	        Collider rBL;
@@ -294,7 +290,7 @@ namespace HayDay
 			{
 				if (Vector3.Distance(transform.position, finalDest) < 2)
 				{
-					Wait("Mart");
+					Wait();
 					return;
 				}
 
@@ -361,10 +357,10 @@ namespace HayDay
 			joyStick.gameObject.SetActive(false);
 			state = "following";
 			
-			movement.lookAt(this.gameObject);
+			movement.LookAt(this.gameObject);
 			
 			position = playerGO.transform.position - transform.position;
-			position = position.normalized * 6;
+			//position = position.normalized * 6;
 			target = position;
 			position += playerGO.transform.position;
 			target = playerGO.transform.position - target;
@@ -375,12 +371,6 @@ namespace HayDay
 			
 			userInterface.cow = cow;
 			userInterface.cowGameObject = this.gameObject;
-
-			if (userInterface.cowGameObject == null)
-				Debug.Log("User Interface is null!");
-			
-			if (userInterface.cow == null)
-				Debug.Log("Cow is null!");
 			
 			GameController.Instance().farmCowUI = true;
 			GameController.Instance().cowSelected = true;
@@ -398,14 +388,30 @@ namespace HayDay
 	            case 1:
 					state = "wander";
 	                break;
+				default:
+					state = "wander";
+				break;
 	        }
 	    }
+
+		private IEnumerator Idle(int seconds)
+		{
+			idleRunning = true;
+			anim.Play("idle2");
+			
+			yield return new WaitForSeconds(seconds);
+			
+			if (state == "idle" || state == "idle2")
+			{
+				state = "wander";
+				idleRunning = false;
+			}
+		}
 
 		private IEnumerator CowMoo(float seconds)
 		{
 			yield return new WaitForSeconds(seconds);
-			
-			GetComponent<AudioSource>().PlayOneShot(cowSound, Random.Range(0.4f, 0.7f));
+			GetComponent<AudioSource>().PlayOneShot(cowSound, Random.Range(0.3f, 0.6f));
 		}
 	}
 }

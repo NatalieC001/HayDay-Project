@@ -1,27 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BackgroundMusic : MonoBehaviour 
+namespace IrishFarmSim
 {
-	private static BackgroundMusic instance = null;
-
-	public static BackgroundMusic Instance 
+	public class BackgroundMusic : MonoBehaviour 
 	{
-		get { return instance; }
-	}
+		private static BackgroundMusic instance = null;
 
-	void Awake() 
-	{
-		if (instance != null && instance != this) 
+		public static BackgroundMusic Instance 
 		{
-			Destroy(this.gameObject);
-			return;
-		} 
-		else 
-		{
-			instance = this;
+			get { return instance; }
 		}
 
-		DontDestroyOnLoad(this.gameObject);
+		void Awake() 
+		{
+			if (instance != null && instance != this) 
+			{
+				Destroy(this.gameObject);
+				return;
+			} 
+			else 
+			{
+				instance = this;
+			}
+
+			DontDestroyOnLoad(this.gameObject);
+		}
 	}
 }

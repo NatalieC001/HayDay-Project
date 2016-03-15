@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	public class GameController : MonoBehaviour
 	{
@@ -34,7 +34,7 @@ namespace HayDay
 		public List<GameObject> cowButtons;
 		public int cowIndex;
 		public CreateScrollList scrollCowList;
-		
+
 		public static GameController _instance { get; private set; }
 
 		public static GameController Instance()
@@ -43,6 +43,26 @@ namespace HayDay
 				Debug.Log("GameController is Null!");
 
 			return _instance;
+		}
+
+		public static string GetSceneName()
+		{
+			return Application.loadedLevelName;
+		}
+
+		void FixedUpdate()
+		{
+			string scene = GetSceneName();
+			
+			if (scene.Equals ("Farm") || scene.Equals ("Mart"))
+			{
+				if(Input.GetKeyDown (KeyCode.Escape)) 
+				{
+					Save();
+					ResetMenus();
+					StartCoroutine(WaitFor(0));
+				}
+			}
 		}
 
 		void Awake()
@@ -61,21 +81,6 @@ namespace HayDay
 	    {
 	        Save();
 	    }
-
-		void FixedUpdate()
-		{
-			string scene = Application.loadedLevelName;
-
-			if (scene.Equals ("Farm") || scene.Equals ("Mart"))
-			{
-				if(Input.GetKeyDown (KeyCode.Escape)) 
-				{
-					Save();
-					ResetMenus();
-					StartCoroutine(WaitFor(0));
-				}
-			}
-		}
 
 	    public void Save()
 	    {
@@ -126,6 +131,8 @@ namespace HayDay
 
 				_instance.player = player;
 				_instance.cows = cows;
+				_instance.gameDifficulty = player.gameDifficulty;
+				_instance.fxLevel = player.fxLevel;
 				_instance.loadPlayer = false;
 	        }
 	        catch (UnityException e)

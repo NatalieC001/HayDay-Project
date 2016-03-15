@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	public class FarmTransition : MonoBehaviour
 	{
-		void FixedUpdate () 
+		void FixedUpdate()
 		{
 			transform.Rotate (0, 2, 0);
 		}

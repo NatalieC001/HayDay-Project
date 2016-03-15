@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	public class PlayerNameMenu : MonoBehaviour 
 	{
@@ -15,6 +15,16 @@ namespace HayDay
 
 		private string playerName = "Joe";
 		private bool isLoading = false;
+
+		void FixedUpdate() 
+		{
+			if (Input.GetKeyDown (KeyCode.Escape)) 
+			{
+				// If esc key pressed, then load menu scene 
+				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.6f);
+				StartCoroutine(WaitFor(0));
+			}
+		}
 
 		void OnGUI()
 		{
@@ -34,8 +44,8 @@ namespace HayDay
 				{
 					// Now going to load new scene with new player data
 					isLoading = true;
-					GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-					GameController._instance.player = new Farmer ("Farmer", 25000, 0, 0, 0);
+					GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.6f);
+					GameController._instance.player = new Farmer ("Farmer", 25000, 0, 0, 0, 0, GameController.Instance().gameDifficulty, GameController.Instance().fxLevel);
 					GameController.Instance().player.name = playerName;
 					GameController.Instance().newGame = true;
 					StartCoroutine(WaitFor(3));
@@ -48,19 +58,9 @@ namespace HayDay
 				if (GUI.Button (new Rect (Screen.width * .035f, Screen.height * .82f, Screen.width * .240f, Screen.height * .13f), "", buttonBackStyle))
 				{
 					// Now loading menu scene
-					GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
+					GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.6f);
 					StartCoroutine(WaitFor(0));
 				}
-			}
-		}
-
-		void Update() 
-		{
-			if (Input.GetKeyDown (KeyCode.Escape)) 
-			{
-				// If esc key pressed, then load menu scene 
-				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.7f);
-				StartCoroutine(WaitFor(0));
 			}
 		}
 

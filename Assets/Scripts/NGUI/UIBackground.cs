@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	public class UIBackground : MonoBehaviour 
 	{
@@ -35,9 +35,6 @@ namespace HayDay
 				inputFieldLabel = GameObject.Find ("Player Name Input").GetComponentInChildren<UILabel>();
 			}
 
-			//backgroundDark.enabled = true;
-			//loadingTexture.enabled = true;
-			//nogameTexture.enabled = true;
 			backgroundDark.enabled = false;
 			loadingTexture.enabled = false;
 			nogameTexture.enabled = false;

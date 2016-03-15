@@ -2,7 +2,7 @@
 using System.Collections;
 using System.IO;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	public class UILoadScene : MonoBehaviour 
 	{

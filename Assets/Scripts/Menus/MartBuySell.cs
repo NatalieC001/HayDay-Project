@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	public class MartBuySell : MonoBehaviour
 	{
 		void OnTriggerEnter(Collider other) 
 		{
-			if (other.gameObject.name.Equals ("Player"))
+			if (other.gameObject.name.Equals("Player"))
 			{
 				GameController.Instance().martCowMenuUI = true;
 			}
@@ -15,7 +15,7 @@ namespace HayDay
 		
 		void OnTriggerExit(Collider other)
 		{
-			if (other.gameObject.name.Equals ("Player"))
+			if (other.gameObject.name.Equals("Player"))
 			{
 				GameController.Instance().martCowMenuUI = false;
 			}

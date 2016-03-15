@@ -1,6 +1,6 @@
 using System;
 
-namespace HayDay
+namespace IrishFarmSim
 {
 	[System.Serializable]
 	public class Cow
@@ -8,7 +8,6 @@ namespace HayDay
 		[System.NonSerialized]
 		public CowController cowController;
 		public string name { get; set; }    
-		public bool ownedByPlayer { get; set; }
 		public int age { get; set; }
 		public string breed { get; set; }
 		public int happiness { get; set; }
@@ -16,10 +15,25 @@ namespace HayDay
 		public bool pregnant { get; set; }
 		public bool gender { get; set; }
 		public int weight { get; set; }
-		public int estimatedValue { get; set; }
+		public string currScene { get; set; }
 
-		public Cow(string name, int age, string breed, int happiness, int health, bool pregnant, bool gender, int weight)
+		public Cow()
 		{
+			cowController = new CowController();
+			this.name = "";
+			this.age = 0;
+			this.breed = "";
+			this.happiness = 0;
+			this.health = 0;
+			this.pregnant = false;
+			this.gender = false;
+			this.weight = 0;
+			this.currScene = "Mart";
+		}
+
+		public Cow(string name, int age, string breed, int happiness, int health, bool pregnant, bool gender, int weight, string currScene)
+		{
+			cowController = new CowController();
 			this.name = name;
 			this.age = age;
 			this.breed = breed;
@@ -28,6 +42,7 @@ namespace HayDay
 			this.pregnant = pregnant;
 			this.gender = gender;
 			this.weight = weight;
+			this.currScene = currScene;
 		}
 	}
 }
