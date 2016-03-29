@@ -406,6 +406,7 @@
      <Compile Include="Assets\Scripts\Misc\GameDifficulty.cs" />
      <Compile Include="Assets\Scripts\NGUI\UIBackground.cs" />
      <Compile Include="Assets\Scripts\NGUI\UILoadScene.cs" />
+     <Compile Include="Assets\Scripts\NGUI\UIMiscScene.cs" />
      <Compile Include="Assets\Scripts\NGUI\UIPlayerName.cs" />
      <Compile Include="Assets\Scripts\NGUI\UISoundControl.cs" />
      <Compile Include="Assets\Scripts\Player\CameraController.cs" />

@@ -1,0 +1,10 @@
+lastUpgrade=00932
+proj.pluginVersion=0.9.32
+proj.AppId=285975073081
+and.BundleId=ie.gmit.irish.farm.sim
+proj.classDir=Assets%2fScripts%2fGoogle
+proj.ConstantsClassName=GoogleCon
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--%0d%0aGoogle+Play+game+services+IDs.%0d%0aSave+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.%0d%0a--%3e%0d%0a%3cresources%3e%0d%0a++%3cstring+name%3d%22app_id%22%3e285975073081%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22package_name%22%3eie.gmit.irish.farm.sim%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_buy_your_first_cow%22%3eCgkIuaLFq6kIEAIQAQ%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_sell_your_first_cow%22%3eCgkIuaLFq6kIEAIQAg%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_buy_10_cows%22%3eCgkIuaLFq6kIEAIQAw%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_gain_100000_in_cash%22%3eCgkIuaLFq6kIEAIQBA%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_gain_50000_in_cash%22%3eCgkIuaLFq6kIEAIQBQ%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22achievement_have_20_cows_in_your_herd%22%3eCgkIuaLFq6kIEAIQBw%3c%2fstring%3e%0d%0a++%3cstring+name%3d%22leaderboard_player_cash_leaderboard%22%3eCgkIuaLFq6kIEAIQBg%3c%2fstring%3e%0d%0a%3c%2fresources%3e
+and.ClientId=
+proj.requireGPlus=false
+android.SetupDone=true
