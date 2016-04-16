@@ -99,6 +99,9 @@ namespace IrishFarmSim
 				bf.Serialize(file, _instance.cows);
 	            file.Close();
 
+				// Submitting score to GPG service
+				GPGController.PostScore(_instance.player.cash);
+
 				Debug.Log ("Saving!");
 	        }
 	        catch (UnityException e)

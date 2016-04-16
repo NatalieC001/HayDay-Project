@@ -271,8 +271,6 @@ namespace IrishFarmSim
 			SetHealth(0);
 			SetHappiness(0);
 
-
-			
 			GUI.Label(new Rect(85, 30, 150, 30), "Grain", customTextStyle);
 			GUI.Label(new Rect(245, 30, 150, 30), "Hay", customTextStyle);
 			GUI.Label(new Rect(380, 30, 150, 30), "Pellets", customTextStyle);
@@ -317,7 +315,6 @@ namespace IrishFarmSim
 			if (GUI.Button(new Rect(535, 180, 50, 50), "", buttonX))
 			{
 				GetComponent<AudioSource>().PlayOneShot(buttonSound, 0.6f);
-				GameController.Instance().globalPlayerUI = true;
 				GameController.Instance().globalSuppliesUI = false;
 			}
 		}
@@ -527,7 +524,7 @@ namespace IrishFarmSim
 			MartBidControl.startingPrice = SetCowPrice(MartBidControl.biddingCow);
 			MartBidControl.currentCowBid = MartBidControl.startingPrice;
 			cameraControl.WatchTarget(MartBidControl.biddingCow.cowController.gameObject);
-	        StartCoroutine(WaitForCow());   
+	        StartCoroutine(WaitForCow());
 	    }
 
 	    private void StopBidding()
