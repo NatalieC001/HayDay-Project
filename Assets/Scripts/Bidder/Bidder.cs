@@ -35,8 +35,8 @@ namespace IrishFarmSim
 	            return;
 
 	        bidStartTime = Time.time;
-	        desiredPrice = currentPrice + Random.Range(500, 800);
-	        bidWaitTime = Random.Range(5, 12);
+	        desiredPrice = currentPrice + Random.Range(700, 1200);
+	        bidWaitTime = Random.Range(5, 10);
 
 	        switch (cow.breed)
 	        {
@@ -44,7 +44,7 @@ namespace IrishFarmSim
 	                interest = 1f;
 	                break;
 	            case "Brangus":
-	                interest = .5f;
+	                interest = .65f;
 	                break;
 	            case "Charolais":
 	                interest = .75f;
@@ -53,10 +53,10 @@ namespace IrishFarmSim
 	                interest = .85f;
 	                break;
 	            case "Holstein Friesian":
-	                interest = .65f;
+	                interest = .70f;
 	                break;
 	            case "Shorthorn":
-	                interest = .35f;
+	                interest = .45f;
 	                break;
 	        }
 			

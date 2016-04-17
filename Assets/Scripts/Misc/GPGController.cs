@@ -17,7 +17,7 @@ namespace IrishFarmSim
 
 		public static void PostScore(double amount){
 			Debug.Log("Submitting Score");
-			Social.ReportScore((int)amount, "CgkIuaLFq6kIEAIQBg", (bool result) => {
+			Social.ReportScore((long)amount, "CgkIuaLFq6kIEAIQBg", (bool result) => {
 				Debug.Log("Score submitted?: " + result);
 			});
 		}

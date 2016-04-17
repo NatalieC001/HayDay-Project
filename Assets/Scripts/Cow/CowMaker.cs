@@ -19,6 +19,8 @@ namespace IrishFarmSim
 	            }
 
 				// Setting location to spawn & getting the y position from the terrain
+				Debug.Log ("Test A: " + PosA);
+				Debug.Log ("Test B: " + PosB);
 				spawnLocation = new Vector3(PosA, 0f, PosB);
 	            spawnLocation.y = Terrain.activeTerrain.SampleHeight(spawnLocation) + 0.5f;
 
