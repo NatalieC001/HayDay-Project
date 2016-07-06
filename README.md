@@ -5,6 +5,10 @@ About
 HayDay is a 3D resource collection / management game based around the buying, selling  and farming of cattle. The player must develop their farm into a thriving business. The target audience could roughly range from 6 + or older, I'm not entirely certain what age group this game fits into.
 The game is still in early-alpha, expect buggy gameplay at the moment.
 
+Running the Game
+----------------
+To run this 3D game, enable 'Unknown Sources' in your Android settings screen. Copy the apk file from the 'Build' folder to your device and tap on the file to start the installation. You may need to select 'Application Manager' or 'APK Installer' depending on your device's manufacturer. The game requires your device's operating system to be Android 4.0 or higher.
+
 Gameplay
 --------
 The original game concept was designed to be played on a touchscreen mobile devices, which means screen size will vary immensely. It’s unclear at this stage if other platforms like PCs & consoles will require support in the future. The gameplay primarily evolves around herding animals on your farm, increasing your cash reserve and generally improve farm over time. To achieve this the player must buy and sell cattle at the local mart. Supplies will also be required to improve the wellbeing of the animals on the farm. Other animals will be later added expand the game at a later stage, but generally for now the game will evolve around simulating cattle farming.
